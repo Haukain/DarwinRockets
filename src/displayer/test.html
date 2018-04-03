@@ -46,12 +46,15 @@
 	import { Widget } from "./widget.js";
 	import { Row } from "./row.js";
 	import { Col } from "./col.js";
+	import { Button } from "./button.js";
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
 	let c2 = new Col(6,6,6,6);
 	r.addChild(c1);
 	r.addChild(c2);
+	let btn = new Button("test");
+	c2.addChild(btn);
 	</script>
 	</body>
 </html>
