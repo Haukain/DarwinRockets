@@ -1,0 +1,14 @@
+.btn{
+  margin:1px 3px;
+}
+/*.btn:first-child{
+  margin-left:6px;
+}
+.btn:last-child{
+  margin-right:6px;
+}*/
+.iconbutton{
+  border-radius: 100px;
+  background: rgba(125,125,125,.2);
+  padding: 6px;
+}

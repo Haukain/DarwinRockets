@@ -30,6 +30,7 @@
 		<script src="../../libs/bootstrap/js/bootstrap.bundle.js"></script>
 		<script src="../../libs/chartjs/Chart.bundle.min.js"></script>
 		<script src="../../libs/matterjs/matter.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../libs/material-icons/material-icons.css">
 		<!-- Custom stylesheet -->
 		<link rel="stylesheet" type="text/css" href="../../src/displayer/style.css">
 	</head>
@@ -47,6 +48,7 @@
 	import { Row } from "./row.js";
 	import { Col } from "./col.js";
 	import { Button } from "./button.js";
+	import { IconButton } from "./iconbutton.js";
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
@@ -54,7 +56,9 @@
 	r.addChild(c1);
 	r.addChild(c2);
 	let btn = new Button("test");
+	let ibtn = new IconButton("add","ajouter");
 	c2.addChild(btn);
+	c2.addChild(ibtn);
 	</script>
 	</body>
 </html>
