@@ -50,6 +50,8 @@
 	import { Button } from "./button.js";
 	import { IconButton } from "./iconbutton.js";
 	import { Card } from "./card.js";
+	import { Text } from "./text.js";
+	import { Title } from "./title.js";
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
@@ -60,6 +62,10 @@
 	c2.addChild(ca2);
 	let btn = new Button("test");
 	let ibtn = new IconButton("add","ajouter");
+  let txt = new Text("hello I am a text.");
+  let ttl = new Title("A Title.");
+	ca2.addChild(ttl);
+	ca2.addChild(txt);
 	ca2.addChild(btn);
 	ca2.addChild(ibtn);
 	</script>
