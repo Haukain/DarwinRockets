@@ -1,14 +1,59 @@
+/* === colors ===*/
+.white{
+  color:#ffffff;
+}
+.grey{
+  color:#eeeeee;
+}
+.black{
+  color:#111111;
+}
+.pink{
+  color:#d65b73;
+}
+.skyblue{
+  color:#85bce6;
+}
+.cloudblue{
+  color:#cfe4f5;
+}
+.navyblue{
+  color:#1a233a;
+}
+/* === background ===*/
+.white{
+  background:#ffffff;
+}
+.grey{
+  background:#eeeeee;
+}
+.black{
+  background:#111111;
+}
+
+.pink-bg{
+  background:#d65b73;
+}
+.skyblue-bg{
+  background:#85bce6;
+}
+.cloudblue-bg{
+  background:#cfe4f5;
+}
+.navyblue-bg{
+  background:#1a233a;
+}
+/* === buttons ===*/
 .btn{
   margin:1px 3px;
 }
-/*.btn:first-child{
-  margin-left:6px;
-}
-.btn:last-child{
-  margin-right:6px;
-}*/
 .iconbutton{
   border-radius: 100px;
   background: rgba(125,125,125,.2);
   padding: 6px;
+}
+/* === rowfix === */
+.row{
+  margin-left:0;
+  margin-right:0;
 }

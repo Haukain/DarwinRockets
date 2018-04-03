@@ -49,16 +49,19 @@
 	import { Col } from "./col.js";
 	import { Button } from "./button.js";
 	import { IconButton } from "./iconbutton.js";
+	import { Card } from "./card.js";
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
 	let c2 = new Col(6,6,6,6);
 	r.addChild(c1);
 	r.addChild(c2);
+	let ca2 = new Card("grey","navyblue");
+	c2.addChild(ca2);
 	let btn = new Button("test");
 	let ibtn = new IconButton("add","ajouter");
-	c2.addChild(btn);
-	c2.addChild(ibtn);
+	ca2.addChild(btn);
+	ca2.addChild(ibtn);
 	</script>
 	</body>
 </html>
