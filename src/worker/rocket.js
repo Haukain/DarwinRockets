@@ -15,7 +15,7 @@ addParents(parentA, parentB) {
 }
 
 addReactors(physicsObject, position, thrust, activationTime, extinctionTime, angle) {
-	this._reactors.push(reactor);
+	this._reactors.push(physicsObject, position, thrust, activationTime, extinctionTime, angle);
 }
 
 addGeneration(generation) {
