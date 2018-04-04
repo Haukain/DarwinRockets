@@ -9,7 +9,7 @@ class Generation {
 	getMin() {}
 }
 
-addRockets(physicsObject, dead) {
+addRockets(rockets) {
 	this._rockets.push(rockets);
 }
 
