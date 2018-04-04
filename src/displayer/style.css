@@ -1,12 +1,12 @@
 /* === background ===*/
-.white{
+.white-bg{
   background:#ffffff;
 }
-.grey{
+.grey-bg{
   background:#eeeeee;
   color: white;
 }
-.black{
+.black-bg{
   background:#111111;
   color: white;
 }
