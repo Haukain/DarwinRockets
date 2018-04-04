@@ -21,9 +21,9 @@ export class Widget{
     this.element.addEventListener(evt,callback,false);
   }
   destroy() {
-    for(let child of children) {
-      child.destroy();
-      this.removeChild(child);
+    while(this.children.length){
+      this.children[0].destroy();
+      this.removeChild(this.children[0]);
     }
   }
   set disabled(d) {

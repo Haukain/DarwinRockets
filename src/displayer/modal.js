@@ -21,8 +21,25 @@ export class Modal extends Row{
 
     $(this.element).modal();
     $(this.element).modal('hide');
+    this._disabled = true;
   }
   set disabled(d){
-  	$(this.element).modal('show');
+  	if(d)this.show();
+    else this.hide()
+  }
+  get disabled(){
+    return this._disabled;
+  }
+  show(){
+    $(this.element).modal('show');
+    this._disabled = false;
+  }
+  hide(){
+    $(this.element).modal('hide');
+    this._disabled = true;
+  }
+  toggle(){
+    if(this._disabled)this.show();
+    else this.hide();
   }
 }
