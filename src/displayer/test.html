@@ -55,6 +55,9 @@
 	import { Input } from "./input.js";
 	import { RangeInput } from "./rangeinput.js";
 	import { NumericInput } from "./numericinput.js";
+	import { Navbar } from "./navbar/navbar.js";
+	let navbar = new Navbar();
+	document.body.appendChild(navbar.element);
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
@@ -64,6 +67,9 @@
 	let ca2 = new Card("grey","pink");
 	c2.addChild(ca2);
 	let btn = new Button("A Button","pink");
+	btn.on("click"evt=>{
+		//enable the modal Here
+	});
 	let ibtn = new IconButton("add","An Icon Button");
   let txt = new Text("hello I am a text.");
   let ttl = new Title("A Title.");
