@@ -46,8 +46,7 @@
 		render.options.wireframes = false;
 
 		// define rocket style
-		let rocketBluePrint = [{ x: 0, y: 0 },{ x: 0, y: 20 },{ x: 0, y: 40 },{ x: 5, y: 50 },{ x: 15, y: 55 },{ x: 25, y: 50 },
-				{ x: 30, y: 40 },{ x: 30, y: 20 },{ x: 30, y: 0 }];
+		let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
 		let rocketRender = {
 		         fillStyle: '#85bce6',
 		         strokeStyle: '#d65b73',
@@ -67,7 +66,7 @@
 			vertices: rocketBluePrint,
 			render: rocketRender
     	});
-    	rightReactor.label = "rightReactor";
+    	rightReactor.label = "LeftReactor";
 		Body.scale(rightReactor,0.6,0.6);
 		Body.setPosition(rightReactor,{ x: -20, y: +20});
 		Body.setAngle(rightReactor, Math.PI);
@@ -76,7 +75,7 @@
 			vertices: rocketBluePrint,
 			render: rocketRender
     	});
-    	leftReactor.label = "leftReactor";
+    	leftReactor.label = "RightReactor";
 		Body.scale(leftReactor,0.6,0.6);
 		Body.setPosition(leftReactor,{ x: +20, y: +20});
 		Body.setAngle(leftReactor, Math.PI);
@@ -84,23 +83,25 @@
 		// create the rocket
 		let rocket = Body.create({parts:[rocketBody,rightReactor,leftReactor]});
 		rocket.label = "rocket";
-		Body.setPosition(rocket,{x:400,y:500});
+		Body.setPosition(rocket,{x:400,y:550});
 
 		// add the rocket to the world
 		World.add(engine.world, [rocket]);
 
 		// apply force
 		Events.on(engine, "beforeUpdate",e=>{
-			forceRightReactor = {
-				x : 0,
-				y : -0.000015
-			}
 			forceLeftReactor = {
-				x : 0,
-				y : -0.00003
+				x : (rocket.angle)/5000,
+				y : -0.000040*Math.cos(rocket.parts[2].angle - Math.PI) + (rocket.angle)/5000
 			}
-			Body.applyForce(rocket,{x: rocket.parts[2].position.x, y: rocket.parts[2].position.y},forceRightReactor);
-			Body.applyForce(rocket,{x: rocket.parts[3].position.x, y: rocket.parts[3].position.y},forceLeftReactor);
+			forceRightReactor = {
+				x : (rocket.angle)/5000,
+				y : -0.000055*Math.cos(rocket.parts[3].angle - Math.PI) + (rocket.angle)/5000
+			}
+			// console.log((rocket.parts[2].angle - Math.PI))
+			// console.log(forceLeftReactor,forceRightReactor);
+			Body.applyForce(rocket,{x: rocket.parts[2].position.x, y: rocket.parts[2].position.y},forceLeftReactor);
+			Body.applyForce(rocket,{x: rocket.parts[3].position.x, y: rocket.parts[3].position.y},forceRightReactor);
 		})
 
 		// check for collisions
