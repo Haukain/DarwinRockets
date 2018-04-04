@@ -4,14 +4,12 @@ export class Modal extends Row{
   constructor() {
     super();
     this.element.className = "modal";
-    this.disabled=true;
-
-
+    let uid = ""+Math.round(Math.random()*100000);
+    this.element.id= `modal-${uid}`;
+    $(this.element).modal();
+    $(this.element).modal('hide');
   }
   set disabled(d){
-  	if (!d){
-  		this.element.className = "modal fade show";
-  	}
-  	else {this.element.className = "modal";}
+  	$(this.element).modal('show');
   }
 }
