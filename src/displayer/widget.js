@@ -26,4 +26,7 @@ export class Widget{
       this.removeChild(child);
     }
   }
+  set disabled(d) {
+    this.element.style.display = d?"none":"";
+  }
 }
