@@ -8,12 +8,13 @@ class Rocket {
 	draw() {}
 }
 
-addParents(parent) {
-	this.parents.push(parent);
+addParents(parentA, parentB) {
+	this._parents.push(parentA);
+	this._parents.push(parentB);
 }
 
-addReactors(reactor) {
-	this.reactors.push(reactor);
+addReactors(physicsObject, position, thrust, activationTime, extinctionTime, angle) {
+	this._reactors.push(reactor);
 }
 
 getPhysicsObject() {return this._physicsObject;}
