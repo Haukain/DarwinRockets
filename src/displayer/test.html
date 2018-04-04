@@ -82,7 +82,6 @@
   let i = new Input("An Input.");
   let ri = new RangeInput("A Range Input.");
   let ni = new NumericInput("A Numeric Input.");
-  let testModal=new Text("test modal");
 	ca2.addChild(ttl);
 	ca2.addChild(txt);
 	ca2.addChild(btn);
@@ -90,8 +89,13 @@
 	ca2.addChild(ri);
 	ca2.addChild(ni);
  	let m1=new Modal();
- 	r.addChild(m1);
- 	m1.addChild(testModal);
+	r.addChild(m1);
+	let m1title=new Title("modal title");
+	let m1text=new Text("modal text");
+	let m1btn = new Button("modal button","skyblue");
+ 	m1.addChild(m1title);
+ 	m1.addChild(m1text);
+ 	m1.addChild(m1btn);
 	</script>
 	</body>
 </html>
