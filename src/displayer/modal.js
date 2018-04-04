@@ -4,5 +4,7 @@ export class Modal extends Row{
   constructor() {
     super();
     this.element.className = "modal";
+    this.disabled=true;
+
   }
 }

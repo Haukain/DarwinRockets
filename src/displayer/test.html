@@ -73,6 +73,7 @@
 	c2.addChild(ca2);
 	let btn = new Button("A Button","pink");
 	btn.on("click",evt=>{
+		m1.disabled=false;
 		//enable the modal Here
 	});
   let txt = new Text("hello I am a text.");
@@ -86,6 +87,8 @@
 	ca2.addChild(i);
 	ca2.addChild(ri);
 	ca2.addChild(ni);
+ 	let m1=new Modal();
+ 	r.addChild(m1);
 	</script>
 	</body>
 </html>
