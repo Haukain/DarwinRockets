@@ -56,7 +56,12 @@
 	import { RangeInput } from "./rangeinput.js";
 	import { NumericInput } from "./numericinput.js";
 	import { Navbar } from "./navbar/navbar.js";
-	let navbar = new Navbar();
+	import { NavbarItem } from "./navbar/navbaritem.js";
+	let navbar = new Navbar("../../assets/icons/favicon-32x32.png");
+	let ni1 = new NavbarItem();
+	navbar.addChild(ni1);
+	let ibtn = new IconButton("add","An Icon Button");
+	ni1.addChild(ibtn);
 	document.body.appendChild(navbar.element);
 	let r = new Row();
 	document.body.appendChild(r.element);
@@ -67,10 +72,9 @@
 	let ca2 = new Card("grey","pink");
 	c2.addChild(ca2);
 	let btn = new Button("A Button","pink");
-	btn.on("click"evt=>{
+	btn.on("click",evt=>{
 		//enable the modal Here
 	});
-	let ibtn = new IconButton("add","An Icon Button");
   let txt = new Text("hello I am a text.");
   let ttl = new Title("A Title.");
   let i = new Input("An Input.");
@@ -79,7 +83,6 @@
 	ca2.addChild(ttl);
 	ca2.addChild(txt);
 	ca2.addChild(btn);
-	ca2.addChild(ibtn);
 	ca2.addChild(i);
 	ca2.addChild(ri);
 	ca2.addChild(ni);
