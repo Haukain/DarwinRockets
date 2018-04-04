@@ -30,3 +30,6 @@ setSimDuration(simDuration) {this._simDuration = simDuration;}
 
 getRockets() {return this._rockets;}
 setRockets(rockets) {this._rockets = rockets;}
+
+getTerrain() {return this._terrain;}
+setTerrain(terrain) {this._terrain = terrain;}
