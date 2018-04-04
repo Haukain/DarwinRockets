@@ -57,9 +57,6 @@
 	import { NumericInput } from "./numericinput.js";
 	import { CanvasWidget } from "./canvaswidget.js";
 	import { ChartWidget } from "./chartwidget.js";
-	import { Navbar } from "./navbar/navbar.js";
-	let navbar = new Navbar();
-	document.body.appendChild(navbar.element);
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
@@ -83,43 +80,26 @@
 	ca2.addChild(ri);
 	ca2.addChild(ni);
 
-	var myChart = new ChartWidget('pink', 'grey', {
+	var myChart = new ChartWidget('skyblue', 'grey', {
     type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
+    data:  {
+        labels: ["Féminin", "Masculin", "Animaux"],
+        datasets: [
+           {
+           label: "Tous les voyageurs",
+           data: [227, 331, 11]
+           },{
+           label: "1ère Classe",
+           data: [107, 115, 2]
+           },{
+           label: "2ème Classe",
+           data: [120, 116, 9]
+           }
+        ]
+      }
+	});
 		c1.addChild(myChart);
+		myChart.update();
 	</script>
 	</body>
 </html>

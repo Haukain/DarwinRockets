@@ -8,7 +8,9 @@ export class ChartWidget extends CanvasWidget{
     this.ctx = this.canvas.getContext('2d');
     this.chart = new Chart(this.ctx, {type : this.type, data : this.data});
   }
-
+  update(){
+  	this.chart.update();
+  }
 
 }
 
