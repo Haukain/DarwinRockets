@@ -4,6 +4,7 @@ class Rocket {
 	this._dead = dead;
 	this._parents = [];
 	this._reactors = [];
+	this._generation = [];
 
 	draw() {}
 }
@@ -15,6 +16,11 @@ addParents(parentA, parentB) {
 
 addReactors(physicsObject, position, thrust, activationTime, extinctionTime, angle) {
 	this._reactors.push(reactor);
+}
+
+addGeneration(generation) {
+	if (this._generation.length >= 1) {return;}
+	this._generation.push(generation);
 }
 
 getPhysicsObject() {return this._physicsObject;}
