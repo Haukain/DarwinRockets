@@ -1,6 +1,6 @@
-import { Card } from "./canvaswidget.js";
+import { CanvasWidget } from "./canvaswidget.js";
 
-export class Chart extends CanvasWidget{
+export class ChartWidget extends CanvasWidget{
   constructor(bg,fg,type,data) {
     super(bg,fg);
     this.type = type;
@@ -11,3 +11,4 @@ export class Chart extends CanvasWidget{
 
 
 }
+
