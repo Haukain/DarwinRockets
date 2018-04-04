@@ -1,3 +1,32 @@
+/* === background ===*/
+.white{
+  background:#ffffff;
+}
+.grey{
+  background:#eeeeee;
+  color: white;
+}
+.black{
+  background:#111111;
+  color: white;
+}
+
+.pink-bg{
+  background:#d65b73;
+  color: white;
+}
+.skyblue-bg{
+  background:#85bce6;
+  color: white;
+}
+.cloudblue-bg{
+  background:#cfe4f5;
+  color: white;
+}
+.navyblue-bg{
+  background:#1a233a;
+  color: white;
+}
 /* === colors ===*/
 .white{
   color:#ffffff;
@@ -20,29 +49,6 @@
 .navyblue{
   color:#1a233a;
 }
-/* === background ===*/
-.white{
-  background:#ffffff;
-}
-.grey{
-  background:#eeeeee;
-}
-.black{
-  background:#111111;
-}
-
-.pink-bg{
-  background:#d65b73;
-}
-.skyblue-bg{
-  background:#85bce6;
-}
-.cloudblue-bg{
-  background:#cfe4f5;
-}
-.navyblue-bg{
-  background:#1a233a;
-}
 /* === buttons ===*/
 .btn{
   margin:1px 3px;
@@ -56,4 +62,113 @@
 .row{
   margin-left:0;
   margin-right:0;
+}
+/* === inputs === */
+.inputContainer{
+  position: relative;
+  width: 100%;
+}
+.inputContainer input{
+  position: relative;
+  width: 100%;
+  display: block;
+}
+.inputContainer input::-webkit-input-placeholder{
+  color: inherit;
+  opacity: 0.4;
+}
+.inputContainer input::-moz-placeholder{
+  color: inherit;
+  opacity: 0.4;
+}
+.inputContainer input[type=text],.inputContainer input[type=number] {
+  color:inherit;
+  border:none;
+  border-bottom: solid 1px;
+  background: none;
+}
+
+/* range restyling*/
+.inputContainer input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+.inputContainer input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.inputContainer input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+.inputContainer input[type=range]::-webkit-slider-thumb{
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  border: solid 7.5px;
+  color: inherit;
+  transform: translateY(-50%);
+}
+.inputContainer input[type=range]::-moz-range-thumb{
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  border: solid 7.5px;
+  color: inherit;
+  cursor: pointer;
+}
+.inputContainer input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  border:solid 1px;
+  color: inherit;
+  cursor: pointer;
+}
+.inputContainer input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  border:solid 1px;
+  color: inherit;
+  cursor: pointer;
+}
+.inputContainer input[type=range]{
+  padding:25px 0;
+  width: calc(100% - 50px);
+  margin: auto;
+  color: inherit;
+}
+.inputContainer .rangeText{
+  position: absolute;
+  pointer-events:none;
+  color: inherit;
+}
+.inputContainer .rangeMin,.inputContainer .rangeMax{
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  background: white;
+  border: solid 1px;
+  text-align: center;
+  line-height: 20px;
+  transform: translate(0,-50%);
+  font-size: 12px;
+}
+.inputContainer .rangeMin{
+  top:50%;
+  left:0;
+}
+.inputContainer .rangeMin{
+  top:50%;
+  left:0;
+}
+.inputContainer .rangeMax{
+  top:50%;
+  right:0;
+}
+.inputContainer .rangeTitle{
+  top:50%;
+  right:0;
+  width: 100%;
+  text-align: center;
+  opacity: 0.7;
 }

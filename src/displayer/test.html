@@ -52,22 +52,31 @@
 	import { Card } from "./card.js";
 	import { Text } from "./text.js";
 	import { Title } from "./title.js";
+	import { Input } from "./input.js";
+	import { RangeInput } from "./rangeinput.js";
+	import { NumericInput } from "./numericinput.js";
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
 	let c2 = new Col(6,6,6,6);
 	r.addChild(c1);
 	r.addChild(c2);
-	let ca2 = new Card("grey","navyblue");
+	let ca2 = new Card("grey","pink");
 	c2.addChild(ca2);
-	let btn = new Button("test");
-	let ibtn = new IconButton("add","ajouter");
+	let btn = new Button("A Button","pink");
+	let ibtn = new IconButton("add","An Icon Button");
   let txt = new Text("hello I am a text.");
   let ttl = new Title("A Title.");
+  let i = new Input("An Input.");
+  let ri = new RangeInput("A Range Input.");
+  let ni = new NumericInput("A Numeric Input.");
 	ca2.addChild(ttl);
 	ca2.addChild(txt);
 	ca2.addChild(btn);
 	ca2.addChild(ibtn);
+	ca2.addChild(i);
+	ca2.addChild(ri);
+	ca2.addChild(ni);
 	</script>
 	</body>
 </html>

@@ -1,20 +1,11 @@
-import { Widget } from "./widget.js";
+import { Text } from "./text.js";
 
-export class Button extends Widget{
-  constructor(text) {
-    super();
+export class Button extends Text{
+  constructor(text,color) {
+    super(text);
     this.element = document.createElement("BUTTON");
-    this.element.className = `btn btn-primary`;
+    this.innerElement = this.element;
+    this.element.className = `btn ${color}-bg`;
     this.text = text;
-  }
-
-  addChild() {}
-  removeChild() {}
-  
-  set text(t){
-    this.element.textContent = t;
-  }
-  get text(){
-    return this.element.textContent;
   }
 }

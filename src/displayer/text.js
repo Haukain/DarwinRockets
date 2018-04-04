@@ -4,6 +4,7 @@ export class Text extends Widget{
   constructor(text) {
     super();
     this.element = document.createElement("P");
+    this.innerElement = this.element;
     this.element.className = "card-text";
     this.text = text;
   }
@@ -12,9 +13,9 @@ export class Text extends Widget{
   removeChild() {}
 
   set text(t){
-    this.element.textContent = t;
+    this.innerElement.textContent = t;
   }
   get text(){
-    return this.element.textContent;
+    return this.innerElement.textContent;
   }
 }
