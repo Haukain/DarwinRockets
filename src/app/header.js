@@ -29,7 +29,7 @@ export class Header{
       });
     });
     //help Button
-    this._addButton("help_outline","help",e=>{new Alert("Pas encore écrite :/","désolé.")});
+    this._addButton("help_outline","help",e=>{new Alert("Not yet written :/","sorry.")});
     //generation range
     let genItem = new NavbarItem();
     this._genRange = new RangeInput("generation");
