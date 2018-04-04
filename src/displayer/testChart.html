@@ -56,51 +56,24 @@
 	import { RangeInput } from "./rangeinput.js";
 	import { NumericInput } from "./numericinput.js";
 	import { CanvasWidget } from "./canvaswidget.js";
-	import { ChartWidget } from "./chartwidget.js";
+	import { LineChartWidget } from "./linechartwidget.js";
+	import { RadarChartWidget } from "./radarchartwidget.js";
 	let r = new Row();
 	document.body.appendChild(r.element);
 	let c1 = new Col(6,6,6,6);
 	let c2 = new Col(6,6,6,6);
 	r.addChild(c1);
 	r.addChild(c2);
-
-	/*lovar myChart = new ChartWidget('white', 'grey', {
-    type: 'bar',
-    data:  {
-        labels: ["Féminin", "Masculin", "Animaux"],
-        datasets: [
-           {
-           label: "Tous les voyageurs",
-           data: [227, 331, 11]
-           },{
-           label: "1ère Classe",
-           data: [107, 115, 2]
-           },{
-           label: "2ème Classe",
-           data: [120, 116, 9]
-           }
-        ]
-      }
-	});*/
-	var myChart = new ChartWidget('white', 'grey', {
-    type: 'bar',
-    data:  {
-        labels: ["Féminin", "Masculin", "Animaux"],
-        datasets: [
-           {
-           label: "Tous les voyageurs",
-           data: [227, 331, 11]
-           },{
-           label: "1ère Classe",
-           data: [107, 115, 2]
-           },{
-           label: "2ème Classe",
-           data: [120, 116, 9]
-           }
-        ]
-      }
-	});
-		c1.addChild(myChart);
+	let myChart = new LineChartWidget('white', 'grey');
+	let datasetOne = myChart.addDataset("one","rgb(255,0,0)","rgba(255,0,0,0.2)");
+	myChart.addDataPoint(datasetOne,227);
+	myChart.addDataPoint(datasetOne,331);
+	myChart.addDataPoint(datasetOne,11);
+	myChart.addDataPoint(datasetOne,50);
+	c1.addChild(myChart);
+	let myChart2 = new RadarChartWidget('white', 'grey',["dsitance","speed","complexity"]);
+	for(let i=0;i<5;i++)myChart2.addDataset("one","rgb(255,0,0)","rgba(255,0,0,0.2)",[Math.random(),Math.random(),Math.random()]);
+	c2.addChild(myChart2);
 	</script>
 	</body>
 </html>
