@@ -51,8 +51,8 @@
 		let rocketInitialPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
 		let leftReactorOffSet = { x: -10, y: +10}
 		let rightReactorOffSet = { x: +10, y: +10}
-		let leftReactorAngle = (6/5)*Math.PI;
-		let rightReactorAngle = (4.5/5)*Math.PI;
+		let leftReactorAngle = +1+Math.PI;
+		let rightReactorAngle = -1+Math.PI;
 		let leftReactorPower = 0.0001;
 		let rightReactorPower = 0.0001;
 		let rocketBluePrint = [{ x: 0, y: 0 },{ x: 15, y: 0 },{ x: 15, y: 20 },{ x: 15, y: 20 },{ x: 7.5, y: 27.5 },{ x: 2.5, y: 25 },{ x: 0, y: 20 }];
@@ -61,6 +61,30 @@
 		         strokeStyle: '#d66b73',
 		         lineWidth: 0
 		};
+    
+    //hacky controls
+    let rightReactorActive = false;
+    let leftReactorActive = false;
+    document.body.addEventListener("keydown",e=>{
+      switch (e.keyCode) {
+          case 37:
+              leftReactorActive = true;
+              break;
+          case 39:
+              rightReactorActive = true;
+              break;
+      }
+    },false);
+    document.body.addEventListener("keyup",e=>{
+      switch (e.keyCode) {
+          case 37:
+              leftReactorActive = false;
+              break;
+          case 39:
+              rightReactorActive = false;
+              break;
+      }
+    },false);
 
 		// create rocket parts
 		// body
@@ -100,13 +124,17 @@
 
 		// apply force
 		Events.on(engine, "beforeUpdate",e=>{
+      //hacky controls
+      let lp=leftReactorActive?leftReactorPower:0
+      let rp=rightReactorActive?rightReactorPower:0
+      //thrust calculation
 			forceLeftReactor = {
-				x : Math.sin(rocket.parts[2].angle)*Math.sin(rocket.angle)*leftReactorPower,
-				y : Math.cos(rocket.parts[2].angle)*Math.cos(rocket.angle)*leftReactorPower
+				x : Math.cos(rocket.parts[2].angle+rocket.angle+Math.PI/2)*lp,
+				y : Math.sin(rocket.parts[2].angle+rocket.angle+Math.PI/2)*lp
 			}
 			forceRightReactor = {
-				x : Math.sin(rocket.parts[3].angle)*Math.sin(rocket.angle)*rightReactorPower,
-				y : Math.cos(rocket.parts[3].angle)*Math.cos(rocket.angle)*rightReactorPower
+				x : Math.cos(rocket.parts[3].angle+rocket.angle+Math.PI/2)*rp,
+				y : Math.sin(rocket.parts[3].angle+rocket.angle+Math.PI/2)*rp
 			}
 			Body.applyForce(rocket,{x: rocket.parts[2].position.x, y: rocket.parts[2].position.y},forceLeftReactor);
 			Body.applyForce(rocket,{x: rocket.parts[3].position.x, y: rocket.parts[3].position.y},forceRightReactor);
