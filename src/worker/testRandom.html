@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Test Worker 
+	</title>
+	<!-- Title, Favicon and SEO Meta -->
+	<title>DarwinRockets - Displayer Test</title>
+	<meta name="description" content="Learning App to let you toy with the concept of darwinian evolution.">
+	<meta name="author" content="Titouan Baillon, Timothy Cabaret, Maïwenn Berthelot, Adrien Constante, Lukas Chaillant">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../assets/icons/favicon-16x16.png">
+	<link rel="manifest" href="../../assets/icons/site.webmanifest">
+	<link rel="mask-icon" href="../../assets/icons/safari-pinned-tab.svg" color="#d65b73">
+	<link rel="shortcut icon" href="../../assets/icons/favicon.ico">
+	<meta name="msapplication-config" content="../../assets/icons/browserconfig.xml">
+	<!-- Librairies -->
+	<script src="../../libs/jquery/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../libs/bootstrap/css/bootstrap-reboot.min.css">
+	<script src="../../libs/bootstrap/js/bootstrap.bundle.js"></script>
+	<script src="../../libs/chartjs/Chart.bundle.min.js"></script>
+	<script src="../../libs/matterjs/matter.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../libs/material-icons/material-icons.css">
+</head>
+<body>
+	<script>
+		// module aliases
+		var Engine = Matter.Engine,
+		    Render = Matter.Render,
+		    World = Matter.World,
+		    Bodies = Matter.Bodies;
+		    Body = Matter.Body;
+		    Constraint = Matter.Constraint;
+		    Composite = Matter.Composite;
+		    Events = Matter.Events;
+        
+class PhysicsReactor{
+  constructor(blueprint,render,position,angle,thrust){
+    this._position = position;
+    this._angle = angle;
+    this._thrust = thrust;
+    this.active = false;
+    this._body = Body.create({
+			vertices: blueprint,
+			render: render
+    });
+    this._body.label = "reactorBody";
+		Body.scale(this._body,5000*this._thrust,5000*this._thrust);
+		Body.setPosition(this._body,this._position);
+		Body.setAngle(this._body, this._angle);
+  }
+  get position(){return this._position;}
+  get angle(){return this._angle;}
+  get thrust(){return this._thrust;}
+  get body(){return this._body;}
+  applyThrust(rocket){
+    if(!this.active)return;
+    let thrustVector = {
+      x : Math.cos(this._angle+rocket.object.angle+Math.PI/2)*this._thrust,
+      y : Math.sin(this._angle+rocket.object.angle+Math.PI/2)*this._thrust
+    }
+    Body.applyForce(rocket.object,{x: this._body.position.x, y: this._body.position.y},thrustVector);
+  }
+}
+class PhysicsRocket{
+  constructor(blueprint,render,position,reactorDefinitions){
+    this._body = Body.create({
+			vertices: rocketBluePrint,
+			render: rocketRender
+    });
+    this._body.label = "rocketBody";
+		Body.setAngle(this._body, Math.PI);
+    this._reactors = [];
+    for(let rd of reactorDefinitions) this._reactors.push(new PhysicsReactor(blueprint,render,rd.position,rd.angle,rd.thrust));
+    console.log([this._body].concat(this._reactors.map(d=>d.body)));
+    this._object = Body.create({parts:[this._body].concat(this._reactors.map(d=>d.body))});
+		this._object.label = "rocket";
+		Body.setPosition(this._object,position);
+    //manual controls
+    document.body.addEventListener("keydown",e=>{
+      if(e.keyCode-49>=0 && e.keyCode-49<9)this._reactors[e.keyCode-49].active = true;
+    },false);
+    document.body.addEventListener("keyup",e=>{
+      if(e.keyCode-49>=0 && e.keyCode-49<9)this._reactors[e.keyCode-49].active = false;
+    },false);
+  }
+  get body(){return this._body;}
+  get object(){return this._object;}
+  applyThrusts(){
+    for(let reactor of this._reactors) reactor.applyThrust(this);
+  }
+}
+		// create an engine
+		let engine = Engine.create();
+		engine.world.gravity.y = 0;
+
+		// create a renderer
+		let render = Render.create({element: document.body,engine: engine});
+		render.options.wireframes = false;
+		render.canvas.width = document.documentElement.clientWidth;
+		render.canvas.height = document.documentElement.clientHeight;
+
+		// rocket parameters 
+		let rocketInitialPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
+		let rocketBluePrint = [{ x: 0, y: 0 },{ x: 15, y: 0 },{ x: 15, y: 20 },{ x: 15, y: 20 },{ x: 7.5, y: 27.5 },{ x: 2.5, y: 25 },{ x: 0, y: 20 }];
+		let rocketRender = {
+		         fillStyle: '#85bce6',
+		         strokeStyle: '#d66b73',
+		         lineWidth: 0
+		};
+
+		// create rocket parts
+		
+    let rocket = new PhysicsRocket(rocketBluePrint,rocketRender,rocketInitialPosition,[
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1)},
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1)},
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1)},
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1)},
+    ]);
+
+		// add the rocket to the world
+		World.add(engine.world, [rocket.object]);
+
+		// apply force
+		Events.on(engine, "beforeUpdate",e=>{
+      rocket.applyThrusts();
+		})
+
+		// check for collisions
+		Matter.Events.on(engine, 'collisionActive', function(event) {
+			let i, currentPair, currentPart;
+			let n = event.pairs.length;
+			let m = rocket.object.parts.length
+
+			for(let i =0; i<n; i++){
+				currentPair = event.pairs[i];
+				for(let j=0;j<m;j++){
+					currentPart = rocket.parts[j];
+					if(currentPair.bodyA.label === currentPart.label){
+						console.log("collision");
+					}
+				}
+
+			}
+
+		});
+
+		// obstacle creation
+		let circleA = Bodies.circle(1050,250,30,{isStatic : true});
+		let circleB = Bodies.circle(1200,100,50,{isStatic : true});
+		let circleC = Bodies.circle(950,10,30,{isStatic : true});
+		let circleD = Bodies.circle(850,100,80,{isStatic : true});
+		let circleE = Bodies.circle(800,300,50,{isStatic : true});
+		World.add(engine.world, [circleA, circleB, circleC, circleD, circleE]);
+
+		// test zone 
+		console.log(rocket.parts);
+
+		// run the engine
+		Engine.run(engine);
+
+		// run the renderer
+		Render.run(render);
+
+	</script>
+</body>
+</html>
