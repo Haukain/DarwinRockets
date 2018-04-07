@@ -136,10 +136,10 @@
 			applyGravitation(){
 				let distanceSquared = Math.pow(this._object.position.x - this._rocket.object.position.x,2) + Math.pow(this._object.position.y - this._rocket.object.position.y,2)
 				let attractionForce = 0.0008*(this._object.mass*this._rocket.object.mass)/(distanceSquared);
-				let beta = Math.atan(Math.abs(this._object.position.y - this._rocket.object.position.y,2)/Math.abs(this._object.position.x - this._rocket.object.position.x,2))
-				console.log("beta:",beta);
-				console.log("attractionForce:",attractionForce);
-				Body.applyForce(this._rocket.object,{x:this._rocket.object.position.x,y:this._rocket.object.position.y},{x:Math.sin(beta)*attractionForce,y:-Math.cos(beta)*attractionForce});
+
+				let beta = Math.atan2(this._object.position.y - this._rocket.object.position.y,this._object.position.x - this._rocket.object.position.x)
+				console.log(beta);
+				Body.applyForce(this._rocket.object,{x:this._rocket.object.position.x,y:this._rocket.object.position.y},{x:Math.cos(beta)*attractionForce,y:Math.sin(beta)*attractionForce});
 			}
 		}
 
