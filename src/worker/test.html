@@ -44,8 +44,8 @@
 		// create a renderer
 		let render = Render.create({element: document.body,engine: engine});
 		render.options.wireframes = false;
-		render.canvas.width = document.documentElement.clientWidth;
-		render.canvas.height = document.documentElement.clientHeight;
+		render.canvas.width = document.documentElement.clientWidth - 100;
+		render.canvas.height = document.documentElement.clientHeight -100;
 
 		// rocket parameters 
 		let rocketInitialPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
@@ -53,8 +53,8 @@
 		let rightReactorOffSet = { x: +10, y: +10}
 		let leftReactorAngle = +1+Math.PI;
 		let rightReactorAngle = -1+Math.PI;
-		let leftReactorPower = 0.0001;
-		let rightReactorPower = 0.0001;
+		let leftReactorPower = 0.0005;
+		let rightReactorPower = 0.0005;
 		let rocketBluePrint = [{ x: 0, y: 0 },{ x: 15, y: 0 },{ x: 15, y: 20 },{ x: 15, y: 20 },{ x: 7.5, y: 27.5 },{ x: 2.5, y: 25 },{ x: 0, y: 20 }];
 		let rocketRender = {
 		         fillStyle: '#85bce6',
