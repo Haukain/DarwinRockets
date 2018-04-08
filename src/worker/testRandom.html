@@ -27,7 +27,10 @@
 </head>
 <body>
 	<script type='module'>
+		import { PhysicsObstacle } from './physicsobstacle.js'; 
 		import { PhysicsRocket } from './physicsrocket.js';
+		import { PhysicsPlanet } from './physicsplanet.js';
+		import { PhysicsBlackHole } from './physicsblackhole.js';
 
 		// module aliases
 		var Engine = Matter.Engine,
@@ -38,47 +41,7 @@
 		    Constraint = Matter.Constraint,
 		    Composite = Matter.Composite,
 		    Events = Matter.Events,
-        Vertices = Matter.Vertices;
-
-
-
-
-		class PhysicObstacle{
-			constructor(rocket,position,radius){
-				if (new.target === PhysicObstacle) {
-			      throw new TypeError("PhysicObstacle is an abstract class"); //Abstract error
-			    }
-				this._object = Bodies.circle(position.x,position.y,radius,{isStatic : true});
-				this._rocket = rocket;
-			}
-
-			get object(){return this._object;}
-
-			applyGravitation(){
-				let distanceSquared = Math.pow(this._object.position.x - this._rocket.object.position.x,2) + Math.pow(this._object.position.y - this._rocket.object.position.y,2)
-				let attractionForce = 0.0001*(this._object.mass*this._rocket.object.mass)/(distanceSquared);
-
-				let beta = Math.atan2(this._object.position.y - this._rocket.object.position.y,this._object.position.x - this._rocket.object.position.x)
-				Body.applyForce(this._rocket.object,{x:this._rocket.object.position.x,y:this._rocket.object.position.y},{x:Math.cos(beta)*attractionForce,y:Math.sin(beta)*attractionForce});
-			}
-		}
-
-		class physicPlanet extends PhysicObstacle{
-			constructor(rocket,position,radius){
-				super(rocket,position,radius);
-				Body.setDensity(this._object,0.07);
-			}
-		}
-
-		class PhysicBlackhole extends PhysicObstacle{
-			constructor(rocket,position,radius){
-				super(rocket,position,radius);
-				Body.setDensity(this._object,0.90);
-				this._object.render.fillStyle ='#1a233a';
-				this._object.render.strokeStyle ='invisible';
-				this._object.render.lineWidth = 0.1 ;
-			}
-		}
+        	Vertices = Matter.Vertices;
 
 		// Create an engine
 		let engine = Engine.create();
@@ -120,9 +83,9 @@
 		// obstacle creation
 		let obstacle = [];
 		for(let i = 0; i<4; i++){
-			obstacle.push(new physicPlanet(rocket,{x:Math.random()*1000+100,y:Math.random()*500+100},40));
+			obstacle.push(new PhysicsPlanet(rocket,{x:Math.random()*1000+100,y:Math.random()*500+100},40));
 		}
-		obstacle.push(new PhysicBlackhole(rocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},50));
+		obstacle.push(new PhysicsBlackhole(rocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},50));
 
 		for(let o of obstacle){
 			World.add(engine.world, o.object);
