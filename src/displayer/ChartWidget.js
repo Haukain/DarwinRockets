@@ -1,4 +1,4 @@
-import { CanvasWidget } from "./canvaswidget.js";
+import { CanvasWidget } from "./CanvasWidget.js";
 
 export class ChartWidget extends CanvasWidget{
   constructor(bg,fg,type) {
