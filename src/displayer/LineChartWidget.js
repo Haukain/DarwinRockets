@@ -1,4 +1,4 @@
-import { ChartWidget } from "./chartwidget.js";
+import { ChartWidget } from "./ChartWidget.js";
 
 export class LineChartWidget extends ChartWidget{
   constructor(bg,fg) {
