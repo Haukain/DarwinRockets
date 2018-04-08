@@ -1,5 +1,5 @@
-import { Screen } from "./screen.js";
-import { TerrainConfigurator } from "../displayer/terrainconfigurator.js";
+import { Screen } from "./Screen.js";
+import { TerrainConfigurator } from "../displayer/TerrainConfigurator.js";
 
 export class ConfigurationScreen extends Screen{
 
