@@ -1,5 +1,5 @@
-import { Row } from "../displayer/row.js";
-import { Header } from "./header.js";
+import { Row } from "../displayer/Row.js";
+import { Header } from "./Header.js";
 export class App{
   constructor(el) {
     this.generations=[];
