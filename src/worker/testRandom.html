@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>
-		Test Worker 
+		Test Worker
 	</title>
 	<!-- Title, Favicon and SEO Meta -->
 	<title>DarwinRockets - Displayer Test</title>
@@ -27,54 +27,20 @@
 </head>
 <body>
 	<script type='module'>
-		import PhysicsRocket from './physicsRocket.js';
+		import { PhysicsRocket } from './physicsrocket.js';
 
 		// module aliases
 		var Engine = Matter.Engine,
 		    Render = Matter.Render,
 		    World = Matter.World,
-		    Bodies = Matter.Bodies;
-		    Body = Matter.Body;
-		    Constraint = Matter.Constraint;
-		    Composite = Matter.Composite;
-		    Events = Matter.Events;
-        	Vertices = Matter.Vertices
+		    Bodies = Matter.Bodies,
+		    Body = Matter.Body,
+		    Constraint = Matter.Constraint,
+		    Composite = Matter.Composite,
+		    Events = Matter.Events,
+        Vertices = Matter.Vertices;
 
-		class PhysicsReactor{
-		  constructor(blueprint,reactorRender,position,angle,thrust,capacity){
-		    this._position = position;
-		    this._angle = angle;
-		    this._thrust = thrust;
-		    this._capacity = capacity;
-		    this.active = false;
-		    this._body = Body.create({
-					vertices: blueprint,
-					render: reactorRender,
-		    });
-		    this._body.label = "reactorBody";
-				Body.scale(this._body,2000*this._thrust,2000*this._thrust);
-				Body.setPosition(this._body,this._position);
-				Body.setAngle(this._body, this._angle);
-		  }
-		  get position(){return this._position;}
-		  get angle(){return this._angle;}
-		  get thrust(){return this._thrust;}
-		  get body(){return this._body;}
-		  get capacity(){return this._capacity;}
-		  setCapacity(){this._capacity -= 1};
-		  applyThrust(rocket){
-		    if(!this.active){
-		    	this._body.render.fillStyle =  '#d65b73'
-		    	return
-		    };
-		    this._body.render.fillStyle = '#1a233a';
-		    let thrustVector = {
-		      x : Math.cos(this._angle+rocket.object.angle+Math.PI/2)*this._thrust,
-		      y : Math.sin(this._angle+rocket.object.angle+Math.PI/2)*this._thrust
-		    }
-		    Body.applyForce(rocket.object,{x: this._body.position.x, y: this._body.position.y},thrustVector);
-		  }
-		}
+
 
 
 		class PhysicObstacle{
@@ -124,9 +90,9 @@
 		render.canvas.width = document.documentElement.clientWidth -100;
 		render.canvas.height = document.documentElement.clientHeight -100;
 
-		// Rocket parameters 
+		// Rocket parameters
 		let rocketInitialPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
-		// let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }]; 
+		// let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
 		let rocketBluePrint = Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
 		let rocketRender = {
 		         fillStyle: '#85bce6',
@@ -140,7 +106,7 @@
 		};
 
 		// Create rocket parts
-		
+
 	    let rocket = new PhysicsRocket(rocketBluePrint,rocketRender,reactorRender,rocketInitialPosition,[
 	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
 	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
@@ -185,7 +151,7 @@
 		// apply force
 		Events.on(engine, "beforeUpdate",e=>{
       		rocket.applyThrusts();
-      		for(o of obstacle){
+      		for(let o of obstacle){
       			o.applyGravitation();
       		}
 		})

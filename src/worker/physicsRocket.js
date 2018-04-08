@@ -1,16 +1,17 @@
-export default class PhysicsRocket{
+import { PhysicsReactor } from "./physicsreactor.js"
+export class PhysicsRocket{
 	constructor(blueprint,rocketRender,reactorRender,position,reactorDefinitions){
-		this._body = Body.create({
-				vertices: rocketBluePrint,
+		this._body = Matter.Body.create({
+				vertices: blueprint,
 				render: rocketRender,
 		});
 		this._body.label = "rocketBody";
-			Body.setAngle(this._body, Math.PI);
+			Matter.Body.setAngle(this._body, Math.PI);
 
 		this._reactors = [];
 		for(let rd of reactorDefinitions) this._reactors.push(new PhysicsReactor(blueprint,reactorRender,rd.position,rd.angle,rd.thrust,rd.capacity));
 
-		this._object = Body.create({
+		this._object = Matter.Body.create({
 			parts:[this._body].concat(this._reactors.map(d=>d.body)),
 			friction: 0.1,
 			frictionAir : 0.01,
@@ -18,7 +19,7 @@ export default class PhysicsRocket{
 		});
 
 		this._object.label = "rocket";
-		Body.setPosition(this._object,position);
+		Matter.Body.setPosition(this._object,position);
 
 		//manual controls
 		// document.body.addEventListener("keydown",e=>{
