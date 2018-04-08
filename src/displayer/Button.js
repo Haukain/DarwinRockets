@@ -1,4 +1,4 @@
-import { Text } from "./text.js";
+import { Text } from "./Text.js";
 
 export class Button extends Text{
   constructor(text,color) {
