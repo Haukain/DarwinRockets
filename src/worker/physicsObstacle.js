@@ -1,4 +1,4 @@
-import { PhysicsRocket } from './physicsrocket.js';
+import { PhysicsRocket } from './PhysicsRocket.js';
 
 export class PhysicsObstacle{
 	constructor(rocket,position,radius){

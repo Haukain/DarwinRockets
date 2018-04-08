@@ -1,4 +1,4 @@
-import { PhysicsObstacle } from "./physicsobstacle.js"
+import { PhysicsObstacle } from "./PhysicsObstacle.js"
 
 export class PhysicsBlackHole extends PhysicsObstacle{
 	constructor(rocket,position,radius){
