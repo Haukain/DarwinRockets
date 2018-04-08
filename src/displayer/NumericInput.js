@@ -1,4 +1,4 @@
-import { Input } from "./input.js";
+import { Input } from "./Input.js";
 
 export class NumericInput extends Input{
   constructor(text) {
