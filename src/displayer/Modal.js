@@ -1,4 +1,4 @@
-import { Row } from "./row.js";
+import { Row } from "./Row.js";
 
 export class Modal extends Row{
   constructor() {
