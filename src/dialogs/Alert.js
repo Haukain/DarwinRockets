@@ -1,7 +1,7 @@
-import { Modal } from "../displayer/modal.js";
-import { Title } from "../displayer/title.js";
-import { Text } from "../displayer/text.js";
-import { Button } from "../displayer/button.js";
+import { Modal } from "../displayer/Modal.js";
+import { Title } from "../displayer/Title.js";
+import { Text } from "../displayer/Text.js";
+import { Button } from "../displayer/Button.js";
 
 export class Alert{
   constructor(title,text){
