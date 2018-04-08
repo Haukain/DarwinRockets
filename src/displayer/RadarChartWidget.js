@@ -1,4 +1,4 @@
-import { ChartWidget } from "./chartwidget.js";
+import { ChartWidget } from "./ChartWidget.js";
 
 export class RadarChartWidget extends ChartWidget{
   constructor(bg,fg,labels) {
