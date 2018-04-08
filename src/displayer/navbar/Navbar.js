@@ -1,4 +1,4 @@
-import { Widget } from "../widget.js";
+import { Widget } from "../Widget.js";
 
 export class Navbar extends Widget{
   constructor(logoSrc) {
