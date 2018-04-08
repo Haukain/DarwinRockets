@@ -1,5 +1,5 @@
-import { Prompt } from "./prompt.js";
-import { NumericInput } from "../displayer/numericinput.js";
+import { Prompt } from "./Prompt.js";
+import { NumericInput } from "../displayer/NumericInput.js";
 
 export class NumericPrompt extends Prompt{
   constructor(title,text,callback){
