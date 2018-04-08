@@ -26,7 +26,9 @@
 	<link rel="stylesheet" type="text/css" href="../../libs/material-icons/material-icons.css">
 </head>
 <body>
-	<script>
+	<script type='module'>
+		import PhysicsRocket from './physicsRocket.js';
+
 		// module aliases
 		var Engine = Matter.Engine,
 		    Render = Matter.Render,
@@ -39,10 +41,11 @@
         	Vertices = Matter.Vertices
 
 		class PhysicsReactor{
-		  constructor(blueprint,reactorRender,position,angle,thrust){
+		  constructor(blueprint,reactorRender,position,angle,thrust,capacity){
 		    this._position = position;
 		    this._angle = angle;
 		    this._thrust = thrust;
+		    this._capacity = capacity;
 		    this.active = false;
 		    this._body = Body.create({
 					vertices: blueprint,
@@ -57,6 +60,8 @@
 		  get angle(){return this._angle;}
 		  get thrust(){return this._thrust;}
 		  get body(){return this._body;}
+		  get capacity(){return this._capacity;}
+		  setCapacity(){this._capacity -= 1};
 		  applyThrust(rocket){
 		    if(!this.active){
 		    	this._body.render.fillStyle =  '#d65b73'
@@ -71,56 +76,6 @@
 		  }
 		}
 
-		class PhysicsRocket{
-		  constructor(blueprint,rocketRender,reactorRender,position,reactorDefinitions){
-		    this._body = Body.create({
-					vertices: rocketBluePrint,
-					render: rocketRender,
-		    });
-		    this._body.label = "rocketBody";
-				Body.setAngle(this._body, Math.PI);
-
-		    this._reactors = [];
-		    for(let rd of reactorDefinitions) this._reactors.push(new PhysicsReactor(blueprint,reactorRender,rd.position,rd.angle,rd.thrust));
-
-		    this._object = Body.create({
-		    	parts:[this._body].concat(this._reactors.map(d=>d.body)),
-		    	friction: 0.1,
-				frictionAir : 0.01,
-				frictionStatic :0.03
-		    });
-
-			this._object.label = "rocket";
-			Body.setPosition(this._object,position);
-
-		    //manual controls
-		    document.body.addEventListener("keydown",e=>{
-		      if(e.keyCode-49>=0 && e.keyCode-49<9){
-		      	if (this._reactors[e.keyCode-49]){
-		      	this._reactors[e.keyCode-49].active = true;
-		      	}
-		      }
-		    },false);
-		    document.body.addEventListener("keyup",e=>{
-		      if(e.keyCode-49>=0 && e.keyCode-49<9){
-		      	if (this._reactors[e.keyCode-49]){
-		      		this._reactors[e.keyCode-49].active = false;
-		      	}
-		      }
-		    },false);
-
-		  }
-
-		  get body(){return this._body;}
-		  get object(){return this._object;}
-
-		  applyThrusts(){
-		    for(let reactor of this._reactors){
-		    	 reactor.applyThrust(this);
-		    }
-		  }
-
-		}
 
 		class PhysicObstacle{
 			constructor(rocket,position,radius){
@@ -187,10 +142,10 @@
 		// Create rocket parts
 		
 	    let rocket = new PhysicsRocket(rocketBluePrint,rocketRender,reactorRender,rocketInitialPosition,[
-	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1)},
-	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1)},
-	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1)},
-	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1)},
+	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+	      {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
 	    ]);
 
 		// add the rocket to the world
