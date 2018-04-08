@@ -2,9 +2,9 @@ import { PhysicsRocket } from './physicsrocket.js';
 
 export class PhysicsObstacle{
 	constructor(rocket,position,radius){
-		if (new.target === PhysicsObstacle) {
-	      throw new TypeError("PhysicObstacle is an abstract class"); //Abstract error
-	    }
+		// if (new.target === PhysicsObstacle) {
+	 //      throw new TypeError("PhysicsObstacle is an abstract class"); //Abstract error
+	 //    }
 		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true});
 		this._rocket = rocket;
 	}
