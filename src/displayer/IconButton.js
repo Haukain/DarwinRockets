@@ -1,4 +1,4 @@
-import { Button } from "./button.js";
+import { Button } from "./Button.js";
 
 export class IconButton extends Button{
   constructor(icon,text) {
