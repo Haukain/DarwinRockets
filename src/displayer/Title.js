@@ -1,4 +1,4 @@
-import { Text } from "./text.js";
+import { Text } from "./Text.js";
 
 export class Title extends Text{
   constructor(text) {
