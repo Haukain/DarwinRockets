@@ -1,4 +1,4 @@
-import { Col } from "../displayer/col.js";
+import { Col } from "../displayer/Col.js";
 
 export class Screen{
 
