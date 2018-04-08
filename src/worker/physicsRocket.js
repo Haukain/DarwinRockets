@@ -1,4 +1,4 @@
-import { PhysicsReactor } from "./physicsreactor.js"
+import { PhysicsReactor } from "./physicsReactor.js"
 
 export class PhysicsRocket{
 	constructor(blueprint,rocketRender,reactorRender,position,reactorDefinitions){
