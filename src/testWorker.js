@@ -1,4 +1,6 @@
-let worker = new Worker("./worker.js", {type:"module"})
+import { WorkerCommander } from "./worker/WorkerCommander.js"
+import Worker from 'worker-loader!./worker/Worker.js';
+let worker = new Worker();
 let com = new WorkerCommander(worker);
 com.send("startGen");
 com.send("stopGen");
