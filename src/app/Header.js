@@ -1,9 +1,9 @@
-import { Navbar } from "../displayer/navbar/navbar.js";
-import { NavbarItem } from "../displayer/navbar/navbaritem.js";
-import { IconButton } from "../displayer/iconbutton.js";
-import { RangeInput } from "../displayer/rangeinput.js";
-import { NumericPrompt } from "../dialogs/numericprompt.js";
-import { Alert } from "../dialogs/alert.js";
+import { Navbar } from "../displayer/navbar/Navbar.js";
+import { NavbarItem } from "../displayer/navbar/NavbarItem.js";
+import { IconButton } from "../displayer/IconButton.js";
+import { RangeInput } from "../displayer/RangeInput.js";
+import { NumericPrompt } from "../dialogs/NumericPrompt.js";
+import { Alert } from "../dialogs/Alert.js";
 
 export class Header{
   constructor(app){
