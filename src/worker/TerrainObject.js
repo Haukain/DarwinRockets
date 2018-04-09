@@ -10,8 +10,8 @@ class TerrainObject {
 	}
 }
 
-getAttraction() {return this._attraction;}
+get attraction() {return this._attraction;}
 setAttraction(attraction) {this._attraction = attraction;}
 
-getPosition() {return this._position;}
+get position() {return this._position;}
 setPosition(position) {this._position = position;}
