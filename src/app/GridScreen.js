@@ -1,4 +1,5 @@
 import { Screen } from "../Screen.js";
+import { RocketViewer } from "../displayer/RocketViewer.js";
 
 export class GridScreen extends Screen{
 
@@ -8,6 +9,11 @@ export class GridScreen extends Screen{
     }
 
     this.display(){
+        let disp;
+        for (var i in this._gen.rockets){
+            
+            //a finir
+        }
     }
 
 }
