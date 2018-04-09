@@ -1,5 +1,5 @@
-import { Button } from "../displayer/button/button.js";
-
+import { Button } from "../displayer/button/Button.js";
+// Sérieux là ça se commit pas un truc comme ça
 export class StartScreen{
 	constructor(app){
 		let that = this;
