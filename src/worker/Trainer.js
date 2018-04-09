@@ -34,14 +34,14 @@ addGeneration(generation) {
 	this._generation.push(generation);
 }
 
-getContinuousGeneration() {return this._continuousGeneration;}
+get continuousGeneration() {return this._continuousGeneration;}
 setContinousGeneration(continousGeneration) {this._continuousGeneration = continuousGeneration;}
 
-getConfig() {return this._config;}
+get config() {return this._config;}
 setConfig(config) {this._config = config;}
 
-getPhysicsComputer() {return this._physicsComputer;}
+get physicsComputer() {return this._physicsComputer;}
 setPhysicsComputer(physicsComputer) {this._physicsComputer = physicsComputer;}
 
-getGeneration() {return this._generation;}
+get generation() {return this._generation;}
 setGeneration(generation) {this._generation = generation;}

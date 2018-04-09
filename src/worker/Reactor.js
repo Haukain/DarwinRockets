@@ -10,20 +10,20 @@ class Reactor {
 	draw() {}
 }
 
-getPhysicsObject() {return this._physicsObject;}
+get physicsObject() {return this._physicsObject;}
 setPhysicsObject(physicsObject) {this._physicsObject = physicsObject;}
 
-getPosition() {return this._position;}
+get position() {return this._position;}
 setPosition(position) {this._position = position;}
 
-getThrust() {return this._thrust;}
+get thrust() {return this._thrust;}
 setThrust(thrust) {this._thrust = thrust;}
 
-getActivationTime() {return this._activationTime;}
+get activationTime() {return this._activationTime;}
 setActivationTime(activationTime) {this._activationTime = activationTime;}
 
-getExtinctionTime() {return this._extinctionTime;}
+get extinctionTime() {return this._extinctionTime;}
 setExtinctionTime(extinctionTime) {this._extinctionTime = extinctionTime;}
 
-getAngle() {return this._angle;}
+get angle() {return this._angle;}
 setAngle(angle) {this._angle = angle;}

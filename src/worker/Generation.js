@@ -13,5 +13,5 @@ addRockets(rockets) {
 	this._rockets.push(rockets);
 }
 
-getRockets() {return this._rockets;}
+get rockets() {return this._rockets;}
 setRockets(rockets) {this.rockets = rockets;}
