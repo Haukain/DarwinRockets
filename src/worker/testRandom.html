@@ -112,7 +112,8 @@
 
 		// apply force
 		Events.on(engine, "beforeUpdate",e=>{
-      		rocket.applyThrusts();
+					let randomReactor = Math.floor(Math.random()*rocket.reactors.length);
+      		rocket.applyThrusts(randomReactor);
       		for(let o of obstacle){
       			o.applyGravitation();
       		}
