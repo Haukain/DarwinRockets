@@ -1,0 +1,3 @@
+class FitnessFunction {
+	constructor()
+}
