@@ -18,7 +18,6 @@ export class PhysicsRocket{
 			frictionAir : 0.01,
 			frictionStatic :0.03
 		});
-
 		this._object.label = "rocket";
 		Matter.Body.setPosition(this._object,position);
 
