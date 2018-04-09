@@ -37,11 +37,12 @@
 	<script type="module">
 
 	import { Screen } from "./Screen.js";
+	import { App } from "./App.js";
 
-	let screen = new Screen(true);
-	screen.update();
-	screen.set_visibility(true);
+	let app = new App(document.body);
+	let screen = new Screen(app);
 	screen.destroy();
+	console.log(screen.container);
 
 
 	</script>
