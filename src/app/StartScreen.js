@@ -1,4 +1,4 @@
-import { Button } from "../displayer/Button/Button.js";
+import { Button } from "../displayer/button/button.js";
 
 export class StartScreen{
 	constructor(app){
@@ -11,11 +11,12 @@ export class StartScreen{
     	this._addButton("play_arrow","toggle continuous generation",e=>{
       		if(e.icon=="play_arrow"){
         		e.icon = "pause";
-        		that._app.startGen();
       		}else{
         		e.icon = "play_arrow";
-        		that._app.stopGen();
       		}
+      	});
+
+    	this._TutorialButtons = TutorialButtons
 
 
 
