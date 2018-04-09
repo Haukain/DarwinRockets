@@ -5,6 +5,10 @@ module.exports = {
   entry: {
     index:'./src/index.js',
     testDisplayer:'./src/testDisplayer.js',
+    testDisplayerChart:'./src/testDisplayerChart.js',
+    testPhysics:'./src/testPhysics.js',
+    testScreens:'./src/testScreens.js',
+    testWorker:'./src/testWorker.js',
   },
   output: {
     filename: '[name].bundle.js',
