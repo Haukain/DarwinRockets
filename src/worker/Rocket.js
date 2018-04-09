@@ -23,14 +23,14 @@ addGeneration(generation) {
 	this._generation.push(generation);
 }
 
-getPhysicsObject() {return this._physicsObject;}
+get physicsObject() {return this._physicsObject;}
 setPhysicsObject(physicsObject) {this._physicsObject = physicsObject;}
 
-getStatus() {return this._dead;}
+get status() {return this._dead;}
 setStatus(status) {this._dead = status;}
 
-getParents() {return this._parents;}
+get parents() {return this._parents;}
 setParents(parents) {this._parents = parents;}
 
-getReactors() {return this._reactors;}
+get reactors() {return this._reactors;}
 setReactors(reactors) {this._reactors = reactors;}

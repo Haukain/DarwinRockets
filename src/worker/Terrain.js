@@ -10,8 +10,8 @@ addObjects(attraction, position) {
 	this._objects.push(attraction, position);
 }
 
-getSize() {return this._size;}
+get size() {return this._size;}
 setSize(size) {this._size = size;}
 
-getObjects() {return this._objects;}
+get objects() {return this._objects;}
 setObjects(objects) {this._objects = objects;}

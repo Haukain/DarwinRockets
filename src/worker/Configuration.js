@@ -1,6 +1,6 @@
 class Configuration {
-	constructor(comentary, populationSize);
-	this._comentary = comentary;
+	constructor(commentary, populationSize);
+	this._commentary = commentary;
 	this._populationSize = populationSize;
 	this._terrain = [];
 	this._reproductionParameters = [];
@@ -22,17 +22,17 @@ addFitnessFunction(fitnessFunction) {
 	this._fitnessFunction.push(fitnessFunction);
 }
 
-getComentary() {return this._comentary;}
-setComentary(comentary) {this._comentary = comentary;}
+get commentary() {return this._commentary;}
+setComentary(comentary) {this._commentary = commentary;}
 
-getPopulationSize() {return this._populationSize;}
+get populationSize() {return this._populationSize;}
 setPopulationSize(populationSize) {this._populationSize = populationSize;}
 
-getTerrain() {return this._terrain;}
+get terrain() {return this._terrain;}
 setTerrain(terrain) {this._terrain = terrain;}
 
-getReproductionParameters() {return this._reproductionParameters;}
+get reproductionParameters() {return this._reproductionParameters;}
 setReproductionParameters(reproductionParameters) {this._reproductionParameters = reproductionParameters;}
 
-getFitnessFunction() {return this._fitnessFunction;}
+get fitnessFunction() {return this._fitnessFunction;}
 setFitnessFunction(fitnessFunction) {this._fitnessFunction = fitnessFunction;}
