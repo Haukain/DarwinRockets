@@ -2,19 +2,18 @@ import { Col } from "../displayer/Col.js";
 
 export class Screen{
 
-	constructor(visibility) {
-    	this.container = new Col();
-    	this.visible = visibility;
+	constructor(app) {
+    	this._container = new Col();
+    	this._app = app;
     }
 
     destroy(){
-    	delete this.container;
-    	console.log("destroyed")
+        this._app.container.removeChild(this._container);
+        this._container.destroy();
+    	delete this._container;
+    	console.log("destroyed");
     }
 
-    update(){
-    	console.log("updated")
-    }
+    get container(){return this._container;}
 
-    set_visibility(bool){this.visible=bool;}
 }
