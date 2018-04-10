@@ -1,11 +1,14 @@
 class FitnessFunction {
-	constructor(rd, ct, td, cx);
+	constructor(rdf, ctf, tdf, cxf);
 	this._remainingDistanceFactor = rdf;
 	this._completionTimeFactor = ctf;
 	this._traveledDistanceFactor = tdf;
 	this._complexityFactor = cf;
 
-	compute(rd, ct, td, cx);
+	compute(rd, ct, td, cx) {
+		score = remainingDistanceFactor*rd + completionTimeFactor*ct + traveledDistanceFactor*td + complexityFactor*cx;
+		return score;
+	}
 }
 
 get remainingDistanceFactor() {return this._remainingDistanceFactor;}
