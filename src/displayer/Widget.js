@@ -36,6 +36,6 @@ export class Widget{
     return this._children;
   }
   get element(){
-    this._element;
+    return this._element;
   }
 }

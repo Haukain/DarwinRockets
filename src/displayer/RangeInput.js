@@ -9,10 +9,10 @@ export class RangeInput extends Input{
     this._minText = document.createElement("div");
     this._minText.className = "rangeText rangeMin";
     this._element.appendChild(this._minText);
-    this.titleText = document.createElement("div");
-    this.titleText.className = "rangeText rangeTitle";
-    this.element.appendChild(this.titleText);
-    this.innerElement.type = `range`;
+    this._titleText = document.createElement("div");
+    this._titleText.className = "rangeText rangeTitle";
+    this._element.appendChild(this._titleText);
+    this._innerElement.type = `range`;
     this.max = 1;
     this.min = -1;
     this.step = 0.01;
@@ -20,29 +20,29 @@ export class RangeInput extends Input{
     this.text = text;
   }
   set max(v) {
-    this.innerElement.max = v;
-    this.maxText.textContent = v;
+    this._innerElement.max = v;
+    this._maxText.textContent = v;
   }
   get max() {
-    return this.innerElement.max;
+    return this._innerElement.max;
   }
   set min(v) {
-    this.innerElement.min = v;
-    this.minText.textContent = v;
+    this._innerElement.min = v;
+    this._minText.textContent = v;
   }
   get min() {
-    return this.innerElement.min;
+    return this._innerElement.min;
   }
   set step(v) {
-    this.innerElement.step = v;
+    this._innerElement.step = v;
   }
   get step() {
-    return this.innerElement.step;
+    return this._innerElement.step;
   }
   set text(v){
-    if(this.titleText) this.titleText.textContent = v;
+    if(this._titleText) this._titleText.textContent = v;
   }
   get text(){
-    if(this.titleText) return this.titleText.textContent;
+    if(this._titleText) return this._titleText.textContent;
   }
 }
