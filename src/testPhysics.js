@@ -83,8 +83,7 @@ Matter.Events.on(engine, 'collisionActive', function(event) {
 
 // apply force
 Events.on(engine, "beforeUpdate",e=>{
-      let randomReactor = Math.floor(Math.random()*rocket.reactors.length);
-      rocket.applyThrusts(randomReactor);
+      rocket.applyThrusts();
       for(let o of obstacle){
         o.applyGravitation();
       }

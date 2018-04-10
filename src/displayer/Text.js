@@ -3,9 +3,9 @@ import { Widget } from "./Widget.js";
 export class Text extends Widget{
   constructor(text) {
     super();
-    this.element = document.createElement("P");
-    this.innerElement = this.element;
-    this.element.className = "card-text";
+    this._element = document.createElement("P");
+    this._innerElement = this._element;
+    this._element.className = "card-text";
     this.text = text;
   }
 
@@ -13,9 +13,9 @@ export class Text extends Widget{
   removeChild() {}
 
   set text(t){
-    this.innerElement.textContent = t;
+    this._innerElement.textContent = t;
   }
   get text(){
-    return this.innerElement.textContent;
+    return this._innerElement.textContent;
   }
 }
