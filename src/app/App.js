@@ -32,4 +32,8 @@ export class App{
   makeNGen(n) {
     console.log(`making ${n}  generation`);
   }
+
+  displayRocket(rocket){
+    console.log(`displaying rocket`);    
+  }
 }

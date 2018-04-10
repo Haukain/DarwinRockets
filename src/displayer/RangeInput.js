@@ -3,12 +3,12 @@ import { Input } from "./Input.js";
 export class RangeInput extends Input{
   constructor(text) {
     super(text);
-    this.maxText = document.createElement("div");
-    this.maxText.className = "rangeText rangeMax";
-    this.element.appendChild(this.maxText);
-    this.minText = document.createElement("div");
-    this.minText.className = "rangeText rangeMin";
-    this.element.appendChild(this.minText);
+    this._maxText = document.createElement("div");
+    this._maxText.className = "rangeText rangeMax";
+    this._element.appendChild(this._maxText);
+    this._minText = document.createElement("div");
+    this._minText.className = "rangeText rangeMin";
+    this._element.appendChild(this._minText);
     this.titleText = document.createElement("div");
     this.titleText.className = "rangeText rangeTitle";
     this.element.appendChild(this.titleText);

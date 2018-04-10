@@ -9,9 +9,9 @@ class Generation {
 	getMin() {}
 }
 
-addRockets(rockets) {
-	this._rockets.push(rockets);
+addRocket(rocket) {
+	this._rockets.push(rocket);
 }
 
 get rockets() {return this._rockets;}
-setRockets(rockets) {this.rockets = rockets;}
+set rockets(rockets) {this._rockets = rockets;}

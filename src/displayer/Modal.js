@@ -3,24 +3,24 @@ import { Row } from "./Row.js";
 export class Modal extends Row{
   constructor() {
     super();
-    this.element.className = "modal";
+    this._element.className = "modal";
     let uid = ""+Math.round(Math.random()*100000);
-    this.element.id= `modal-${uid}`;
+    this._element.id= `modal-${uid}`;
     //Modal-dialog
     this._dialog = document.createElement("DIV");
     this._dialog.className = "modal-dialog";
-    this.element.appendChild(this._dialog);
+    this._element.appendChild(this._dialog);
     //Modal-content
     this._content = document.createElement("DIV");
     this._content.className = "modal-content";
     this._dialog.appendChild(this._content);
     //Modal-body
-    this.innerElement = document.createElement("DIV");
-    this.innerElement.className = "modal-body";
-    this._content.appendChild(this.innerElement);
+    this._innerElement = document.createElement("DIV");
+    this._innerElement.className = "modal-body";
+    this._content.appendChild(this._innerElement);
 
-    $(this.element).modal();
-    $(this.element).modal('hide');
+    $(this._element).modal();
+    $(this._element).modal('hide');
     this._disabled = true;
   }
   set disabled(d){

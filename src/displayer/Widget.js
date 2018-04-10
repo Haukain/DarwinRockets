@@ -3,30 +3,39 @@ export class Widget{
     if (this.constructor === Widget) {
       throw new Error("Widget is an abstract class");
     }
-    this.children = [];
-    this.element = document.createElement("DIV");
-    this.innerElement = this.element;
+    this._children = [];
+    this._element = document.createElement("DIV");
+    this._innerElement = this._element;
     this.disabled = false;
   }
   addChild(child) {
     this.children.push(child);
-    this.innerElement.appendChild(child.element);
+    this._innerElement.appendChild(child.element);
   }
   removeChild(child) {
-    if(this.children.indexOf(child)==-1) return;
-    this.children.splice(this.children.indexOf(child),1);
-    this.innerElement.removeChild(child.element);
+    if(this._children.indexOf(child)==-1) return;
+    this._children.splice(this._children.indexOf(child),1);
+    this._innerElement.removeChild(child.element);
   }
   on(evt,callback) {
-    this.element.addEventListener(evt,callback,false);
+    this._element.addEventListener(evt,callback,false);
   }
   destroy() {
-    while(this.children.length){
-      this.children[0].destroy();
-      this.removeChild(this.children[0]);
+    while(this._children.length){
+      this._children[0].destroy();
+      this.removeChild(this._children[0]);
     }
   }
+  get disabled(){
+    return this._element.style.display=="none";
+  }
   set disabled(d) {
-    this.element.style.display = d?"none":"";
+    this._element.style.display = d?"none":"";
+  }
+  get children(){
+    return this._children;
+  }
+  get element(){
+    this._element;
   }
 }

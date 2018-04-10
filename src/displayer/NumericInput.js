@@ -3,12 +3,12 @@ import { Input } from "./Input.js";
 export class NumericInput extends Input{
   constructor(text) {
     super(text);
-    this.innerElement.type = `number`;
+    this._innerElement.type = `number`;
   }
   set value(v){
-    this.innerElement.value = parseFloat(v);
+    this._innerElement.value = parseFloat(v);
   }
   get value(){
-    return parseFloat(this.innerElement.value);
+    return parseFloat(this._innerElement.value);
   }
 }
