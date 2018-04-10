@@ -5,7 +5,8 @@ export class PhysicsObstacle{
 		// if (new.target === PhysicsObstacle) {
 	 //      throw new TypeError("PhysicsObstacle is an abstract class"); //Abstract error
 	 //    }
-		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true});
+		this._object;
+		this.createObject(position,radius);
 		this._rocket = rocket;
 	}
 
