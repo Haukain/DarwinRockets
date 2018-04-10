@@ -3,6 +3,6 @@ import { Widget } from "./Widget.js";
 export class Row extends Widget{
   constructor() {
     super();
-    this.element.className = "row";
+    this._element.className = "row";
   }
 }

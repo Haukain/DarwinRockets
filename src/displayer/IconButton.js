@@ -3,7 +3,7 @@ import { Button } from "./Button.js";
 export class IconButton extends Button{
   constructor(icon,text) {
     super(text);
-    this.element.className = `btn material-icons iconbutton`;
+    this._element.className = `btn material-icons iconbutton`;
     this.icon = icon;
 
   }
@@ -12,15 +12,15 @@ export class IconButton extends Button{
   removeChild() {}
 
   set text(t) {
-    this.element.title = t;
+    this._element.title = t;
   }
   get text() {
-    return this.element.title;
+    return this._element.title;
   }
   set icon(t) {
-    this.element.textContent = t;
+    this._element.textContent = t;
   }
   get icon() {
-    return this.element.textContent;
+    return this._element.textContent;
   }
 }
