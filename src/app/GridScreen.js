@@ -6,13 +6,12 @@ export class GridScreen extends Screen{
 	constructor(app, gen) {
         super(app);
         this._gen = gen;
-    }
 
-    this.display(){
-        let disp;
-        for (var i in this._gen.rockets){
-            
-            //a finir
+        for (let i of this._gen.rockets){
+            let rocketViewer = new RocketViewer(i);
+            rocketViewer.on("click",()=>{
+                this._app.displayRocket(i);
+            });
         }
     }
 
