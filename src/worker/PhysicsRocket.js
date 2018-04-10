@@ -42,7 +42,8 @@ export class PhysicsRocket{
 	get reactors(){return this._reactors};
 	get object(){return this._object;}
 
-	selectReactor(randomReactor){
+	selectReactor(){
+		let randomReactor = Math.floor(Math.random()*this._reactors.length);
 		let activeReactors = 0;
 		for(let r of this._reactors){
 			if(r.active){
@@ -59,8 +60,8 @@ export class PhysicsRocket{
 		}
 	}
 
-	applyThrusts(randomReactor){
-		this.selectReactor(randomReactor);
+	applyThrusts(){
+		this.selectReactor();
 		for(let reactor of this._reactors){
 			 reactor.applyThrust(this);
 		}
