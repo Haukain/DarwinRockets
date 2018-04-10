@@ -4,7 +4,7 @@ export class App{
   constructor(el) {
     this.generations=[];
     this.container = new Row();
-    el.appendChild(this.container.element);
+    el.appendChild(this.container._element);
     this._header = new Header(this);
     el.appendChild(this._header.container.element);
   }
@@ -34,6 +34,6 @@ export class App{
   }
 
   displayRocket(rocket){
-    console.log(`displaying rocket`);    
+    console.log(`displaying rocket`);
   }
 }

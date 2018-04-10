@@ -1,6 +1,7 @@
-class Generation {
-	constructor();
-	this._rockets = [];
+export class Generation {
+	constructor(){
+		this._rockets = [];
+	}
 
 	getAverage() {}
 

@@ -15,7 +15,7 @@ export class Widget{
   removeChild(child) {
     if(this._children.indexOf(child)==-1) return;
     this._children.splice(this._children.indexOf(child),1);
-    this._innerElement.removeChild(child.element);
+    this._innerElement.removeChild(child._element);
   }
   on(evt,callback) {
     this._element.addEventListener(evt,callback,false);
