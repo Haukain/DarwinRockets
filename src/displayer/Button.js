@@ -5,7 +5,7 @@ export class Button extends Text{
     super(text);
     this._element = document.createElement("BUTTON");
     this._innerElement = this._element;
-    this._element.className = `btn ${color}-bg`;
+    this._element.className = `btn ${color}-bg btn-basic`;
     this.text = text;
   }
 }

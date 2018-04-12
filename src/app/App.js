@@ -3,10 +3,10 @@ import { Header } from "./Header.js";
 export class App{
   constructor(el) {
     this.generations=[];
-    this.container = new Row();
-    el.appendChild(this.container._element);
     this._header = new Header(this);
     el.appendChild(this._header.container.element);
+    this.container = new Row();
+    el.appendChild(this.container._element);
   }
   init() {}
   //go methods
@@ -35,5 +35,8 @@ export class App{
 
   displayRocket(rocket){
     console.log(`displaying rocket`);
+  }
+  selectTutorial(t){
+    console.log(`launching ${t.name}  generation`);
   }
 }

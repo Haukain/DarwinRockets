@@ -1,9 +1,9 @@
-import { Row } from "../displayer/Row.js";
+import { ScreenContainer } from "../displayer/ScreenContainer.js";
 
 export class Screen{
 
 	constructor(app) {
-    	this._container = new Row();
+    	this._container = new ScreenContainer();
     	this._app = app;
     }
 

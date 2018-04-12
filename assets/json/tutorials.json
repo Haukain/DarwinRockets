@@ -1,0 +1,30 @@
+{
+  "surv":{
+    "name":"1. Survival of the fittest",
+    "config":{}
+  },
+  "repro":{
+    "name":"2. New with Old",
+    "config":{}
+  },
+  "mut":{
+    "name":"3. Random Mutation",
+    "config":{}
+  },
+  "varia":{
+    "name":"4. Replication Errors",
+    "config":{}
+  },
+  "harder":{
+    "name":"5. Harder",
+    "config":{}
+  },
+  "simpler":{
+    "name":"6. Simpler",
+    "config":{}
+  },
+  "faster":{
+    "name":"7. Faster",
+    "config":{}
+  }
+}
