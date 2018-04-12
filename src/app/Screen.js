@@ -1,9 +1,9 @@
-import { Col } from "../displayer/Col.js";
+import { Row } from "../displayer/Row.js";
 
 export class Screen{
 
 	constructor(app) {
-    	this._container = new Col();
+    	this._container = new Row();
     	this._app = app;
     }
 

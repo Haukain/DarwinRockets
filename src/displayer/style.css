@@ -63,6 +63,10 @@
   margin-left:0;
   margin-right:0;
 }
+/* === canvasfix === */
+.card canvas{
+  width: 100%;
+}
 /* === inputs === */
 .inputContainer{
   position: relative;

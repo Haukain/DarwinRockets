@@ -14,7 +14,5 @@ export class Generation {
 	}
 
 	get rockets() {return this._rockets;}
-	set rockets(rockets) {this._rockets = rockets;}
-
 
 }

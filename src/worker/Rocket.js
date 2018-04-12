@@ -1,36 +1,28 @@
-class Rocket {
-	constructor(physicsObject, dead);
-	this._physicsObject = physicsObject;
-	this._dead = dead;
-	this._parents = [];
-	this._reactors = [];
-	this._generation = [];
+export class Rocket {
+	constructor(){
+		this._physicsObject = null;
+		this._score = -1;
+		this._parents = [];
+		this._reactors = [];
+		this._generation = null;
+	}
+	draw(ctx) {}
 
-	draw() {}
+	addReactor(physicsObject, position, thrust, activationTime, extinctionTime, angle) {
+		this._reactors.push(new Reactor(physicsObject, position, thrust, activationTime, extinctionTime, angle));
+	}
+
+	set generation(generation) {
+		this._generation = generation;
+	}
+	get generation(){return this._generation}
+
+	get physicsObject() {return this._physicsObject;}
+	createPhysicsObject() {
+		this._physicsObject = new PhysicsRocket(blueprint,rocketRender,reactorRender,position,reactorDefinitions);
+	}
+
+	get parents() {return this._parents;}
+
+	get reactors() {return this._reactors;}
 }
-
-addParents(parentA, parentB) {
-	this._parents.push(parentA);
-	this._parents.push(parentB);
-}
-
-addReactors(physicsObject, position, thrust, activationTime, extinctionTime, angle) {
-	this._reactors.push(physicsObject, position, thrust, activationTime, extinctionTime, angle);
-}
-
-addGeneration(generation) {
-	if (this._generation.length >= 1) {return;}
-	this._generation.push(generation);
-}
-
-get physicsObject() {return this._physicsObject;}
-setPhysicsObject(physicsObject) {this._physicsObject = physicsObject;}
-
-get status() {return this._dead;}
-setStatus(status) {this._dead = status;}
-
-get parents() {return this._parents;}
-setParents(parents) {this._parents = parents;}
-
-get reactors() {return this._reactors;}
-setReactors(reactors) {this._reactors = reactors;}
