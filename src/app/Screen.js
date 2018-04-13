@@ -2,8 +2,8 @@ import { ScreenContainer } from "../displayer/ScreenContainer.js";
 
 export class Screen{
 
-	constructor(app) {
-    	this._container = new ScreenContainer();
+	constructor(app,bg,fg) {
+    	this._container = new ScreenContainer(bg);
     	this._app = app;
     }
 

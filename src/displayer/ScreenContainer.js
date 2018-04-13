@@ -1,8 +1,9 @@
 import { Row } from "./Row.js";
 
 export class ScreenContainer extends Row{
-  constructor() {
+  constructor(bg) {
+    bg=bg||"white";
     super();
-    this._element.className += " screenContainer";
+    this._element.className += ` screenContainer ${bg}-bg`;
   }
 }

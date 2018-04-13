@@ -8,14 +8,14 @@ import { TerrainConfigurator } from "../displayer/TerrainConfigurator.js";
 export class EditScreen extends Screen{
 
 	constructor(app) {
-		super(app);
+		super(app,"navyblue");
 		//structure
 		let leftCol=new Col(12,12,5,5);
 		let rightCol=new Col(12,12,7,7);
 		this._container.addChild(leftCol);
 		this._container.addChild(rightCol);
 		//config
-		let confCard = new Card("white","navyblue");
+		let confCard = new Card("navyblue","white");
 		leftCol.addChild(confCard);
 		let confCardTitle = new Title("Configuration");
 		confCard.addChild(confCardTitle);

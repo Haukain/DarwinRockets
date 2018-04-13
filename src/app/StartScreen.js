@@ -10,7 +10,7 @@ import { ImageWidget } from "../displayer/ImageWidget.js";
 
 export class StartScreen extends Screen{
 	constructor(app){
-		super(app);
+		super(app,"white");
 		let that = this;
 
 		this._centerer = new CenteredRow();
