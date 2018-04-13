@@ -1,6 +1,7 @@
+import { Reactor } from "./Reactor.js";
+import { PhysicsRocket } from "./PhysicsRocket.js";
 export class Rocket {
 	constructor(){
-		this._physicsObject = null;
 		this._score = -1;
 		this._parents = [];
 		this._reactors = [];
@@ -17,9 +18,19 @@ export class Rocket {
 	}
 	get generation(){return this._generation}
 
-	get physicsObject() {return this._physicsObject;}
 	createPhysicsObject() {
-		this._physicsObject = new PhysicsRocket(blueprint,rocketRender,reactorRender,position,reactorDefinitions);
+		let rocketBluePrint = Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
+		let rocketRender = {
+		         fillStyle: '#85bce6',
+		         strokeStyle: 'invisible',
+		         lineWidth: 0.2
+		};
+		let reactorRender = {
+		         fillStyle: '#d65b73',
+		         strokeStyle: 'invisible',
+		         lineWidth: 0.2
+		};
+		return new PhysicsRocket(rocketBluePrint,rocketRender,reactorRender,position,reactorDefinitions);
 	}
 
 	get parents() {return this._parents;}
