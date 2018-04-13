@@ -1,6 +1,7 @@
 import { Row } from "../displayer/Row.js";
 import { Header } from "./Header.js";
 import { StartScreen } from "./StartScreen.js";
+import { EditScreen } from "./EditScreen.js";
 export class App{
   constructor(el) {
     this.generations=[];
@@ -16,7 +17,7 @@ export class App{
     console.log("going back");
   }
   goEdit() {
-    console.log("going edit");
+    this._currentScreen = new EditScreen(this);
   }
   goSimulation() {
     console.log("going edit");
