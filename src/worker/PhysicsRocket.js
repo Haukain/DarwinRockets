@@ -66,4 +66,31 @@ export class PhysicsRocket{
 			 reactor.applyThrust(this);
 		}
 	}
+
+	drawOnce(ctx){
+		let oneTimeEngine = Matter.Engine.create();
+    oneTimeEngine.world.gravity.y = 0;
+		Matter.Body.setPosition(this._object,{x:50,y:50});
+    Matter.World.add(oneTimeEngine.world, [this._object]);
+
+    Matter.Engine.run(oneTimeEngine);
+
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(0, 0, 1500, 1500);
+
+		for(let i = 0;i<this._object.parts.length;i++){
+			if(this._object.parts[i].label != "rocket"){
+				let vertices = this._object.parts[i].vertices;
+				let fs = this._object.parts[i].render.fillStyle;
+				ctx.beginPath();
+				ctx.moveTo(vertices[0].x, vertices[0].y);
+				for (let j = 1; j < vertices.length; j += 1) {
+						ctx.lineTo(vertices[j].x, vertices[j].y);
+				}
+				ctx.lineTo(vertices[0].x, vertices[0].y);
+				ctx.fillStyle = fs;
+				ctx.fill();
+			}
+		}
+	}
 }

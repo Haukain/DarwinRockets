@@ -5,7 +5,7 @@ export class PhysicsPlanet extends PhysicsObstacle{
 		super(rocket,position,radius);
 	}
 	createObject(position,radius){
-		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true})
+		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true,render:{fillStyle:'#85233a'}})
 		Matter.Body.setDensity(this._object,0.1);
 	}
 }

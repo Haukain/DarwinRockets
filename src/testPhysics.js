@@ -17,11 +17,11 @@ var Engine = Matter.Engine,
 let engine = Engine.create();
 engine.world.gravity.y = 0;
 
-// Create a renderer
-let render = Render.create({element: document.body,engine: engine});
-render.options.wireframes = false;
-render.canvas.width = document.documentElement.clientWidth -100;
-render.canvas.height = document.documentElement.clientHeight -100;
+// Old renderer
+// let render = Render.create({element: document.body,engine: engine});
+// render.options.wireframes = false;
+// render.canvas.width = document.documentElement.clientWidth -100;
+// render.canvas.height = document.documentElement.clientHeight -100;
 
 // Rocket parameters
 let rocketInitialPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
@@ -90,7 +90,48 @@ Events.on(engine, "beforeUpdate",e=>{
 })
 
 // run the engine
-Engine.run(engine);
+// Engine.run(engine);
 
-// run the renderer
-Render.run(render);
+// old renderer run
+// Render.run(render);
+
+// New renderer
+let canvas = document.createElement('canvas'),
+    context = canvas.getContext('2d');
+canvas.width = document.documentElement.clientWidth -100;
+canvas.height = document.documentElement.clientHeight -100;
+
+document.body.appendChild(canvas);
+
+(function render() {
+
+    let bodies = Composite.allBodies(engine.world);
+
+    window.requestAnimationFrame(render);
+
+    context.fillStyle = '#fff';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    rocket.drawOnce(context);
+
+    context.beginPath();
+
+    // Render
+    // for (let i = 0; i < bodies.length; i += 1) {
+    //     for(let j = 0; j<bodies[i].parts.length; j+= 1){
+    //       if(bodies[i].parts[j].label != "rocket"){
+    //         let vertices = bodies[i].parts[j].vertices;
+    //         let fs = bodies[i].parts[j].render.fillStyle;
+    //         context.beginPath();
+    //         context.moveTo(vertices[0].x, vertices[0].y);
+    //         for (let h = 1; h < vertices.length; h += 1) {
+    //             context.lineTo(vertices[h].x, vertices[h].y);
+    //         }
+    //         context.lineTo(vertices[0].x, vertices[0].y);
+    //         context.fillStyle =  fs;
+    //         console.log(fs);
+    //         context.fill();
+    //       }
+    //     }
+    // }
+})();
