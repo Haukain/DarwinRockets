@@ -1,12 +1,14 @@
 import { Row } from "../displayer/Row.js";
 import { Header } from "./Header.js";
+import { StartScreen } from "./StartScreen.js";
 export class App{
   constructor(el) {
     this.generations=[];
     this._header = new Header(this);
     el.appendChild(this._header.container.element);
-    this.container = new Row();
-    el.appendChild(this.container._element);
+    this._container = new Row();
+    el.appendChild(this._container._element);
+    this._currentScreen = new StartScreen(this);
   }
   init() {}
   //go methods
@@ -38,5 +40,17 @@ export class App{
   }
   selectTutorial(t){
     console.log(`launching ${t.name}  generation`);
+  }
+
+  get container(){
+    return this._container;
+  }
+  get _currentScreen(){
+    return this.__currentScreen;
+  }
+  set _currentScreen(s){
+    if(this.__currentScreen)this.__currentScreen.destroy();
+    this.__currentScreen = s;
+    this._container.addChild(this.__currentScreen.container);
   }
 }

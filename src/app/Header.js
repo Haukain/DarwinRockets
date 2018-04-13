@@ -9,7 +9,7 @@ export class Header{
   constructor(app){
     let that = this;
     this._app = app;
-    this.container = new Navbar("./assets/icons/favicon-32x32.png");
+    this.container = new Navbar("./assets/icons/favicon-32x32.png","Darwin Rockets");
     //back button
     this._addButton("arrow_back","go back",e=>{that._app.goBack()});
     //start/stop gen Button

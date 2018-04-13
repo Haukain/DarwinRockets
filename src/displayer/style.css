@@ -70,10 +70,17 @@
   width: 100%;
 }
 /* === screen classes === */
-.screenContainer{
+body>.row{
+  position: absolute;
+  top: 59px;
   height:calc(100vh - 59px);
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+}
+.screenContainer{
+  height:100%;
+  width: 100%;
 }
 .centeredVH{
   transform: translate(-50%,-50%);
@@ -83,7 +90,7 @@
   width: auto;
 }
 /* === button in col === */
-.col>.btn-basic{
+.colCont>.btn-basic{
   width: 100%;
   text-align: center;
   display: block;
@@ -196,4 +203,28 @@
   width: 100%;
   text-align: center;
   opacity: 0.7;
+}
+/*=== Navbar ===*/
+.nav-item .btn{
+  background: rgba(255,255,255,0.2);
+  color:white;
+}
+.navbar-toggler-i{
+  color: white;
+  font-size: 30px;
+}
+.navbar{
+  z-index: 1000;
+}
+@media (max-width: 991px){
+  .nav-item .iconbutton:after{
+    content: attr(title);
+    font-family: arial;
+    font-weight: normal;
+    font-size: 12px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+  }
 }

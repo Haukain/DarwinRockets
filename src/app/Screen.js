@@ -8,9 +8,10 @@ export class Screen{
     }
 
     destroy(){
-        this._app.container.removeChild(this._container);
-        this._container.destroy();
+      this._app.container.removeChild(this._container);
+      this._container.destroy();
     	delete this._container;
+			delete this._app;
     	console.log("destroyed");
     }
 
