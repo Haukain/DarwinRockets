@@ -19,7 +19,14 @@ export class Rocket {
 	get generation(){return this._generation}
 
 	createPhysicsObject() {
-		let rocketBluePrint = Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
+		let position = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
+		let reactorDefinitions = [
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1),activationTime:50*(20*Math.random()),extinctionTime:150*(Math.random()+1)},
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1),activationTime:50*(20*Math.random()),extinctionTime:150*(Math.random()+1)},
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1),activationTime:50*(20*Math.random()),extinctionTime:150*(Math.random()+1)},
+      {position:{x:Math.random()*20-10,y:Math.random()*20-10},angle:Math.random()*3-1.5+Math.PI,thrust:0.0001*(Math.random()+1),activationTime:50*(20*Math.random()),extinctionTime:150*(Math.random()+1)},
+    ];
+		let rocketBluePrint = Matter.Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
 		let rocketRender = {
 		         fillStyle: '#85bce6',
 		         strokeStyle: 'invisible',

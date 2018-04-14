@@ -1,9 +1,10 @@
 export class PhysicsReactor{
-  constructor(blueprint,reactorRender,position,angle,thrust,capacity){
+  constructor(blueprint,reactorRender,position,thrust,activationTime,extinctionTime,angle){
     this._position = position;
     this._angle = angle;
     this._thrust = thrust;
-    this._capacity = capacity;
+    this._activationTime = activationTime;
+    this._extinctionTime = extinctionTime;
     this.active = false;
     this._body = Matter.Body.create({
       vertices: blueprint,
@@ -18,8 +19,9 @@ export class PhysicsReactor{
   get angle(){return this._angle;}
   get thrust(){return this._thrust;}
   get body(){return this._body;}
-  get capacity(){return this._capacity;}
-  setCapacity(){this._capacity -= 1};
+  get activationTime(){return this._activationTime;}
+  get extinctionTime(){return this._extinctionTime;}
+  extinctionTimeReduction(){ this._extinctionTime -= 1;}
   applyThrust(rocket){
     if(!this.active){
       this._body.render.fillStyle =  '#d65b73'

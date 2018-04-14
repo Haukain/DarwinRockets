@@ -1,4 +1,5 @@
-import { PhysicsRocket } from './worker/PhysicsRocket.js';
+import { Reactor } from "./worker/Reactor.js";
+import { Rocket } from "./worker/Rocket.js";
 import { PhysicsPlanet } from './worker/PhysicsPlanet.js';
 import { PhysicsBlackHole } from './worker/PhysicsBlackHole.js';
 
@@ -16,6 +17,7 @@ var Engine = Matter.Engine,
 // Create an engine
 let engine = Engine.create();
 engine.world.gravity.y = 0;
+let time = 0;
 
 // Old renderer
 // let render = Render.create({element: document.body,engine: engine});
@@ -24,38 +26,22 @@ engine.world.gravity.y = 0;
 // render.canvas.height = document.documentElement.clientHeight -100;
 
 // Rocket parameters
-let rocketInitialPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
+
 // let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
-let rocketBluePrint = Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
-let rocketRender = {
-         fillStyle: '#85bce6',
-         strokeStyle: 'invisible',
-         lineWidth: 0.2
-};
-let reactorRender = {
-         fillStyle: '#d65b73',
-         strokeStyle: 'invisible',
-         lineWidth: 0.2
-};
-
-// Create rocket parts
-
-  let rocket = new PhysicsRocket(rocketBluePrint,rocketRender,reactorRender,rocketInitialPosition,[
-    {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
-    {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
-    {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
-    {position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
-  ]);
+let rocket = new Rocket();
+let steadyRocket = new Rocket();
+let physicsRocket = rocket.createPhysicsObject();
+let steadyPhysicsRocket = steadyRocket.createPhysicsObject();
 
 // add the rocket to the world
-World.add(engine.world, [rocket.object]);
+World.add(engine.world, [physicsRocket.object]);
 
 // obstacle creation
 let obstacle = [];
 for(let i = 0; i<4; i++){
-  obstacle.push(new PhysicsPlanet(rocket,{x:Math.random()*1000+100,y:Math.random()*500+100},40));
+  obstacle.push(new PhysicsPlanet(physicsRocket,{x:Math.random()*1000+100,y:Math.random()*500+100},40));
 }
-obstacle.push(new PhysicsBlackHole(rocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},50));
+obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},50));
 
 for(let o of obstacle){
   World.add(engine.world, o.object);
@@ -66,12 +52,12 @@ for(let o of obstacle){
 Matter.Events.on(engine, 'collisionActive', function(event) {
   let i, currentPair, currentPart;
   let n = event.pairs.length;
-  let m = rocket.object.parts.length
+  let m = physicsRocket.object.parts.length
 
   for(let i =0; i<n; i++){
     currentPair = event.pairs[i];
     for(let j=0;j<m;j++){
-      currentPart = rocket.object.parts[j];
+      currentPart = physicsRocket.object.parts[j];
       if( (currentPair.bodyA.label === currentPart.label) || (currentPair.bodyB.label === currentPart.label)){
         console.log("collision");
       }
@@ -83,14 +69,15 @@ Matter.Events.on(engine, 'collisionActive', function(event) {
 
 // apply force
 Events.on(engine, "beforeUpdate",e=>{
-      rocket.applyThrusts();
+      time += 1;
+      physicsRocket.applyThrusts(time);
       for(let o of obstacle){
         o.applyGravitation();
       }
 })
 
 // run the engine
-// Engine.run(engine);
+Engine.run(engine);
 
 // old renderer run
 // Render.run(render);
@@ -112,26 +99,25 @@ document.body.appendChild(canvas);
     context.fillStyle = '#fff';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    rocket.drawOnce(context);
+    steadyPhysicsRocket.drawOnce(context);
 
     context.beginPath();
 
-    // Render
-    // for (let i = 0; i < bodies.length; i += 1) {
-    //     for(let j = 0; j<bodies[i].parts.length; j+= 1){
-    //       if(bodies[i].parts[j].label != "rocket"){
-    //         let vertices = bodies[i].parts[j].vertices;
-    //         let fs = bodies[i].parts[j].render.fillStyle;
-    //         context.beginPath();
-    //         context.moveTo(vertices[0].x, vertices[0].y);
-    //         for (let h = 1; h < vertices.length; h += 1) {
-    //             context.lineTo(vertices[h].x, vertices[h].y);
-    //         }
-    //         context.lineTo(vertices[0].x, vertices[0].y);
-    //         context.fillStyle =  fs;
-    //         console.log(fs);
-    //         context.fill();
-    //       }
-    //     }
-    // }
+    //Render
+    for (let i = 0; i < bodies.length; i += 1) {
+        for(let j = 0; j<bodies[i].parts.length; j+= 1){
+          if(bodies[i].parts[j].label != "rocket"){
+            let vertices = bodies[i].parts[j].vertices;
+            let fs = bodies[i].parts[j].render.fillStyle;
+            context.beginPath();
+            context.moveTo(vertices[0].x, vertices[0].y);
+            for (let h = 1; h < vertices.length; h += 1) {
+                context.lineTo(vertices[h].x, vertices[h].y);
+            }
+            context.lineTo(vertices[0].x, vertices[0].y);
+            context.fillStyle =  fs;
+            context.fill();
+          }
+        }
+    }
 })();

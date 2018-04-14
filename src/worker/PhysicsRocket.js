@@ -10,7 +10,7 @@ export class PhysicsRocket{
 			Matter.Body.setAngle(this._body, Math.PI);
 
 		this._reactors = [];
-		for(let rd of reactorDefinitions) this._reactors.push(new PhysicsReactor(blueprint,reactorRender,rd.position,rd.angle,rd.thrust,rd.capacity));
+		for(let rd of reactorDefinitions) this._reactors.push(new PhysicsReactor(blueprint,reactorRender,rd.position,rd.thrust,rd.activationTime,rd.extinctionTime,rd.angle));
 
 		this._object = Matter.Body.create({
 			parts:[this._body].concat(this._reactors.map(d=>d.body)),
@@ -42,26 +42,23 @@ export class PhysicsRocket{
 	get reactors(){return this._reactors};
 	get object(){return this._object;}
 
-	selectReactor(){
-		let randomReactor = Math.floor(Math.random()*this._reactors.length);
-		let activeReactors = 0;
+	selectReactor(time){
 		for(let r of this._reactors){
+			if(time>=r.activationTime){
+				r.active = true;
+			}
 			if(r.active){
-				if(r.capacity<=0){
+				if(r.extinctionTime<=0){
 					r.active = false;
 				} else {
-					activeReactors += 1;
-					r.setCapacity();
+					r.extinctionTimeReduction();
 				}
 			}
 		}
-		if(activeReactors<2 && this._reactors[randomReactor].capacity>0){
-			this._reactors[randomReactor].active = true;
-		}
 	}
 
-	applyThrusts(){
-		this.selectReactor();
+	applyThrusts(time){
+		this.selectReactor(time);
 		for(let reactor of this._reactors){
 			 reactor.applyThrust(this);
 		}
