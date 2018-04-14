@@ -1,3 +1,5 @@
+import { PhysicsReactor } from "./PhysicsReactor.js"
+
 export class Reactor {
 	constructor(position, thrust, activationTime, extinctionTime, angle){
 		this._position = position;
@@ -9,8 +11,8 @@ export class Reactor {
 
 	draw() {}
 
-	createPhysicsObject(physicsObject) {
-		
+	createPhysicsObject(blueprint,reactorRender) {
+		return new PhysicsReactor(blueprint,reactorRender,this._position,this._thrust,this._activationTime,this._extinctionTime,this._angle)
 	}
 
 	get position() {return this._position;}
