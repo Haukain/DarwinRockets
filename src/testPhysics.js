@@ -40,14 +40,9 @@ rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.ran
 rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 
-let steadyRocket = new Rocket();
-steadyRocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-steadyRocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-
 let physicsRocket = rocket.createPhysicsObject();
 physicsRocket.setPosition({x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3});
-let steadyPhysicsRocket = steadyRocket.createPhysicsObject();
-steadyPhysicsRocket.setPosition({x:50,y:50});
+
 
 
 // add the rocket to the world
@@ -58,7 +53,7 @@ let obstacle = [];
 for(let i = 0; i<4; i++){
   obstacle.push(new PhysicsPlanet(physicsRocket,{x:Math.random()*1000+100,y:Math.random()*500+100},40));
 }
-obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},50));
+obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},20));
 
 for(let o of obstacle){
   World.add(engine.world, o.object);
@@ -105,12 +100,12 @@ Engine.run(engine);
 
     let bodies = Composite.allBodies(engine.world);
 
+    //Loop
     window.requestAnimationFrame(render);
 
+    //Clear Scene
     context.fillStyle = '#fff';
     context.fillRect(0, 0, canvas.width, canvas.height);
-
-    steadyRocket.draw(context);
 
     //Render bodies
     for (let i = 0; i < bodies.length; i += 1) {
@@ -146,6 +141,18 @@ Engine.run(engine);
         context.lineTo(14, 15);
         context.fill();
         context.restore();
+      }
+    }
+    //Render PhysicsBlackHole
+    for(let o of obstacle){
+      if(o.object.label == "blackHole"){
+        context.beginPath();
+        context.arc(o.position.x,o.position.y,o.radius*2*Math.abs(Math.sin(time/50)),0,2*Math.PI);
+        context.fillStyle = 'rgba(26,35,48,0.6)'
+        context.fill();
+        context.arc(o.position.x,o.position.y,o.radius*2*Math.abs(Math.sin(time/50 + Math.PI/2)),0,2*Math.PI);
+        context.fillStyle = 'rgba(26,35,48,0.2)'
+        context.fill();
       }
     }
 
