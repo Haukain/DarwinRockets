@@ -4,20 +4,39 @@ import { StartScreen } from "./StartScreen.js";
 import { EditScreen } from "./EditScreen.js";
 export class App{
   constructor(el) {
+    let that = this;
     this.generations=[];
     this._header = new Header(this);
     el.appendChild(this._header.container.element);
     this._container = new Row();
     el.appendChild(this._container._element);
-    this._currentScreen = new StartScreen(this);
+    window.onpopstate= e=>{
+      that.goBack();
+      e.preventDefault();
+      return false;
+    };
+    this.goStart();
   }
   init() {}
   //go methods
   goBack() {
-    console.log("going back");
+    if     (this._state == "edit") this.goStart();
+    else if(this._state == "gen") this.goEdit();
+    else if(this._state == "chart" || this._state == "display") this.goSimulation();
+    else {
+      let i =Array.from(history).reduce((a,b)=>a+(!!b.state.fake),0); // TODO: repair the history back out of site feature
+      history.back(-i);
+    }
+  }
+  goStart(){
+    this._currentScreen = new StartScreen(this);
+    this._state = "start";
+    history.pushState({fake: true},"Edit config","start.html");
   }
   goEdit() {
     this._currentScreen = new EditScreen(this);
+    this._state = "edit";
+    history.pushState({fake: true},"Edit config","edit.html");
   }
   goSimulation() {
     console.log("going edit");
