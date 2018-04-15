@@ -3,6 +3,7 @@ import { Col } from "../displayer/Col.js";
 import { Card } from "../displayer/Card.js";
 import { Title } from "../displayer/Title.js";
 import { RangeInput } from "../displayer/RangeInput.js";
+import { Button } from "../displayer/Button.js";
 import { TerrainConfigurator } from "../displayer/TerrainConfigurator.js";
 
 export class EditScreen extends Screen{
@@ -25,6 +26,11 @@ export class EditScreen extends Screen{
 		testRange.step=.01;
 		testRange.text="test range";
 		confCard.addChild(testRange);
+		let confirmButton = new Button("Confirm","white");
+		confirmButton.on("click",()=>{
+			this._app.goSimulation();
+		});
+		confCard.addChild(confirmButton);
 		//terrain
 		this._terrainConf = new TerrainConfigurator();
 		rightCol.addChild(this._terrainConf);

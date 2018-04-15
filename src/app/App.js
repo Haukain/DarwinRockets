@@ -2,14 +2,19 @@ import { Row } from "../displayer/Row.js";
 import { Header } from "./Header.js";
 import { StartScreen } from "./StartScreen.js";
 import { EditScreen } from "./EditScreen.js";
+import { GridScreen } from "./GridScreen.js";
 export class App{
   constructor(el) {
     let that = this;
-    this.generations=[];
+    this._generations=[];
     this._header = new Header(this);
     el.appendChild(this._header.container.element);
     this._container = new Row();
     el.appendChild(this._container._element);
+    //generations
+    this._generations=[];
+    this._currentGeneration = null;
+    //screens
     window.onpopstate= e=>{
       that.goBack();
       e.preventDefault();
@@ -31,7 +36,7 @@ export class App{
   goStart(){
     this._currentScreen = new StartScreen(this);
     this._state = "start";
-    history.pushState({fake: true},"Edit config","start.html");
+    history.pushState({fake: true},"Darwin Rockets","start.html");
   }
   goEdit() {
     this._currentScreen = new EditScreen(this);
@@ -39,7 +44,9 @@ export class App{
     history.pushState({fake: true},"Edit config","edit.html");
   }
   goSimulation() {
-    console.log("going edit");
+    this._currentScreen = new GridScreen(this,this._currentGeneration);
+    this._state = "gen";
+    history.pushState({fake: true},"Simulation screen","gen.html");
   }
   goChart() {
     console.log("going edit");
@@ -55,13 +62,24 @@ export class App{
     console.log(`making ${n}  generation`);
   }
 
+  addGeneration(gen){
+    this._generations.push(gen);
+    this._header.updateGen();
+  }
+
   displayRocket(rocket){
     console.log(`displaying rocket`);
   }
   selectTutorial(t){
     console.log(`launching ${t.name}  generation`);
   }
+  selectGeneration(gen){
+    this._currentGeneration = gen;
+    if(this._state == "gen") this.goSimulation();
+    if(this._state == "chart") this.goChart();
+  }
 
+  get generations(){return this._generations}
   get container(){
     return this._container;
   }
