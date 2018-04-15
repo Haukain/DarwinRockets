@@ -8,7 +8,6 @@ export class Rocket {
 		this._reactors = [];
 		this._generation = null;
 
-		this._startingPosition = {x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3}
 		this._rocketBluePrint = Matter.Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
 		this._rocketRender = {
 		         fillStyle: '#85bce6',
@@ -19,7 +18,7 @@ export class Rocket {
 
 	}
 	draw(ctx) {
-		oneTimeRocket = this.createPhysicsObject();
+		let oneTimeRocket = this.createPhysicsObject();
 		oneTimeRocket.drawOnce(ctx);
 	}
 
@@ -39,7 +38,6 @@ export class Rocket {
 			reactors.push(r.createPhysicsObject(this._rocketBluePrint,this._reactorRender));
 		}
 		physicsRocket.addPhysicsReactor(reactors);
-		physicsRocket.setPosition(this._startingPosition);
 		return physicsRocket
 	}
 

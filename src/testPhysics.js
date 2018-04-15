@@ -24,7 +24,11 @@ let time = 0;
 // render.options.wireframes = false;
 // render.canvas.width = document.documentElement.clientWidth -100;
 // render.canvas.height = document.documentElement.clientHeight -100;
-
+let canvas = document.createElement('canvas'),
+    context = canvas.getContext('2d');
+canvas.width = document.documentElement.clientWidth -100;
+canvas.height = document.documentElement.clientHeight -100;
+document.body.appendChild(canvas);
 // Rocket parameters
 
 // let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
@@ -41,7 +45,9 @@ steadyRocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Ma
 steadyRocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 
 let physicsRocket = rocket.createPhysicsObject();
+physicsRocket.setPosition({x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3});
 let steadyPhysicsRocket = steadyRocket.createPhysicsObject();
+steadyPhysicsRocket.setPosition({x:50,y:50});
 
 
 // add the rocket to the world
@@ -94,12 +100,6 @@ Engine.run(engine);
 // Render.run(render);
 
 // New renderer
-let canvas = document.createElement('canvas'),
-    context = canvas.getContext('2d');
-canvas.width = document.documentElement.clientWidth -100;
-canvas.height = document.documentElement.clientHeight -100;
-
-document.body.appendChild(canvas);
 
 (function render() {
 
@@ -110,11 +110,9 @@ document.body.appendChild(canvas);
     context.fillStyle = '#fff';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    steadyPhysicsRocket.drawOnce(context);
+    steadyRocket.draw(context);
 
-    context.beginPath();
-
-    //Render
+    //Render bodies
     for (let i = 0; i < bodies.length; i += 1) {
         for(let j = 0; j<bodies[i].parts.length; j+= 1){
           if(bodies[i].parts[j].label != "rocket"){
@@ -131,4 +129,24 @@ document.body.appendChild(canvas);
           }
         }
     }
+    //Render Thrust
+    for(let r = 0;r<physicsRocket.reactors.length;r+=1){
+      if(physicsRocket.object.parts[r+2].label === "reactorBody" && physicsRocket.reactors[r].active){
+        context.save();
+        context.translate(physicsRocket.object.parts[r].position.x,physicsRocket.object.parts[r].position.y);
+        context.rotate(physicsRocket.object.parts[r].angle);
+        context.beginPath();
+        var grd = context.createLinearGradient(0, 0, 0, 15);
+        grd.addColorStop(0, 'rgba(255, 0, 100, 0)');
+        grd.addColorStop(1, 'rgba(255, 0, 100, 1)');
+        context.fillStyle = grd;
+        context.beginPath();
+        context.moveTo(6 * (Math.random() - 0.5), 6 * (Math.random() - 0.5));
+        context.lineTo(6, 15);
+        context.lineTo(14, 15);
+        context.fill();
+        context.restore();
+      }
+    }
+
 })();

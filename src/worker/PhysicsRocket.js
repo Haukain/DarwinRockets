@@ -29,6 +29,7 @@ export class PhysicsRocket{
 	get body(){return this._body;}
 	get reactors(){return this._reactors};
 	get object(){return this._object;}
+
 	setPosition(position){
 		Matter.Body.setPosition(this._object,position);
 	}
@@ -42,6 +43,7 @@ export class PhysicsRocket{
 			frictionStatic :0.03
 		});
 		this._object.label = "rocket";
+
 	}
 
 	selectReactor(time){

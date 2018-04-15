@@ -22,6 +22,7 @@ export class PhysicsReactor{
   get activationTime(){return this._activationTime;}
   get extinctionTime(){return this._extinctionTime;}
   extinctionTimeReduction(){ this._extinctionTime -= 1;}
+
   applyThrust(rocket){
     if(!this.active){
       this._body.render.fillStyle =  '#d65b73'
@@ -34,4 +35,6 @@ export class PhysicsReactor{
     }
     Matter.Body.applyForce(rocket.object,{x: this._body.position.x, y: this._body.position.y},thrustVector);
   }
+
+  
 }

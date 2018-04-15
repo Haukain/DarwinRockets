@@ -6,6 +6,6 @@ export class PhysicsPlanet extends PhysicsObstacle{
 	}
 	createObject(position,radius){
 		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true,render:{fillStyle:'#85233a'}})
-		Matter.Body.setDensity(this._object,0.1);
+		Matter.Body.setDensity(this._object,0.05);
 	}
 }
