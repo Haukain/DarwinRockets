@@ -6,13 +6,17 @@ import { Row } from "../displayer/Row.js";
 import { CenteredRow } from "../displayer/CenteredRow.js";
 import { Col } from "../displayer/Col.js";
 import { ImageWidget } from "../displayer/ImageWidget.js";
+import { parallaxSVG } from "../displayer/parallaxSVG.js";
 
 
 export class StartScreen extends Screen{
 	constructor(app){
 		super(app,"white");
 		let that = this;
-
+		//background parallax
+		this._background = new parallaxSVG("./assets/svg/background.svg",100);
+		this._container.addChild(this._background);
+		//centered row
 		this._centerer = new CenteredRow();
 		this._container.addChild(this._centerer);
 		//logo
