@@ -11,7 +11,7 @@ import { parallaxSVG } from "../displayer/parallaxSVG.js";
 
 export class StartScreen extends Screen{
 	constructor(app){
-		super(app,"white");
+		super(app,"navyblue");
 		let that = this;
 		//background parallax
 		this._background = new parallaxSVG("./assets/svg/background.svg",100);
@@ -35,7 +35,7 @@ export class StartScreen extends Screen{
 
 		//freeplay button
 		this._editCol = new Col(12,12,12,12);
-		this._editButton = new Button ("Free play", "navyblue");
+		this._editButton = new Button ("Free play", "white");
 		this._editCol.addChild(this._editButton);
 		this._centerer.addChild(this._editCol);
 		this._editButton.on("click",()=>{
