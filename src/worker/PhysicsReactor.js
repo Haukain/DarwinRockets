@@ -11,7 +11,7 @@ export class PhysicsReactor{
       render: reactorRender,
     });
     this._body.label = "reactorBody";
-    Matter.Body.scale(this._body,2000*this._thrust,2000*this._thrust);
+    Matter.Body.scale(this._body,2500*this._thrust,2500*this._thrust);
     Matter.Body.setPosition(this._body,this._position);
     Matter.Body.setAngle(this._body, this._angle);
   }
@@ -25,7 +25,7 @@ export class PhysicsReactor{
 
   applyThrust(rocket){
     if(!this.active){
-      this._body.render.fillStyle =  '#d65b73'
+      this._body.render.fillStyle =  '#913748'
       return
     };
     this._body.render.fillStyle = '#1a233a';
@@ -36,5 +36,5 @@ export class PhysicsReactor{
     Matter.Body.applyForce(rocket.object,{x: this._body.position.x, y: this._body.position.y},thrustVector);
   }
 
-  
+
 }

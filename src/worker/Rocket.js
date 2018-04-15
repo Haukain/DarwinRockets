@@ -10,10 +10,10 @@ export class Rocket {
 
 		this._rocketBluePrint = Matter.Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
 		this._rocketRender = {
-		         fillStyle: '#85bce6',
+		         fillStyle: '#d65b73',
 		};
 		this._reactorRender = {
-		         fillStyle: '#d65b73',
+		         fillStyle: '#913748',
 		};
 
 	}

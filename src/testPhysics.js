@@ -34,11 +34,6 @@ document.body.appendChild(canvas);
 // let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
 let rocket = new Rocket();
 rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
-rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 
 let physicsRocket = rocket.createPhysicsObject();
 physicsRocket.setPosition({x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3});
@@ -124,35 +119,24 @@ Engine.run(engine);
           }
         }
     }
-    //Render Thrust
-    for(let r = 0;r<physicsRocket.reactors.length;r+=1){
-      if(physicsRocket.object.parts[r+2].label === "reactorBody" && physicsRocket.reactors[r].active){
-        context.save();
-        context.translate(physicsRocket.object.parts[r].position.x,physicsRocket.object.parts[r].position.y);
-        context.rotate(physicsRocket.object.parts[r].angle);
-        context.beginPath();
-        var grd = context.createLinearGradient(0, 0, 0, 15);
-        grd.addColorStop(0, 'rgba(255, 0, 100, 0)');
-        grd.addColorStop(1, 'rgba(255, 0, 100, 1)');
-        context.fillStyle = grd;
-        context.beginPath();
-        context.moveTo(6 * (Math.random() - 0.5), 6 * (Math.random() - 0.5));
-        context.lineTo(6, 15);
-        context.lineTo(14, 15);
-        context.fill();
-        context.restore();
-      }
-    }
+
     //Render PhysicsBlackHole
     for(let o of obstacle){
       if(o.object.label == "blackHole"){
+        context.save();
+
+        var grd=context.createRadialGradient(0,0,5,0,0,o.radius*2);
+        grd.addColorStop(0, 'rgba(0, 0, 0, 1)');
+        grd.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        context.fillStyle = grd;
+        context.translate(o.position.x,o.position.y)
         context.beginPath();
-        context.arc(o.position.x,o.position.y,o.radius*2*Math.abs(Math.sin(time/50)),0,2*Math.PI);
-        context.fillStyle = 'rgba(26,35,48,0.6)'
+        context.arc(0,0,o.radius*2*Math.abs(Math.sin(time/100)),0,2*Math.PI);
         context.fill();
-        context.arc(o.position.x,o.position.y,o.radius*2*Math.abs(Math.sin(time/50 + Math.PI/2)),0,2*Math.PI);
-        context.fillStyle = 'rgba(26,35,48,0.2)'
+        context.arc(0,0,o.radius*3*Math.abs(Math.sin(time/100 + Math.PI/2)),0,2*Math.PI);
         context.fill();
+
+        context.restore();
       }
     }
 
