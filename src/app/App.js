@@ -3,6 +3,10 @@ import { Header } from "./Header.js";
 import { StartScreen } from "./StartScreen.js";
 import { EditScreen } from "./EditScreen.js";
 import { GridScreen } from "./GridScreen.js";
+import { Generation } from "../worker/Generation.js";
+import { Configuration } from "../worker/Configuration.js";
+import { WorkerCommander } from "../worker/WorkerCommander.js";
+import Worker from 'worker-loader!../worker/Worker.js';
 export class App{
   constructor(el) {
     let that = this;
@@ -11,9 +15,14 @@ export class App{
     el.appendChild(this._header.container.element);
     this._container = new Row();
     el.appendChild(this._container._element);
+    //Worker
+    this._worker = new Worker();
+    this._com = new WorkerCommander(this._worker);
     //generations
-    this._generations=[];
     this._currentGeneration = null;
+    this._generations=[];
+    //configuration
+    this._configuration = new Configuration();
     //screens
     window.onpopstate= e=>{
       that.goBack();
@@ -52,6 +61,14 @@ export class App{
     console.log("going edit");
   }
   //trainer control
+  initTrainer(){
+    let that = this;
+    this._currentGeneration = new Generation(true);
+    this._generations=[this._currentGeneration];
+    setTimeout(()=>{
+      that._com.send("initTrainer",{gen:that._generations[0],conf:this._configuration});
+    },20);
+  }
   startGen() {
     console.log("starting generation");
   }
@@ -71,7 +88,9 @@ export class App{
     console.log(`displaying rocket`);
   }
   selectTutorial(t){
-    console.log(`launching ${t.name}  generation`);
+    this._configuration = new Configuration(tutorial.config);
+    this._initTrainer();
+    this.goSimulation();
   }
   selectGeneration(gen){
     this._currentGeneration = gen;

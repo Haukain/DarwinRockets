@@ -1,6 +1,12 @@
+import { Rocket } from "./Rocket.js"
 export class Generation {
-	constructor(){
+	constructor(random){
 		this._rockets = [];
+		if(random){
+			for(let i=0;i<200;i++){
+				this.addRocket(new Rocket(true));
+			}
+		}
 	}
 
 	getAverage() {}

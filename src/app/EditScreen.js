@@ -28,6 +28,7 @@ export class EditScreen extends Screen{
 		confCard.addChild(testRange);
 		let confirmButton = new Button("Confirm","white");
 		confirmButton.on("click",()=>{
+			this._app.initTrainer();
 			this._app.goSimulation();
 		});
 		confCard.addChild(confirmButton);

@@ -2,7 +2,7 @@ import { Reactor } from "./Reactor.js";
 import { PhysicsRocket } from "./PhysicsRocket.js";
 
 export class Rocket {
-	constructor(){
+	constructor(random){
 		this._score = -1;
 		this._parents = [];
 		this._reactors = [];
@@ -15,6 +15,12 @@ export class Rocket {
 		this._reactorRender = {
 		         fillStyle: '#913748',
 		};
+		if(random){
+			let reac = Math.round(Math.random()*5);
+			for(let i=0;i<reac;i++){
+				this.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
+			}
+		}
 
 	}
 	draw(ctx) {

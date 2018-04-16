@@ -1,17 +1,17 @@
-class Terrain {
-	constructor(size);
-	this._size = size;
-	this._objects = [];
-
+export class Terrain {
+	constructor(size){
+		size = size||{width:1920,height:1080};
+		this._size = size;
+		this._objects = [];
+	}
 	testCollisions(r) {}
+
+	addObject(object) {
+		this._objects.push(object);
+	}
+
+	get size() {return this._size;}
+	set size(size) {this._size = size;}
+
+	get objects() {return this._objects;}
 }
-
-addObjects(attraction, position) {
-	this._objects.push(attraction, position);
-}
-
-get size() {return this._size;}
-setSize(size) {this._size = size;}
-
-get objects() {return this._objects;}
-setObjects(objects) {this._objects = objects;}
