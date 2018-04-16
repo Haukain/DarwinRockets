@@ -83,6 +83,8 @@ body>.row{
   width: 100%;
   background-image: linear-gradient(135deg, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0) 100%);
   padding: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .centeredVH{
   transform: translate(-50%,-50%);
@@ -235,8 +237,11 @@ body>.row{
 .card{
   border: none;
   box-shadow: 0 5px 20px -10px black;
+  margin-bottom: 20px;
 }
-
+.canvasWidget>.card-body{
+  padding: 0;
+}
 /*=== parallax ===*/
 .parallaxContainer{
   position: absolute;

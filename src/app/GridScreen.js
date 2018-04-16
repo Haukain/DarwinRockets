@@ -5,7 +5,7 @@ import { Col } from "../displayer/Col.js";
 export class GridScreen extends Screen{
 
 	constructor(app, gen) {
-        super(app);
+        super(app,"grey");
         this._gen = gen;
 
         for (let i of this._gen.rockets){
