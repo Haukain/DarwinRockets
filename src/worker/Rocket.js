@@ -2,7 +2,13 @@ import { Reactor } from "./Reactor.js";
 import { PhysicsRocket } from "./PhysicsRocket.js";
 
 export class Rocket {
-	constructor(){
+	constructor(position, reactorDefinitions){
+		this._physicsObject = new PhysicsRocket(rocketBluePrint,rocketRender,reactorRender,rocketInitialPosition,[
+		    	{position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+		    	{position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+		    	{position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+		    	{position:{x:Math.random()*15-8,y:Math.random()*40 -10},angle:Math.random()*3-1.5+Math.PI,thrust:0.00015*(Math.random()+1),capacity:300*Math.random()+150},
+		]);
 		this._score = -1;
 		this._parents = [];
 		this._reactors = [];
