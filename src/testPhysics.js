@@ -19,16 +19,27 @@ let engine = Engine.create();
 engine.world.gravity.y = 0;
 let time = 0;
 
-// Old renderer
+// Define canvas
+
 // let render = Render.create({element: document.body,engine: engine});
 // render.options.wireframes = false;
 // render.canvas.width = document.documentElement.clientWidth -100;
 // render.canvas.height = document.documentElement.clientHeight -100;
 let canvas = document.createElement('canvas'),
     context = canvas.getContext('2d');
-canvas.width = document.documentElement.clientWidth -100;
-canvas.height = document.documentElement.clientHeight -100;
+let screenWidth = canvas.width = 1200;
+let screenHeight = canvas.height = 800;
 document.body.appendChild(canvas);
+let randomX=[];let randomY=[];let randomSize=[];let randomOpacityOne=[];let randomOpacityTwo=[];let randomHue=[];let starNumb = 1000;
+for(var i=0; i<=starNumb; i++) {
+  randomX.push(Math.floor((Math.random()*screenWidth)+1));
+  randomY.push(Math.floor((Math.random()*screenHeight)+1));
+  randomSize.push(Math.floor((Math.random()*2)+1));
+  randomOpacityOne.push(Math.floor((Math.random()*9)+1));
+  randomOpacityTwo.push(Math.floor((Math.random()*9)+1));
+  randomHue.push(Math.floor((Math.random()*360)+1));
+}
+
 // Rocket parameters
 
 // let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
@@ -36,7 +47,7 @@ let rocket = new Rocket();
 rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 
 let physicsRocket = rocket.createPhysicsObject();
-physicsRocket.setPosition({x:document.documentElement.clientWidth/2,y:document.documentElement.clientHeight*2/3});
+physicsRocket.setPosition({x:screenWidth/2,y:screenHeight*2/3});
 
 
 
@@ -46,9 +57,9 @@ World.add(engine.world, [physicsRocket.object]);
 // obstacle creation
 let obstacle = [];
 for(let i = 0; i<4; i++){
-  obstacle.push(new PhysicsPlanet(physicsRocket,{x:Math.random()*1000+100,y:Math.random()*500+100},40));
+  obstacle.push(new PhysicsPlanet(physicsRocket,{x:Math.random()*screenWidth,y:Math.random()*screenHeight},40));
 }
-obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*800 +400,y:Math.random()*300 +200},20));
+obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*screenWidth,y:Math.random()*screenHeight},20));
 
 for(let o of obstacle){
   World.add(engine.world, o.object);
@@ -90,7 +101,6 @@ Engine.run(engine);
 // Render.run(render);
 
 // New renderer
-
 (function render() {
 
     let bodies = Composite.allBodies(engine.world);
@@ -99,9 +109,20 @@ Engine.run(engine);
     window.requestAnimationFrame(render);
 
     //Clear Scene
-    context.fillStyle = '#fff';
+    context.fillStyle = '#1a233a';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
+    //Render background
+    context.save();
+    for(let i = 0;i<starNumb;i++){
+      if(randomSize[i]>1) {
+        context.shadowBlur = Math.floor((Math.random()*15)+5);
+        context.shadowColor = "white";
+      }
+      context.fillStyle = "hsla("+randomHue[i]+", 30%, 80%, ."+randomOpacityOne[i]+randomOpacityTwo[i]+")";
+      context.fillRect(randomX[i], randomY[i], randomSize[i], randomSize[i]);
+    }
+    context.restore();
     //Render bodies
     for (let i = 0; i < bodies.length; i += 1) {
         for(let j = 0; j<bodies[i].parts.length; j+= 1){
@@ -120,14 +141,14 @@ Engine.run(engine);
         }
     }
 
-    //Render PhysicsBlackHole
+    //Render PhysicsBlackHole Effect
     for(let o of obstacle){
       if(o.object.label == "blackHole"){
         context.save();
 
-        var grd=context.createRadialGradient(0,0,5,0,0,o.radius*2);
-        grd.addColorStop(0, 'rgba(0, 0, 0, 1)');
-        grd.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        var grd=context.createRadialGradient(0,0,o.radius*1.8,0,0,o.radius*2.2);
+        grd.addColorStop(0, 'rgba(0, 0, 0, 0.8)');
+        grd.addColorStop(1, 'rgba(255, 255, 255, 0)');
         context.fillStyle = grd;
         context.translate(o.position.x,o.position.y)
         context.beginPath();

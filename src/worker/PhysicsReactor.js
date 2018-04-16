@@ -28,7 +28,7 @@ export class PhysicsReactor{
       this._body.render.fillStyle =  '#913748'
       return
     };
-    this._body.render.fillStyle = '#1a233a';
+    this._body.render.fillStyle = '#918999';
     let thrustVector = {
       x : Math.cos(this._angle+rocket.object.angle+Math.PI/2)*this._thrust,
       y : Math.sin(this._angle+rocket.object.angle+Math.PI/2)*this._thrust
