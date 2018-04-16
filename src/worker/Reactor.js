@@ -24,4 +24,14 @@ export class Reactor {
 	get extinctionTime() {return this._extinctionTime;}
 
 	get angle() {return this._angle;}
+
+	toStructure(){
+		return {
+			position:{x:this._position.x,y:this._position.y},
+			thrust:this._thrust,
+			activationTime:this._activationTime,
+			extinctionTime:this._extinctionTime,
+			angle:this._angle
+		};
+	}
 }

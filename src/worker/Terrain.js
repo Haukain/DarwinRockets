@@ -1,4 +1,7 @@
 export class Terrain {
+	static fromStructure(s){
+		return new Terrain(); // TODO: make that correctly
+	}
 	constructor(size){
 		size = size||{width:1920,height:1080};
 		this._size = size;
@@ -14,4 +17,8 @@ export class Terrain {
 	set size(size) {this._size = size;}
 
 	get objects() {return this._objects;}
+
+	toStructure(){
+		return {};
+	}
 }

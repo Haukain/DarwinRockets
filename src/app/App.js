@@ -18,6 +18,9 @@ export class App{
     //Worker
     this._worker = new Worker();
     this._com = new WorkerCommander(this._worker);
+    this._com.addCommandListener("newGen",g=>{
+			that.addGeneration(Generation.fromStructure(g));
+		});
     //generations
     this._currentGeneration = null;
     this._generations=[];
@@ -60,28 +63,33 @@ export class App{
   goChart() {
     console.log("going edit");
   }
-  //trainer control
+  //trainer interface
   initTrainer(){
     let that = this;
-    this._currentGeneration = new Generation(true);
+    this._currentGeneration = Generation.random(this._configuration.populationSize,5);
     this._generations=[this._currentGeneration];
-    setTimeout(()=>{
-      that._com.send("initTrainer",{gen:that._generations[0],conf:this._configuration});
-    },20);
+    this._com.send("initTrainer",{gen:that._generations[0].toStructure(),conf:this._configuration.toStructure()});
   }
   startGen() {
     console.log("starting generation");
+    this._com.send("startGen");
   }
   stopGen() {
     console.log("stopping generation");
+    this._com.send("stopGen");
   }
   makeNGen(n) {
     console.log(`making ${n}  generation`);
+    this._com.send("nGen",n);
   }
-
+  trainerRunning(){//return Promise<boolean>
+    return com.send("isRunning",null,true)
+  }
+  //other methods
   addGeneration(gen){
     this._generations.push(gen);
     this._header.updateGen();
+    console.log(this._generations);
   }
 
   displayRocket(rocket){

@@ -2,19 +2,21 @@ import { Terrain } from "./Terrain.js";
 import { ReproductionParameters } from "./ReproductionParameters.js";
 import { FitnessFunction } from "./FitnessFunction.js";
 export class Configuration {
-	constructor(tutorial){
+	static fromStructure(s){
+		let c = new Configuration();
+		c._commentary = s.commentary||c._commentary;
+		c._populationSize = s.populationSize||c._populationSize;
+		c._terrain = s.terrain?Terrain.fromStructure(s.terrain):c._terrain;
+		c._reproductionParameters = s.reproductionParameters?ReproductionParameters.fromStructure(s.reproductionParameters):c._reproductionParameters;
+		c._fitnessFunction = s.fitnessFunction?FitnessFunction.fromStructure(s.fitnessFunction):c._fitnessFunction;
+		return c;
+	}
+	constructor(){
 		this._commentary = "";
 		this._populationSize = 100;
 		this._terrain = new Terrain();
 		this._reproductionParameters = new ReproductionParameters();
 		this._fitnessFunction = new FitnessFunction();
-		if(tutorial){
-			this._commentary = tutorial.commentary||this._commentary;
-			this._populationSize = tutorial.populationSize||this._populationSize;
-			this._terrain = tutorial.terrain?new Terrain(tutorial.terrain):this._terrain;
-			this._reproductionParameters = tutorial.reproductionParameters?new ReproductionParameters(tutorial.reproductionParameters):this._reproductionParameters;
-			this._fitnessFunction = tutorial.fitnessFunction?new FitnessFunction(tutorial.fitnessFunction):this._fitnessFunction;
-		}
 	}
 
 	get commentary() {return this._commentary;}
@@ -28,4 +30,14 @@ export class Configuration {
 	get reproductionParameters() {return this._reproductionParameters;}
 
 	get fitnessFunction() {return this._fitnessFunction;}
+
+	toStructure(){
+		return {
+			commentary:this._commentary,
+			populationSize:this._populationSize,
+			terrain:this._terrain.toStructure(),
+			reproductionParameters:this._reproductionParameters.toStructure(),
+			fitnessFunction:this._fitnessFunction.toStructure(),
+		};
+	}
 }

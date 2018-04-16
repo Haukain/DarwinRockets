@@ -1,12 +1,21 @@
 import { Rocket } from "./Rocket.js"
 export class Generation {
-	constructor(random){
-		this._rockets = [];
-		if(random){
-			for(let i=0;i<200;i++){
-				this.addRocket(new Rocket(true));
-			}
+	static random(size,maxR){
+		let g = new Generation();
+		for(let i=0;i<size;i++){
+			g.addRocket(Rocket.random(maxR));
 		}
+		return g;
+	}
+	static fromStructure(s){
+		let g = new Generation();
+		for(let r of s.rockets){
+			g.addRocket(Rocket.fromStructure(r));
+		}
+		return g;
+	}
+	constructor(){
+		this._rockets = [];
 	}
 
 	getAverage() {}
@@ -21,4 +30,7 @@ export class Generation {
 
 	get rockets() {return this._rockets;}
 
+	toStructure(){
+		return {rockets:this._rockets.map(r=>r.toStructure())};
+	}
 }

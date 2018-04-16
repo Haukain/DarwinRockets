@@ -34,9 +34,10 @@ export class Header{
     let genItem = new NavbarItem();
     this._genRange = new RangeInput("generation");
     this._genRange.min=1;
+    this._genRange.step=1;
     this._genRange.value=1;
     this._genRange.on("change",()=>{
-      that._app.selectGeneration(that._app.generations[this._genRange.value]);
+      that._app.selectGeneration(that._app.generations[this._genRange.value-1]);
     });
     this.updateGen();
 
