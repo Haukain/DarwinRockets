@@ -89,7 +89,6 @@ export class App{
   addGeneration(gen){
     this._generations.push(gen);
     this._header.updateGen();
-    console.log(this._generations);
   }
 
   displayRocket(rocket){

@@ -27,7 +27,7 @@ export class Trainer {
 		this._com.addCommandListener("isRunning",d=>Promise.resolve(that.continuousGeneration()));
 	}
 
-	makeNewGen() {
+	async makeNewGen() {
 		let oldGen = this.generations[this.generations.length-1];
 		//killing the old
 		let survivors = this.applyNauralSelection(oldGen);
@@ -39,12 +39,12 @@ export class Trainer {
 			newGen.addRocket(this.reproduce(p1,p2));
 		}
 		//evaluate the generation
-		this.evaluateGen(newGen);
+		await this.evaluateGen(newGen);
 		this.addGeneration(newGen);
 		this._com.send("newGen",newGen.toStructure());
 	}
 
-	evaluateGen(g) {}
+	async evaluateGen(g) {}
 
 	applyNauralSelection(g) {
 		// TODO: make it real
@@ -76,9 +76,10 @@ export class Trainer {
 		this._continuousGeneration = false;
 	}
 
-	makeNGenerations(n) {
+	async makeNGenerations(n) {
 		for(let i=0;i<n;i++){
-			this.makeNewGen();
+			await this.makeNewGen();
+			await new Promise((res,rej)=>setTimeout(()=>res(),1));
 		}
 	}
 
