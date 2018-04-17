@@ -52,10 +52,10 @@ export class Header{
     this.container.addChild(item);
   }
   hideButtons(){
-    for(let child in this.container.children) chuld.disabled = true;
+    for(let child of this.container.children) child.disabled = true;
   }
   showButtons(){
-    for(let child in this.container.children) chuld.disabled = false;
+    for(let child of this.container.children) child.disabled = false;
   }
   updateGen(){
     this._genRange.max=this._app.generations.length;

@@ -48,20 +48,24 @@ export class App{
   goStart(){
     this._currentScreen = new StartScreen(this);
     this._state = "start";
+    this._header.hideButtons();
     history.pushState({fake: true},"Darwin Rockets","start.html");
   }
   goEdit() {
     this._currentScreen = new EditScreen(this);
     this._state = "edit";
+    this._header.hideButtons();
     history.pushState({fake: true},"Edit config","edit.html");
   }
   goSimulation() {
     this._currentScreen = new GridScreen(this,this._currentGeneration);
     this._state = "gen";
+    this._header.showButtons();
     history.pushState({fake: true},"Simulation screen","gen.html");
   }
   goChart() {
     console.log("going edit");
+    this._header.showButtons();
   }
   //trainer interface
   initTrainer(){
