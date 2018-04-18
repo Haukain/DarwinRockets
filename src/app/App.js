@@ -35,7 +35,7 @@ export class App{
     };
     this.goStart();
   }
-  
+
   init() {}
   //go methods
   goBack() {
@@ -127,4 +127,7 @@ export class App{
     this.__currentScreen = s;
     this._container.addChild(this.__currentScreen.container);
   }
+  get currentGeneration(){
+    return this._currentGeneration;
+  } 
 }
