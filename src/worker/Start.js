@@ -1,3 +1,5 @@
+import { TerrainObject } from "./TerrainObject.js"
+
 export class Start extends TerrainObject {
 	constructor(attraction, position) {
 		super(attraction, position);

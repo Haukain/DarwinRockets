@@ -1,8 +1,8 @@
 import { PhysicsObstacle } from "./PhysicsObstacle.js"
 
 export class PhysicsPlanet extends PhysicsObstacle{
-	constructor(rocket,position,radius){
-		super(rocket,position,radius);
+	constructor(position,radius){
+		super(position,radius);
 	}
 	createObject(position,radius){
 		let fs = '#bae1ff';
