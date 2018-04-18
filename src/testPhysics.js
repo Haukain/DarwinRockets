@@ -30,15 +30,10 @@ let canvas = document.createElement('canvas'),
 let screenWidth = canvas.width = 1200;
 let screenHeight = canvas.height = 800;
 document.body.appendChild(canvas);
-let randomX=[];let randomY=[];let randomSize=[];let randomOpacityOne=[];let randomOpacityTwo=[];let randomHue=[];let starNumb = 1000;
-for(var i=0; i<=starNumb; i++) {
-  randomX.push(Math.floor((Math.random()*screenWidth)+1));
-  randomY.push(Math.floor((Math.random()*screenHeight)+1));
-  randomSize.push(Math.floor((Math.random()*2)+1));
-  randomOpacityOne.push(Math.floor((Math.random()*9)+1));
-  randomOpacityTwo.push(Math.floor((Math.random()*9)+1));
-  randomHue.push(Math.floor((Math.random()*360)+1));
-}
+let starBackground = new Image();
+starBackground.src = './assets/images/starBackground.png';
+starBackground.loaded = false;
+starBackground.onload = ()=>starBackground.loaded = true;
 
 // Rocket parameters
 
@@ -48,7 +43,6 @@ rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.ran
 
 let physicsRocket = rocket.createPhysicsObject();
 physicsRocket.setPosition({x:screenWidth/2,y:screenHeight*2/3});
-
 
 
 // add the rocket to the world
@@ -109,37 +103,23 @@ Engine.run(engine);
     window.requestAnimationFrame(render);
 
     //Clear Scene
-    context.fillStyle = '#1a233a';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    if (starBackground.loaded){
+      context.drawImage(starBackground,0,0);
+    }
+    else {
+      context.fillStyle = '#1a233a';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
-    //Render background
+
+    //Render rocketRender
     context.save();
-    for(let i = 0;i<starNumb;i++){
-      if(randomSize[i]>1) {
-        context.shadowBlur = Math.floor((Math.random()*15)+5);
-        context.shadowColor = "white";
-      }
-      context.fillStyle = "hsla("+randomHue[i]+", 30%, 80%, ."+randomOpacityOne[i]+randomOpacityTwo[i]+")";
-      context.fillRect(randomX[i], randomY[i], randomSize[i], randomSize[i]);
-    }
+    context.translate(physicsRocket.object.position.x,physicsRocket.object.position.y);
+    context.rotate(physicsRocket.object.angle + Math.PI);
+    physicsRocket.draw(context);
     context.restore();
-    //Render bodies
-    for (let i = 0; i < bodies.length; i += 1) {
-        for(let j = 0; j<bodies[i].parts.length; j+= 1){
-          if(bodies[i].parts[j].label != "rocket"){
-            let vertices = bodies[i].parts[j].vertices;
-            let fs = bodies[i].parts[j].render.fillStyle;
-            context.beginPath();
-            context.moveTo(vertices[0].x, vertices[0].y);
-            for (let h = 1; h < vertices.length; h += 1) {
-                context.lineTo(vertices[h].x, vertices[h].y);
-            }
-            context.lineTo(vertices[0].x, vertices[0].y);
-            context.fillStyle =  fs;
-            context.fill();
-          }
-        }
-    }
+
+    //Render blackHole
 
     //Render PhysicsBlackHole Effect
     for(let o of obstacle){

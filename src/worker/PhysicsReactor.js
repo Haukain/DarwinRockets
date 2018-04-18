@@ -6,15 +6,18 @@ export class PhysicsReactor{
     this._activationTime = activationTime;
     this._extinctionTime = extinctionTime;
     this.active = false;
+    this._vertices = blueprint;
+    this._scale = 2500*this._thrust;
     this._body = Matter.Body.create({
       vertices: blueprint,
       render: reactorRender,
     });
     this._body.label = "reactorBody";
-    Matter.Body.scale(this._body,2500*this._thrust,2500*this._thrust);
+    Matter.Body.scale(this._body,this._scale,this._scale);
     Matter.Body.setPosition(this._body,this._position);
     Matter.Body.setAngle(this._body, this._angle);
   }
+  get scale(){return this._scale;}
   get position(){return this._position;}
   get angle(){return this._angle;}
   get thrust(){return this._thrust;}
@@ -36,5 +39,15 @@ export class PhysicsReactor{
     Matter.Body.applyForce(rocket.object,{x: this._body.position.x, y: this._body.position.y},thrustVector);
   }
 
+  draw(ctx){
+    ctx.beginPath();
+		ctx.fillStyle = this._body.render.fillStyle
+		ctx.moveTo(this._vertices[0].x,this._vertices[0].y);
+		for (let i = 1; i < this._vertices.length; i += 1) {
+				ctx.lineTo(this._vertices[i].x,this._vertices[i].y);
+		}
+		ctx.lineTo(this._vertices[0].x,this._vertices[0].y);
+		ctx.fill();
+  }
 
 }

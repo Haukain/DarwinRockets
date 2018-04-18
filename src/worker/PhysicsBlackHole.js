@@ -9,4 +9,5 @@ export class PhysicsBlackHole extends PhysicsObstacle{
 		Matter.Body.setDensity(this._object,1);
 		this._object.label = "blackHole";
 	}
+
 }
