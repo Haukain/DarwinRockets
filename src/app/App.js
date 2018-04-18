@@ -119,6 +119,9 @@ export class App{
   get container(){
     return this._container;
   }
+  get configuration(){
+    return this._configuration;
+  }
   get _currentScreen(){
     return this.__currentScreen;
   }
