@@ -35,6 +35,7 @@ export class App{
     };
     this.goStart();
   }
+  
   init() {}
   //go methods
   goBack() {
