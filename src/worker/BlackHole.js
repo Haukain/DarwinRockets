@@ -6,7 +6,8 @@ export class BlackHole extends TerrainObject {
 		this._radius = radius;
 
 	createPhysicsObject() {
-		let physicsBlackHole = new PhysicsBlackHole(this._rocket, this._position, this._radius);
+		let physicsBlackHole = new PhysicsBlackHole(this._position, this._radius);
+		return physicsBlackHole;
 	}
 
 	draw() {}
