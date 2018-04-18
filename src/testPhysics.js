@@ -57,9 +57,9 @@ World.add(engine.world, [physicsRocket.object]);
 // obstacle creation
 let obstacle = [];
 for(let i = 0; i<4; i++){
-  obstacle.push(new PhysicsPlanet(physicsRocket,{x:Math.random()*screenWidth,y:Math.random()*screenHeight},40));
+  obstacle.push(new PhysicsPlanet({x:Math.random()*screenWidth,y:Math.random()*screenHeight},40));
 }
-obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*screenWidth,y:Math.random()*screenHeight},20));
+obstacle.push(new PhysicsBlackHole({x:Math.random()*screenWidth,y:Math.random()*screenHeight},20));
 
 for(let o of obstacle){
   World.add(engine.world, o.object);
@@ -90,7 +90,7 @@ Events.on(engine, "beforeUpdate",e=>{
       time += 1;
       physicsRocket.applyThrusts(time);
       for(let o of obstacle){
-        o.applyGravitation();
+        o.applyGravitation(physicsRocket);
       }
 })
 
