@@ -1,3 +1,5 @@
+import { TerrainObject } from "./TerrainObject"
+
 export class End extends TerrainObject {
 	constructor(attraction, position) {
 		super(attraction, position);
