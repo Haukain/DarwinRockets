@@ -3,6 +3,7 @@ import { Header } from "./Header.js";
 import { StartScreen } from "./StartScreen.js";
 import { EditScreen } from "./EditScreen.js";
 import { GridScreen } from "./GridScreen.js";
+import { ChartScreen } from "./ChartScreen.js";
 import { Generation } from "../worker/Generation.js";
 import { Configuration } from "../worker/Configuration.js";
 import { WorkerCommander } from "../worker/WorkerCommander.js";
@@ -34,6 +35,7 @@ export class App{
     };
     this.goStart();
   }
+  
   init() {}
   //go methods
   goBack() {
@@ -66,6 +68,10 @@ export class App{
   goChart() {
     console.log("going edit");
     this._header.showButtons();
+    this._currentScreen = new ChartScreen(this,this._currentGeneration);
+    this._state = "chart";
+    this._header.showButtons();
+    history.pushState({fake: true},"chart screen","chart.html");
   }
   //trainer interface
   initTrainer(){
@@ -112,6 +118,9 @@ export class App{
   get generations(){return this._generations}
   get container(){
     return this._container;
+  }
+  get configuration(){
+    return this._configuration;
   }
   get _currentScreen(){
     return this.__currentScreen;

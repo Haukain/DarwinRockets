@@ -30,25 +30,22 @@ let canvas = document.createElement('canvas'),
 let screenWidth = canvas.width = 1200;
 let screenHeight = canvas.height = 800;
 document.body.appendChild(canvas);
-let randomX=[];let randomY=[];let randomSize=[];let randomOpacityOne=[];let randomOpacityTwo=[];let randomHue=[];let starNumb = 1000;
-for(var i=0; i<=starNumb; i++) {
-  randomX.push(Math.floor((Math.random()*screenWidth)+1));
-  randomY.push(Math.floor((Math.random()*screenHeight)+1));
-  randomSize.push(Math.floor((Math.random()*2)+1));
-  randomOpacityOne.push(Math.floor((Math.random()*9)+1));
-  randomOpacityTwo.push(Math.floor((Math.random()*9)+1));
-  randomHue.push(Math.floor((Math.random()*360)+1));
-}
+let starBackground = new Image();
+starBackground.src = './assets/images/starBackground.png';
+starBackground.loaded = false;
+starBackground.onload = ()=>starBackground.loaded = true;
 
 // Rocket parameters
 
 // let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
 let rocket = new Rocket();
 rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
+rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
+rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
+rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 
 let physicsRocket = rocket.createPhysicsObject();
 physicsRocket.setPosition({x:screenWidth/2,y:screenHeight*2/3});
-
 
 
 // add the rocket to the world
@@ -57,9 +54,9 @@ World.add(engine.world, [physicsRocket.object]);
 // obstacle creation
 let obstacle = [];
 for(let i = 0; i<4; i++){
-  obstacle.push(new PhysicsPlanet(physicsRocket,{x:Math.random()*screenWidth,y:Math.random()*screenHeight},40));
+  obstacle.push(new PhysicsPlanet({x:Math.random()*screenWidth,y:Math.random()*screenHeight},40));
 }
-obstacle.push(new PhysicsBlackHole(physicsRocket,{x:Math.random()*screenWidth,y:Math.random()*screenHeight},20));
+obstacle.push(new PhysicsBlackHole({x:Math.random()*screenWidth,y:Math.random()*screenHeight},20));
 
 for(let o of obstacle){
   World.add(engine.world, o.object);
@@ -90,7 +87,7 @@ Events.on(engine, "beforeUpdate",e=>{
       time += 1;
       physicsRocket.applyThrusts(time);
       for(let o of obstacle){
-        o.applyGravitation();
+        o.applyGravitation(physicsRocket);
       }
 })
 
@@ -109,56 +106,28 @@ Engine.run(engine);
     window.requestAnimationFrame(render);
 
     //Clear Scene
-    context.fillStyle = '#1a233a';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    if (starBackground.loaded){
+      context.drawImage(starBackground,0,0);
+    }
+    else {
+      context.fillStyle = '#1a233a';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
-    //Render background
+    //Render Rocket
     context.save();
-    for(let i = 0;i<starNumb;i++){
-      if(randomSize[i]>1) {
-        context.shadowBlur = Math.floor((Math.random()*15)+5);
-        context.shadowColor = "white";
-      }
-      context.fillStyle = "hsla("+randomHue[i]+", 30%, 80%, ."+randomOpacityOne[i]+randomOpacityTwo[i]+")";
-      context.fillRect(randomX[i], randomY[i], randomSize[i], randomSize[i]);
-    }
+    context.translate(physicsRocket.object.position.x,physicsRocket.object.position.y);
+    context.rotate(physicsRocket.object.angle + Math.PI);
+    physicsRocket.draw(context);
     context.restore();
-    //Render bodies
-    for (let i = 0; i < bodies.length; i += 1) {
-        for(let j = 0; j<bodies[i].parts.length; j+= 1){
-          if(bodies[i].parts[j].label != "rocket"){
-            let vertices = bodies[i].parts[j].vertices;
-            let fs = bodies[i].parts[j].render.fillStyle;
-            context.beginPath();
-            context.moveTo(vertices[0].x, vertices[0].y);
-            for (let h = 1; h < vertices.length; h += 1) {
-                context.lineTo(vertices[h].x, vertices[h].y);
-            }
-            context.lineTo(vertices[0].x, vertices[0].y);
-            context.fillStyle =  fs;
-            context.fill();
-          }
-        }
-    }
 
-    //Render PhysicsBlackHole Effect
+
+    //Render Obstacles
     for(let o of obstacle){
-      if(o.object.label == "blackHole"){
-        context.save();
-
-        var grd=context.createRadialGradient(0,0,o.radius*1.8,0,0,o.radius*2.2);
-        grd.addColorStop(0, 'rgba(0, 0, 0, 0.8)');
-        grd.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        context.fillStyle = grd;
-        context.translate(o.position.x,o.position.y)
-        context.beginPath();
-        context.arc(0,0,o.radius*2*Math.abs(Math.sin(time/100)),0,2*Math.PI);
-        context.fill();
-        context.arc(0,0,o.radius*3*Math.abs(Math.sin(time/100 + Math.PI/2)),0,2*Math.PI);
-        context.fill();
-
-        context.restore();
-      }
+      context.save();
+      context.translate(o.position.x,o.position.y);
+      o.draw(context);
+      context.restore();
     }
 
 })();

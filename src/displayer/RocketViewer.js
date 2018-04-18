@@ -9,8 +9,8 @@ export class RocketViewer extends CanvasWidget{
     this.draw();
   }
   draw(){
-    let matrix = Object.assign({},this._ctx.currentTransform);
+    this._ctx.save();
     this._rocket.draw(this._ctx);
-    this._ctx.currentTransform = matrix;
+    this._ctx.restore();
   }
 }

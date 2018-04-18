@@ -6,6 +6,7 @@ export class PhysicsRocket{
 				vertices: blueprint,
 				render: rocketRender,
 		});
+		this._vertices = blueprint;
 		this._body.label = "rocketBody";
 			Matter.Body.setAngle(this._body, Math.PI);
 
@@ -34,7 +35,7 @@ export class PhysicsRocket{
 		Matter.Body.setPosition(this._object,position);
 	}
 
-	addPhysicsReactor(reactors){
+	addPhysicsReactors(reactors){
 		this._reactors = reactors;
 		this._object = Matter.Body.create({
 			parts:[this._body].concat(this._reactors.map(d=>d.body)),
@@ -68,24 +69,25 @@ export class PhysicsRocket{
 		}
 	}
 
-	drawOnce(ctx){
-		ctx.fillStyle = '#fff';
-		ctx.fillRect(0, 0, 100, 100);
-
-		let offset = {x:this._object.position.x-50,y:this._object.position.y-50}
-		for(let i = 0;i<this._object.parts.length;i++){
-			if(this._object.parts[i].label != "rocket"){
-				let vertices = this._object.parts[i].vertices;
-				let fs = this._object.parts[i].render.fillStyle;
-				ctx.beginPath();
-				ctx.moveTo(vertices[0].x  - offset.x, vertices[0].y - offset.y);
-				for (let j = 1; j < vertices.length; j += 1) {
-						ctx.lineTo(vertices[j].x - offset.x, vertices[j].y - offset.y);
-				}
-				ctx.lineTo(vertices[0].x - offset.x, vertices[0].y - offset.y);
-				ctx.fillStyle = fs;
-				ctx.fill();
-			}
+	draw(ctx){
+		ctx.beginPath();
+		ctx.fillStyle = this._object.parts[1].render.fillStyle
+		ctx.moveTo(this._vertices[0].x,this._vertices[0].y);
+		for (let i = 1; i < this._vertices.length; i += 1) {
+				ctx.lineTo(this._vertices[i].x,this._vertices[i].y);
 		}
+		ctx.lineTo(this._vertices[0].x,this._vertices[0].y);
+		ctx.fill();
+
+		for(let r of this._reactors){
+			ctx.save();
+			ctx.scale(r.scale,r.scale);
+			ctx.translate(r.position.x,r.position.y);
+			ctx.rotate(r.angle + Math.PI);
+			r.draw(ctx);
+			ctx.restore();
+		}
+
 	}
+
 }
