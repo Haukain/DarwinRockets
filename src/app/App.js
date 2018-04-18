@@ -77,7 +77,8 @@ export class App{
   initTrainer(){
     let that = this;
     this._currentGeneration = Generation.random(this._configuration.populationSize,5);
-    this._generations=[this._currentGeneration];
+    this._generations=[];
+    this.addGeneration(this._currentGeneration);
     this._com.send("initTrainer",{gen:that._generations[0].toStructure(),conf:this._configuration.toStructure()});
   }
   startGen() {
@@ -105,8 +106,8 @@ export class App{
     console.log(`displaying rocket`);
   }
   selectTutorial(t){
-    this._configuration = new Configuration(tutorial.config);
-    this._initTrainer();
+    this._configuration = Configuration.fromStructure(t.config);
+    this.initTrainer();
     this.goSimulation();
   }
   selectGeneration(gen){
@@ -132,5 +133,5 @@ export class App{
   }
   get currentGeneration(){
     return this._currentGeneration;
-  } 
+  }
 }
