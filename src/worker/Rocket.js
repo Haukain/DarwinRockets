@@ -33,7 +33,7 @@ export class Rocket {
 	}
 	draw(ctx) {
 		let oneTimeRocket = this.createPhysicsObject();
-		oneTimeRocket.drawOnce(ctx);
+		oneTimeRocket.draw(ctx);
 	}
 
 	addReactor(position, thrust, activationTime, extinctionTime, angle) {
@@ -46,7 +46,7 @@ export class Rocket {
 		for(let r of this._reactors){
 			reactors.push(r.createPhysicsObject(this._rocketBluePrint,this._reactorRender));
 		}
-		physicsRocket.addPhysicsReactor(reactors);
+		physicsRocket.addPhysicsReactors(reactors);
 		return physicsRocket
 	}
 
