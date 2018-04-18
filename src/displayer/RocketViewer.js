@@ -10,6 +10,8 @@ export class RocketViewer extends CanvasWidget{
   }
   draw(){
     this._ctx.save();
+    this._ctx.translate(50,50);
+    this._ctx.rotate(Math.PI*1.25);
     this._rocket.draw(this._ctx);
     this._ctx.restore();
   }
