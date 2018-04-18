@@ -58,6 +58,7 @@ export class StartScreen extends Screen{
 		let col = new Col(12,6,6,6);
 		let button = new Button(text, "pink");
 		button.on("click",()=>{
+			that._modal.hide();
 			that._app.selectTutorial(tut);
 		});
 		col.addChild(button);
