@@ -16,22 +16,55 @@ export class EditScreen extends Screen{
 		this._container.addChild(leftCol);
 		this._container.addChild(rightCol);
 		//config
-		let confCard = new Card("navyblue","white");
-		leftCol.addChild(confCard);
-		let confCardTitle = new Title("Configuration");
-		confCard.addChild(confCardTitle);
-		let testRange = new RangeInput();
-		testRange.min=-1;
-		testRange.max=1;
-		testRange.step=.01;
-		testRange.text="test range";
-		confCard.addChild(testRange);
+		let map =[
+			{
+				title:"Population size",
+				params:[
+					{key:".populationSize",name:"",min:"10",max:"100",step:"1"}
+				]
+			},
+			{
+				title:"Score calculation",
+				params:[
+					{key:".fitnessFunction.remainingDistanceFactor",name:"distance to objective",min:"-1",max:"1",step:".01"},
+					{key:".fitnessFunction.completionTimeFactor",name:"time of flight",min:"-1",max:"1",step:".01"},
+					{key:".fitnessFunction.traveledDistanceFactor",name:"distance traveled",min:"-1",max:"1",step:".01"},
+					{key:".fitnessFunction.complexityFactor",name:"rocket complexity",min:"-1",max:"1",step:".01"}
+				]
+			},
+			{
+				title:"Reproduction",
+				params:[
+					{key:".fitnessFunction.newGeneAppearanceRate",name:"gene appearance rate",min:"0",max:"1",step:".01"},
+					{key:".fitnessFunction.geneDistributionDeviationFactor",name:"distribution random",min:"0",max:"1",step:".01"},
+					{key:".fitnessFunction.randomMutationRate",name:"mutation rate",min:"0",max:"1",step:".01"}
+				]
+			}
+		];
+		let card = new Card("navyblue","white");
+		leftCol.addChild(card);
+		for(let section of map){
+			let title = new Title(section.title);
+			card.addChild(title);
+			for(let param of section.params){
+				let range = new RangeInput();
+				range.min=param.min;
+				range.max=param.max;
+				range.step=param.step;
+				range.text=param.name;
+				range.value=eval("this._app.configuration"+param.key);
+				range.on("change",e=>{
+					eval(`this._app.configuration${param.key}=${range.value}`);
+				});
+				card.addChild(range);
+			}
+		}
 		let confirmButton = new Button("Confirm","white");
 		confirmButton.on("click",()=>{
 			this._app.initTrainer();
 			this._app.goSimulation();
 		});
-		confCard.addChild(confirmButton);
+		card.addChild(confirmButton);
 		//terrain
 		this._terrainConf = new TerrainConfigurator();
 		rightCol.addChild(this._terrainConf);
