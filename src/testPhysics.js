@@ -40,6 +40,9 @@ starBackground.onload = ()=>starBackground.loaded = true;
 // let rocketBluePrint = [{ x: 0, y: 0 },{ x: 30, y: 0 },{ x: 30, y: 40 },{ x: 25, y: 50 },{ x: 15, y: 55 },{ x: 5, y: 50 },{ x: 0, y: 40 }];
 let rocket = new Rocket();
 rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
+rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
+rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
+rocket.addReactor({x:Math.random()*20-10,y:Math.random()*20-10},0.0001*(Math.random()+1),50*(20*Math.random()),150*(Math.random()+1),Math.random()*3-1.5+Math.PI);
 
 let physicsRocket = rocket.createPhysicsObject();
 physicsRocket.setPosition({x:screenWidth/2,y:screenHeight*2/3});
@@ -111,8 +114,7 @@ Engine.run(engine);
       context.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-
-    //Render rocketRender
+    //Render Rocket
     context.save();
     context.translate(physicsRocket.object.position.x,physicsRocket.object.position.y);
     context.rotate(physicsRocket.object.angle + Math.PI);
@@ -120,26 +122,12 @@ Engine.run(engine);
     context.restore();
 
 
-    //Render blackHole
-
-    //Render PhysicsBlackHole Effect
+    //Render Obstacles
     for(let o of obstacle){
-      if(o.object.label == "blackHole"){
-        context.save();
-
-        var grd=context.createRadialGradient(0,0,o.radius*1.8,0,0,o.radius*2.2);
-        grd.addColorStop(0, 'rgba(0, 0, 0, 0.8)');
-        grd.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        context.fillStyle = grd;
-        context.translate(o.position.x,o.position.y)
-        context.beginPath();
-        context.arc(0,0,o.radius*2*Math.abs(Math.sin(time/100)),0,2*Math.PI);
-        context.fill();
-        context.arc(0,0,o.radius*3*Math.abs(Math.sin(time/100 + Math.PI/2)),0,2*Math.PI);
-        context.fill();
-
-        context.restore();
-      }
+      context.save();
+      context.translate(o.position.x,o.position.y);
+      o.draw(context);
+      context.restore();
     }
 
 })();

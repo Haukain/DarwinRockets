@@ -14,4 +14,11 @@ export class PhysicsPlanet extends PhysicsObstacle{
 		Matter.Body.setDensity(this._object,0.005);
 		this._object.label = "planet";
 	}
+
+	draw(ctx){
+		ctx.beginPath();
+		ctx.fillStyle = this._object.render.fillStyle;
+		ctx.arc(0,0,this._radius,0,2*Math.PI);
+		ctx.fill();
+	}
 }
