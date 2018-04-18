@@ -20,9 +20,13 @@ export class GridScreen extends Screen{
         }
 
         let floatingButton = new FloatingButton("equalizer","Écran des statistiques");
+        floatingButton.on("click",()=>{
+            this._app.goChart();
+        });
         let col = new Col(3,2,1,1);
         col.addChild(floatingButton);
         this._container.addChild(col);
+
 
     }
 
