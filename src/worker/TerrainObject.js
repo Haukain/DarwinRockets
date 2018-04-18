@@ -8,10 +8,10 @@ class TerrainObject {
 	draw() {
 		throw "La classe TerrainObject est abstraite"
 	}
+
+	get attraction() {return this._attraction;}
+	setAttraction(attraction) {this._attraction = attraction;}
+
+	get position() {return this._position;}
+	setPosition(position) {this._position = position;}
 }
-
-get attraction() {return this._attraction;}
-setAttraction(attraction) {this._attraction = attraction;}
-
-get position() {return this._position;}
-setPosition(position) {this._position = position;}

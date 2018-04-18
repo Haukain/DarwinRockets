@@ -68,8 +68,12 @@ export class Trainer {
 		return baby;
 	}
 
-	startContinuousGeneration() {
+	async startContinuousGeneration() {
 		this._continuousGeneration = true;
+		while(this._continuousGeneration){
+			await this.makeNewGen();
+			await new Promise((res,rej)=>setTimeout(()=>res(),1));
+		}
 	}
 
 	stopContinuousGeneration() {
