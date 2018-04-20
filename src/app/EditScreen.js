@@ -52,19 +52,19 @@ export class EditScreen extends Screen{
 				range.max=param.max;
 				range.step=param.step;
 				range.text=param.name;
-				range.value=eval("this._app.configuration"+param.key);
+				range.value=eval("this._app.configuration"+param.key); // TODO: trouver une solution pour éviter cette vulnérabilité
 				range.on("change",e=>{
-					eval(`this._app.configuration${param.key}=${range.value}`);
+					eval(`this._app.configuration${param.key}=${range.value}`); // TODO: trouver une solution pour éviter cette vulnérabilité
 				});
 				card.addChild(range);
 			}
 		}
-		let confirmButton = new Button("Confirm","white");
-		confirmButton.on("click",()=>{
+		let LaunchButton = new Button("Launch Simulation","white");
+		LaunchButton.on("click",()=>{
 			this._app.initTrainer();
 			this._app.goSimulation();
 		});
-		card.addChild(confirmButton);
+		card.addChild(LaunchButton);
 		//terrain
 		this._terrainConf = new TerrainConfigurator();
 		rightCol.addChild(this._terrainConf);

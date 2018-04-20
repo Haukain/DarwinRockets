@@ -264,3 +264,11 @@ body>.row{
   background:#1a233a;
   color: white;
 }
+/*=== toolbar ===*/
+.toolbar{
+  position: relative;
+}
+.toolbar .iconbutton{
+  display: block;
+  margin: auto;
+}
