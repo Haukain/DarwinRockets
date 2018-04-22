@@ -5,6 +5,7 @@ export class MoveTerrainTool extends TerrainTool{
     super(configurator,"open_with","move");
     this._downCallback = (p,o) =>{
       for(let object of o.filter(d=>d.inHitBox(p.x,p.y))){
+        console.log(object);
         object.move = {};
         object.move.px = p.x;
         object.move.py = p.y;
@@ -21,7 +22,7 @@ export class MoveTerrainTool extends TerrainTool{
       return o;
     };
     this._upCallback = (p,o) =>{
-      for(let object of o.filter(d=>d.move).filter(d=>d.inHitBox(p.x,p.y))){
+      for(let object of o.filter(d=>d.move)){
         delete object.move;
       }
       return o;

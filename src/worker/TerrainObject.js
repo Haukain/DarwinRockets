@@ -10,6 +10,10 @@ export class TerrainObject {
 		throw "La classe TerrainObject est abstraite";
 	}
 
+	inHitBox(x,y){
+		return false;
+	}
+
 	get attraction() {return this._attraction;}
 	setAttraction(attraction) {this._attraction = attraction;}
 
