@@ -1,8 +1,8 @@
 import { PhysicsPlanet } from "./PhysicsPlanet.js"
 import { TerrainObject } from "./TerrainObject.js"
 
-export class Wall extends TerrainObject {
-	constructor(attraction, position, radius) {
+export class Planet extends TerrainObject {
+	constructor(attraction, position, radius=30) {
 		super(attraction, position);
 		this._radius = radius;
 	}
@@ -12,5 +12,8 @@ export class Wall extends TerrainObject {
 		return physicsPlanet;
 	}
 
-	draw() {}
+	draw(ctx) {
+		let oneTimePlanet = this.createPhysicsObject();
+		oneTimePlanet.draw(ctx);
+	}
 }

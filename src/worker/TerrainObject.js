@@ -1,17 +1,18 @@
-class TerrainObject {
-	constructor(attraction, position);
-	this._attraction = attraction;
-	this._position = position;
+export class TerrainObject {
+	constructor(attraction, position){
+		this._attraction = attraction||0;
+		this._position = position||{x:0,y:0};
+	}
 
 	testCollision(r) {}
 
-	draw() {
-		throw "La classe TerrainObject est abstraite"
+	draw(ctx) {
+		throw "La classe TerrainObject est abstraite";
 	}
 
 	get attraction() {return this._attraction;}
 	setAttraction(attraction) {this._attraction = attraction;}
 
 	get position() {return this._position;}
-	setPosition(position) {this._position = position;}
+	set position(position) {this._position = position;}
 }

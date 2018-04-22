@@ -1,8 +1,8 @@
 import { TerrainObject } from "./TerrainObject.js"
 
 export class Start extends TerrainObject {
-	constructor(attraction, position) {
-		super(attraction, position);
+	constructor(position) {
+		super(0, position);
 		this._radius = 10;
 	}
 

@@ -1,10 +1,20 @@
 import { Screen } from "./Screen.js";
 import { Col } from "../displayer/Col.js";
+import { Row } from "../displayer/Row.js";
 import { Card } from "../displayer/Card.js";
 import { Title } from "../displayer/Title.js";
 import { RangeInput } from "../displayer/RangeInput.js";
 import { Button } from "../displayer/Button.js";
-import { TerrainConfigurator } from "../displayer/TerrainConfigurator.js";
+import { Toolbar } from "../displayer/Toolbar.js";
+//terrain configurator
+import { TerrainConfigurator } from "../displayer/TerrainConfigurator/TerrainConfigurator.js";
+import { MoveTerrainTool } from "../displayer/TerrainConfigurator/MoveTerrainTool.js";
+import { EraseTerrainTool } from "../displayer/TerrainConfigurator/EraseTerrainTool.js";
+import { PlaceTerrainTool } from "../displayer/TerrainConfigurator/PlaceTerrainTool.js";
+//terrain objects
+import { Start } from "../worker/Start.js";
+import { End } from "../worker/End.js";
+import { Planet } from "../worker/Planet.js";
 
 export class EditScreen extends Screen{
 
@@ -66,7 +76,25 @@ export class EditScreen extends Screen{
 		});
 		card.addChild(LaunchButton);
 		//terrain
+		let rightColRow = new Row();
+		rightCol.addChild(rightColRow);
+		let terrainConfCol = new Col(11,11,11,11);
+		let toolbarCol = new Col(1,1,1,1);
+		rightColRow.addChild(terrainConfCol);
+		rightColRow.addChild(toolbarCol);
 		this._terrainConf = new TerrainConfigurator();
-		rightCol.addChild(this._terrainConf);
-    }
+		terrainConfCol.addChild(this._terrainConf);
+		this._toolbar = new Toolbar();
+		toolbarCol.addChild(this._toolbar);
+		const tools = [
+			new MoveTerrainTool(this._terrainConf),
+			new EraseTerrainTool(this._terrainConf),
+			new PlaceTerrainTool(this._terrainConf,"play_arrow","start",Start),
+			new PlaceTerrainTool(this._terrainConf,"stop","stop",End),
+			new PlaceTerrainTool(this._terrainConf,"public","planet",Planet),
+		];
+		for(let tool of tools){
+			this._toolbar.addChild(tool.button);
+		}
+	}
 }
