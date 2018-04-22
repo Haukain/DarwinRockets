@@ -9,15 +9,15 @@ export class TerrainConfigurator extends CanvasWidget{
     this._tool = null;
     this._objects = [];
     this._canvas.addEventListener("mousedown",e=>{
-      this._objects = that._tool.downCallback(this._eventRelativeCoords(e),this._objects);
+      if(that._tool) this._objects = that._tool.downCallback(this._eventRelativeCoords(e),this._objects);
       this.draw();
     },false);
     this._canvas.addEventListener("mousemove",e=>{
-      this._objects = that._tool.moveCallback(this._eventRelativeCoords(e),this._objects);
+      if(that._tool) this._objects = that._tool.moveCallback(this._eventRelativeCoords(e),this._objects);
       this.draw();
     },false);
     this._canvas.addEventListener("mouseup",e=>{
-      this._objects = that._tool.upCallback(this._eventRelativeCoords(e),this._objects);
+      if(that._tool) this._objects = that._tool.upCallback(this._eventRelativeCoords(e),this._objects);
       this.draw();
     },false);
   }

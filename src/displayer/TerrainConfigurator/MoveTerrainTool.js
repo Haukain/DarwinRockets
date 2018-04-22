@@ -13,7 +13,7 @@ export class MoveTerrainTool extends TerrainTool{
       return o;
     };
     this._moveCallback = (p,o) =>{
-      for(let object of o.filter(d=>d.move).filter(d=>d.inHitBox(p.x,p.y))){
+      for(let object of o.filter(d=>d.move)){
         object.position.x += p.x - object.move.px;
         object.position.y += p.y - object.move.py;
         object.move.px = p.x;
