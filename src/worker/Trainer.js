@@ -44,10 +44,23 @@ export class Trainer {
 		this._com.send("newGen",newGen.toStructure());
 	}
 
-	async evaluateGen(g) {}
+	async evaluateGen(g) {
+		for(let r of g.rockets){
+			r.score = Math.random()*10 - 5; // a enlever
+		}
+	}
 
 	applyNauralSelection(g) {
 		// TODO: make it real
+		// g.rockets.sort(function(a,b){
+		// 	return a.score - b.score
+		// })
+		// let selectedRockets = [];
+		// for (let i = 0; i<g.rockets.length;i++){
+		// 	if(i<g.rockets.length/2){
+		// 		selectedRockets.push(g.rockets[i]);
+		// 	}
+		// }
 		return g.rockets;
 	}
 

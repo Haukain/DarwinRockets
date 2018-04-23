@@ -11,21 +11,38 @@ export class ChartScreen extends Screen{
         super(app,"grey");
         this._gen = gen;
 
-        //average score per generation chart
 		let c1 = new Col(6,6,6,6);
 		let c2 = new Col(6,6,6,6);
+		let c3 = new Col(6,6,6,6);
 		this._container.addChild(c1);
 		this._container.addChild(c2);
-		let scoreChart = new LineChartWidget('white', 'grey');
-		let datasetOne = scoreChart.addDataset("Score moyen par génération","#0011FC","#C2C6FA");
-		for(let gen of this._app.generations){scoreChart.addDataPoint(datasetOne,gen.getAverage());}
-		c1.addChild(scoreChart);
+		this._container.addChild(c3);
 
-		//moyenne de toutes les gen n-1 et gen n (2 triangles )
+		//average score per generation chart
+		let scoreChart1 = new LineChartWidget('white', 'grey');
+		let dataset1 = scoreChart1.addDataset("Average score per generation","#0011FC","#C2C6FA");
+		for(let gen of this._app.generations){scoreChart1.addDataPoint(dataset1,gen.getAverage());}
+		c1.addChild(scoreChart1);
+
+		//reste a coder le radarchart : parametres distance, speed et complexity
 		let radarChart = new RadarChartWidget('white', 'grey',["Distance","Speed","Complexity"]);
-		radarChart.addDataset("Génération actuelle",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
-		radarChart.addDataset("Génération parent",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
+		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
+		radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
 		c2.addChild(radarChart);
+
+		//score of the actual generation chart (code pas fini)
+		let scoreChart2 = new LineChartWidget('white', 'grey');
+		let dataset2 = scoreChart2.addDataset("Number of rockets the actual generation per score","#0011FC","#C2C6FA");
+		let max=this._app.currentGeneration.getMax();
+		let min=this._app.currentGeneration.getMin();
+		console.log(min);
+		console.log(max);
+		min=-10;
+		max=10;
+		let interval = (max-min)/10;
+		for(let i=min; i<max; i+=interval){
+			scoreChart2.addDataPoint(dataset2,this._app.currentGeneration.getInterval(i,i+interval));console.log(this._app.currentGeneration.getInterval(i,i+interval));}
+		c3.addChild(scoreChart2);
     }
 
 }

@@ -1,3 +1,4 @@
+import { Terrain } from "../../worker/Terrain.js";
 import { CanvasWidget } from "../CanvasWidget.js";
 
 export class TerrainConfigurator extends CanvasWidget{
@@ -50,5 +51,12 @@ export class TerrainConfigurator extends CanvasWidget{
       x :(pos.x - offset.left)*this._canvas.width/this._canvas.clientWidth,
       y :(pos.y - offset.top)*this._canvas.height/this._canvas.clientHeight,
     };
+  }
+  toTerrain(){
+    let t = new Terrain({width:this._canvas.width,height:this._canvas.height});
+    for(let object of this._objects){
+      t.addObject(object);
+    }
+    return t;
   }
 }
