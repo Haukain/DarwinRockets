@@ -1,17 +1,8 @@
-import { TerrainObject } from "./TerrainObject"
+import { RoundTerrainObject } from "./RoundTerrainObject.js"
 
-export class End extends TerrainObject {
-	constructor(attraction, position) {
-		super(attraction, position);
-		this._radius = 10;
-	}
-	inHitBox(x,y){
-		return (
-			x>this._position.x-this._radius &&
-			x<this._position.x+this._radius &&
-			y>this._position.y-this._radius &&
-			y<this._position.y+this._radius
-		);
+export class End extends RoundTerrainObject {
+	constructor(position) {
+		super(position,10);
 	}
 	draw(context) {
 		context.beginPath();

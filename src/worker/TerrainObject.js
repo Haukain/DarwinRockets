@@ -1,6 +1,8 @@
 export class TerrainObject {
-	constructor(attraction, position){
-		this._attraction = attraction||0;
+	static fromStructure(s){
+		return new TerrainObject(s.position);
+	}
+	constructor(position){
 		this._position = position||{x:0,y:0};
 	}
 
@@ -14,9 +16,13 @@ export class TerrainObject {
 		return false;
 	}
 
-	get attraction() {return this._attraction;}
-	setAttraction(attraction) {this._attraction = attraction;}
-
 	get position() {return this._position;}
 	set position(position) {this._position = position;}
+
+	toStructure(){
+		return {
+			type:this.constructor.toString()
+			position: this._position
+		}
+	}
 }
