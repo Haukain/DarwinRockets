@@ -1,7 +1,7 @@
 import { PhysicsPlanet } from "./PhysicsPlanet.js"
 import { RoundTerrainObject } from "./RoundTerrainObject.js"
 
-export class Planet extends TerrainObject {
+export class Planet extends RoundTerrainObject {
 	constructor(attraction, position, radius=30) {
 		super(position,radius);
 		this._attraction = attraction||0;

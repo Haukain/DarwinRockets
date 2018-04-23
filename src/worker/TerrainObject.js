@@ -21,7 +21,7 @@ export class TerrainObject {
 
 	toStructure(){
 		return {
-			type:this.constructor.toString()
+			type: this.constructor.name,
 			position: this._position
 		}
 	}

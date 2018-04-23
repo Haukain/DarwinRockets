@@ -1,6 +1,6 @@
 import { TerrainObject } from "./TerrainObject.js"
 
-export class Start extends TerrainObject {
+export class RoundTerrainObject extends TerrainObject {
 	constructor(position,radius) {
 		super(position);
 		this._radius = radius;
