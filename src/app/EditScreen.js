@@ -6,6 +6,7 @@ import { Title } from "../displayer/Title.js";
 import { RangeInput } from "../displayer/RangeInput.js";
 import { Button } from "../displayer/Button.js";
 import { Toolbar } from "../displayer/Toolbar.js";
+import { Alert } from "../dialogs/Alert.js";
 //terrain configurator
 import { TerrainConfigurator } from "../displayer/TerrainConfigurator/TerrainConfigurator.js";
 import { MoveTerrainTool } from "../displayer/TerrainConfigurator/MoveTerrainTool.js";
@@ -71,6 +72,11 @@ export class EditScreen extends Screen{
 		}
 		let LaunchButton = new Button("Launch Simulation","white");
 		LaunchButton.on("click",()=>{
+			let terrain = this._terrainConf.toTerrain();
+			if(!terrain.isValid()){
+				new Alert("Your terrain is invalid","Please make sure you have one start and one end.");
+				return;
+			}
 			this._app.initTrainer();
 			this._app.goSimulation();
 		});

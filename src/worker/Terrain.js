@@ -23,7 +23,15 @@ export class Terrain {
 		this._size = size;
 		this._objects = [];
 	}
-	testCollisions(r) {}
+	isValid() {
+		let startNumber = 0;
+		let endNumber = 0;
+		for(let object of this._objects){
+			if(object instanceof Start) startNumber++;
+			if(object instanceof End) endNumber++;
+		}
+		return startNumber==1 && endNumber==1;
+	}
 
 	addObject(object) {
 		this._objects.push(object);
