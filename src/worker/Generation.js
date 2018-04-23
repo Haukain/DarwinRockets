@@ -25,9 +25,23 @@ export class Generation {
 		return average;
 	}
 
-	getMax() {}
+	getInterval(score0,score1) {
+		let number = 0;
+		for(let r of this._rockets){if (r.score>=score0 && r.score<score1){number+=1};}
+		return number;
+	}
 
-	getMin() {}
+	getMax() {
+		let max = -1000000;
+		for(let r of this._rockets){if (r.score>max){max=r.score};}
+		return max;
+	}
+
+	getMin(){
+		let min = 1000000;
+		for(let r of this._rockets){if (r.score<min){min=r.score};}
+		return min;
+	}
 
 	addRocket(rocket) {
 		this._rockets.push(rocket);
