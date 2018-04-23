@@ -2,20 +2,19 @@
   "surv":{
     "name":"1. Survival of the fittest",
     "config":{
-     "commentary":" La survie du plus fort : 1 lorsque la distance sera effectuée, 0 dans le cas contraire ",
-     "populationSize" : 5,
-     "terrain":{},
-     "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-     "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-
+      "commentary":" The survival of the strongest: 1 when the distance will be made, 0 if not ",
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
+      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
+      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
   },
   "repro":{
     "name":"2. New with Old",
     "config":{
       "commentary":" ",
-      "populationSize" : 1,
-      "terrain":{},
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
       "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
@@ -24,8 +23,8 @@
     "name":"3. Random Mutation",
     "config":{
       "commentary":" ",
-      "populationSize" : 1,
-      "terrain":{},
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
       "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
@@ -34,8 +33,8 @@
     "name":"4. Replication Errors",
     "config":{
       "commentary":" ",
-      "populationSize" : 1,
-      "terrain":{},
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
       "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
@@ -44,8 +43,8 @@
     "name":"5. Harder",
     "config":{
       "commentary":"  ",
-      "populationSize" : 1,
-      "terrain":{},
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
       "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
@@ -54,8 +53,8 @@
     "name":"6. Simpler",
     "config":{
       "commentary":"  ",
-      "populationSize" : 1,
-      "terrain":{},
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
       "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
@@ -64,8 +63,8 @@
     "name":"7. Faster",
     "config":{
       "commentary":" ",
-      "populationSize" : 1,
-      "terrain":{},
+      "populationSize" : 30,
+      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
       "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
     }
