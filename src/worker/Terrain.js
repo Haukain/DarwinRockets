@@ -1,6 +1,22 @@
+import { Start } from './Start.js';
+import { End } from './End.js';
+import { Planet } from './Planet.js';
+import { BlackHole } from './BlackHole.js';
+
+
+let constructors={
+	"Start":Start,
+	"End":End,
+	"Planet":Planet,
+	"BlackHole":BlackHole
+}
 export class Terrain {
 	static fromStructure(s){
-		return new Terrain(); // TODO: make that correctly
+		let t=new Terrain(s.size);
+		for(let object of s.objects){
+			t.addObject(constructors[object.type].fromStructure(s));
+		}
+		return t;
 	}
 	constructor(size){
 		size = size||{width:1920,height:1080};
@@ -19,6 +35,9 @@ export class Terrain {
 	get objects() {return this._objects;}
 
 	toStructure(){
-		return {};
+		return {
+			size:this._size,
+			objects:this._objects.map(o=>o.toStructure())
+		};
 	}
 }
