@@ -12,7 +12,7 @@ export class Screen{
       this._container.destroy();
     	delete this._container;
 			delete this._app;
-    	console.log("destroyed");
+    	
     }
 
     get container(){return this._container;}
