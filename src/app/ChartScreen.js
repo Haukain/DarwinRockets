@@ -18,10 +18,17 @@ export class ChartScreen extends Screen{
 		this._container.addChild(c2);
 		this._container.addChild(c3);
 
-		//average score per generation chart
+		//average score per generation chart (code pas fini)
 		let scoreChart1 = new LineChartWidget('white', 'grey');
 		let dataset1 = scoreChart1.addDataset("Average score per generation","#0011FC","#C2C6FA");
-		for(let gen of this._app.generations){scoreChart1.addDataPoint(dataset1,gen.getAverage());}
+		let n = 0;
+
+		for(let gen of this._app.generations){
+			if(gen == this._app.currentGeneration){break;}
+			if(n>150){if(n%10==0){scoreChart1.addDataPoint(dataset1,[{x : 100, y : gen.getAverage()}]);}}
+			else{scoreChart1.addDataPoint(dataset1,gen.getAverage());}
+			n++;
+		}
 		c1.addChild(scoreChart1);
 
 		//reste a coder le radarchart : parametres distance, speed et complexity
