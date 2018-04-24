@@ -51,17 +51,11 @@ export class Trainer {
 	}
 
 	applyNauralSelection(g) {
-		// TODO: make it real
-		// g.rockets.sort(function(a,b){
-		// 	return a.score - b.score
-		// })
-		// let selectedRockets = [];
-		// for (let i = 0; i<g.rockets.length;i++){
-		// 	if(i<g.rockets.length/2){
-		// 		selectedRockets.push(g.rockets[i]);
-		// 	}
-		// }
-		return g.rockets;
+		// TODO: ajouter random
+		let selectedRockets = g.rockets.sort(function(a,b){
+			return b.score - a.score
+		}).splice(0,Math.ceil(g.rockets.length/2));
+		return selectedRockets;
 	}
 
 	reproduce(p1,p2) {
