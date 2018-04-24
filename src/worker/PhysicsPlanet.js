@@ -5,8 +5,12 @@ export class PhysicsPlanet extends PhysicsObstacle{
 		super(position,radius);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	createObject(position,radius) {
+=======
+	
+>>>>>>> parent of 2ced1cb... Bêtise réparée
 		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true})
 =======
 	createObject(position,radius){
