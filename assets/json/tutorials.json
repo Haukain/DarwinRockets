@@ -2,7 +2,7 @@
   "surv":{
     "name":"1. Survival of the fittest",
     "config":{
-      "commentary":" The survival of the strongest: 1 when the distance will be made, 0 if not ",
+      "commentary":" The survival of the highest: 1 when the distance will be made, 0 if no. Reproduction has no purposes",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
@@ -12,7 +12,7 @@
   "repro":{
     "name":"2. New with Old",
     "config":{
-      "commentary":" ",
+      "commentary":" Adds more interest ",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
@@ -22,7 +22,7 @@
   "mut":{
     "name":"3. Random Mutation",
     "config":{
-      "commentary":" ",
+      "commentary":" Mutations are random for all generations ",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
@@ -32,7 +32,7 @@
   "varia":{
     "name":"4. Replication Errors",
     "config":{
-      "commentary":" ",
+      "commentary":" Reactor cloning ",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
@@ -42,7 +42,7 @@
   "harder":{
     "name":"5. Harder",
     "config":{
-      "commentary":"  ",
+      "commentary":" The field is harder, more complex ",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
@@ -52,7 +52,7 @@
   "simpler":{
     "name":"6. Simpler",
     "config":{
-      "commentary":"  ",
+      "commentary":" Prioritize the rockets not complex, malus for complexity ",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
@@ -62,7 +62,7 @@
   "faster":{
     "name":"7. Faster",
     "config":{
-      "commentary":" ",
+      "commentary":" The fastest possible ",
       "populationSize" : 30,
       "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
       "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },

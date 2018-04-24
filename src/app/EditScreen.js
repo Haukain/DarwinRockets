@@ -72,8 +72,7 @@ export class EditScreen extends Screen{
 		}
 		let LaunchButton = new Button("Launch Simulation","white");
 		LaunchButton.on("click",()=>{
-			let terrain = this._terrainConf.toTerrain();
-			if(!terrain.isValid()){
+			if(!this._terrainConf.terrain.isValid()){
 				new Alert("Your terrain is invalid","Please make sure you have one start and one end.");
 				return;
 			}
@@ -88,7 +87,7 @@ export class EditScreen extends Screen{
 		let toolbarCol = new Col(1,1,1,1);
 		rightColRow.addChild(terrainConfCol);
 		rightColRow.addChild(toolbarCol);
-		this._terrainConf = new TerrainConfigurator();
+		this._terrainConf = new TerrainConfigurator(this._app.configuration.terrain);
 		terrainConfCol.addChild(this._terrainConf);
 		this._toolbar = new Toolbar();
 		toolbarCol.addChild(this._toolbar);

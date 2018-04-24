@@ -41,6 +41,7 @@ export class Terrain {
 	set size(size) {this._size = size;}
 
 	get objects() {return this._objects;}
+	set objects(o) {this._objects=o;}
 
 	toStructure(){
 		return {
