@@ -10,6 +10,7 @@ import { WorkerCommander } from "../worker/WorkerCommander.js";
 import Worker from 'worker-loader!../worker/Worker.js';
 export class App{
   constructor(el) {
+    this._DEBUG = true;
     let that = this;
     this._generations=[];
     this._header = new Header(this);
@@ -51,19 +52,19 @@ export class App{
     this._currentScreen = new StartScreen(this);
     this._state = "start";
     this._header.hideButtons();
-    history.pushState({fake: true},"Darwin Rockets","start.html");
+    if(!this._DEBUG)history.pushState({fake: true},"Darwin Rockets","start.html");
   }
   goEdit() {
     this._currentScreen = new EditScreen(this);
     this._state = "edit";
     this._header.hideButtons();
-    history.pushState({fake: true},"Edit config","edit.html");
+    if(!this._DEBUG)history.pushState({fake: true},"Edit config","edit.html");
   }
   goSimulation() {
     this._currentScreen = new GridScreen(this,this._currentGeneration);
     this._state = "gen";
     this._header.showButtons();
-    history.pushState({fake: true},"Simulation screen","gen.html");
+    if(!this._DEBUG)history.pushState({fake: true},"Simulation screen","gen.html");
   }
   goChart() {
     console.log("going edit");
@@ -71,7 +72,7 @@ export class App{
     this._currentScreen = new ChartScreen(this,this._currentGeneration);
     this._state = "chart";
     this._header.showButtons();
-    history.pushState({fake: true},"chart screen","chart.html");
+    if(!this._DEBUG)history.pushState({fake: true},"chart screen","chart.html");
   }
   //trainer interface
   initTrainer(){
@@ -134,4 +135,5 @@ export class App{
   get currentGeneration(){
     return this._currentGeneration;
   }
+  get DEBUG(){return this._DEBUG;}
 }
