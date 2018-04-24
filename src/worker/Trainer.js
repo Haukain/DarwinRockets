@@ -53,8 +53,10 @@ export class Trainer {
 	applyNauralSelection(g) {
 		// TODO: ajouter random
 		let selectedRockets = g.rockets.sort(function(a,b){
-			return b.score - a.score
-		}).splice(0,Math.ceil(g.rockets.length/2));
+			return b.score - a.score;
+		}).slice(0,Math.ceil(g.rockets.length/2));
+		console.log(g.rockets);
+		console.log(selectedRockets);
 		return selectedRockets;
 	}
 
