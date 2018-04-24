@@ -12,7 +12,7 @@ export class PhysicsObstacle{
 	}
 
 	get object(){return this._object;}
-	get position(){return this._position;}
+	get position(){return this._object.position;}
 	get radius(){return this._radius;}
 
 	applyGravitation(rocket){

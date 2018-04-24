@@ -1,5 +1,7 @@
 import { Reactor } from "./worker/Reactor.js";
 import { Rocket } from "./worker/Rocket.js";
+import { Planet } from "./worker/Planet.js";
+import { BlackHole } from "./worker/BlackHole";
 import { PhysicsPlanet } from './worker/PhysicsPlanet.js';
 import { PhysicsBlackHole } from './worker/PhysicsBlackHole.js';
 
@@ -53,14 +55,21 @@ World.add(engine.world, [physicsRocket.object]);
 
 // obstacle creation
 let obstacle = [];
-for(let i = 0; i<4; i++){
-  obstacle.push(new PhysicsPlanet({x:Math.random()*screenWidth,y:Math.random()*screenHeight},40));
-}
-obstacle.push(new PhysicsBlackHole({x:Math.random()*screenWidth,y:Math.random()*screenHeight},20));
+let physicsObstacle = [];
 
-for(let o of obstacle){
+for(let i = 0; i<4; i++){
+  let p = new Planet({x:Math.random()*screenWidth,y:Math.random()*screenHeight},40);
+  obstacle.push(p);
+  physicsObstacle.push(p.createPhysicsObject());
+}
+let b = new BlackHole({x:Math.random()*screenWidth,y:Math.random()*screenHeight},20);
+obstacle.push(b);
+physicsObstacle.push(b.createPhysicsObject());
+
+for(let o of physicsObstacle){
   World.add(engine.world, o.object);
 }
+
 
 
 // check for collisions
@@ -86,7 +95,7 @@ Matter.Events.on(engine, 'collisionActive', function(event) {
 Events.on(engine, "beforeUpdate",e=>{
       time += 1;
       physicsRocket.applyThrusts(time);
-      for(let o of obstacle){
+      for(let o of physicsObstacle){
         o.applyGravitation(physicsRocket);
       }
 })
@@ -123,10 +132,10 @@ Engine.run(engine);
 
 
     //Render Obstacles
-    for(let o of obstacle){
+    for(let i = 0; i<obstacle.length; i++){
       context.save();
-      context.translate(o.position.x,o.position.y);
-      o.draw(context);
+      context.translate(physicsObstacle[i].position.x,physicsObstacle[i].position.y);
+      obstacle[i].draw(context);
       context.restore();
     }
 
