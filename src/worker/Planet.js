@@ -1,4 +1,4 @@
-import { PhysicsPlanet } from "./PhysicsPlanet.js"
+import { PhysicsPlanet } from "./physics/PhysicsPlanet.js"
 import { RoundTerrainObject } from "./RoundTerrainObject.js"
 
 export class Planet extends RoundTerrainObject {

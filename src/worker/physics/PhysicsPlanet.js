@@ -1,19 +1,19 @@
-import { PhysicsRocket } from './PhysicsRocket.js';
+import { PhysicsObject } from "./PhysicsObject.js"
 
-export class PhysicsObstacle{
+export class PhysicsPlanet extends PhysicsObject{
 	constructor(position,radius){
-		if (new.target === PhysicsObstacle) {
-	      throw new TypeError("PhysicsObstacle is an abstract class"); //Abstract error
-	    }
-		this._position = position;
-		this._radius = radius;
-		this._object;
-		this.createObject(position,radius);
+		super(position,radius);
 	}
 
-	get object(){return this._object;}
-	get position(){return this._object.position;}
-	get radius(){return this._radius;}
+	createObject(position,radius){
+		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true})
+		Matter.Body.setDensity(this._object,0.005);
+		this._object.label = "planet";
+	}
+
+	update(rockets){
+		for(let rocket of rockets) this.applyGravitation(rocket);
+	}
 
 	applyGravitation(rocket){
 		let distanceSquared = Math.pow(this._object.position.x - rocket.object.position.x,2) + Math.pow(this._object.position.y - rocket.object.position.y,2)

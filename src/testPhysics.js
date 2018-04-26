@@ -2,8 +2,6 @@ import { Reactor } from "./worker/Reactor.js";
 import { Rocket } from "./worker/Rocket.js";
 import { Planet } from "./worker/Planet.js";
 import { BlackHole } from "./worker/BlackHole";
-import { PhysicsPlanet } from './worker/PhysicsPlanet.js';
-import { PhysicsBlackHole } from './worker/PhysicsBlackHole.js';
 
 // module aliases
 var Engine = Matter.Engine,

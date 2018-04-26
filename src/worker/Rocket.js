@@ -1,5 +1,5 @@
 import { Reactor } from "./Reactor.js";
-import { PhysicsRocket } from "./PhysicsRocket.js";
+import { PhysicsRocket } from "./physics/PhysicsRocket.js";
 
 export class Rocket {
 	static random(maxR){

@@ -1,4 +1,4 @@
-import { PhysicsBlackHole } from "./PhysicsBlackHole.js"
+import { PhysicsBlackHole } from "./physics/PhysicsBlackHole.js"
 import { Planet } from "./Planet.js"
 
 export class BlackHole extends Planet {
