@@ -30,6 +30,8 @@ export class PhysicsRocket{
 	get body(){return this._body;}
 	get reactors(){return this._reactors};
 	get object(){return this._object;}
+	get position(){return this._object.position;}
+	get angle(){return this._object.angle;}
 
 	setPosition(position){
 		Matter.Body.setPosition(this._object,position);
@@ -67,6 +69,9 @@ export class PhysicsRocket{
 		for(let reactor of this._reactors){
 			 reactor.applyThrust(this);
 		}
+	}
+	update(time,objects){
+		this.applyThrusts(time);
 	}
 
 	draw(ctx){

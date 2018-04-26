@@ -1,18 +1,15 @@
-import { PhysicsObject } from "./PhysicsObject.js"
+import { RoundPhysicsObject } from "./RoundPhysicsObject.js"
+import { PhysicsRocket } from "./PhysicsRocket.js"
 
-export class PhysicsPlanet extends PhysicsObject{
+export class PhysicsPlanet extends RoundPhysicsObject{
 	constructor(position,radius){
 		super(position,radius);
-	}
-
-	createObject(position,radius){
-		this._object = Matter.Bodies.circle(position.x,position.y,radius,{isStatic : true})
 		Matter.Body.setDensity(this._object,0.005);
 		this._object.label = "planet";
 	}
 
-	update(rockets){
-		for(let rocket of rockets) this.applyGravitation(rocket);
+	update(time,objects){
+		for(let rocket of objects.filter(o=>o instanceof PhysicsRocket)) this.applyGravitation(rocket);
 	}
 
 	applyGravitation(rocket){
