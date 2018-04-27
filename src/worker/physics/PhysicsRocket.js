@@ -33,7 +33,7 @@ export class PhysicsRocket{
 	get position(){return this._object.position;}
 	get angle(){return this._object.angle;}
 
-	setPosition(position){
+	set position(position){
 		Matter.Body.setPosition(this._object,position);
 	}
 
