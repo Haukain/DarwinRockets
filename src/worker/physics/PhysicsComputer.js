@@ -50,7 +50,9 @@ export class PhysicsComputer {
 		Matter.Engine.update(this._engine);
 	}
 
-	isEnded() {}
+	isEnded() { // TODO: finish
+		return false;
+	}
 
 	get simDuration() {return this._simDuration;}// read only
 

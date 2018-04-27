@@ -4,6 +4,7 @@ import { StartScreen } from "./StartScreen.js";
 import { EditScreen } from "./EditScreen.js";
 import { GridScreen } from "./GridScreen.js";
 import { ChartScreen } from "./ChartScreen.js";
+import { PhysicsDisplayer } from "../displayer/PhysicsDisplayer.js";
 import { Generation } from "../worker/Generation.js";
 import { Configuration } from "../worker/Configuration.js";
 import { WorkerCommander } from "../worker/WorkerCommander.js";
@@ -103,8 +104,9 @@ export class App{
     this._header.updateGen();
   }
 
-  displayRocket(rocket){
-    console.log(`displaying rocket`);
+  displayRockets(rockets){
+    let displayer = new PhysicsDisplayer(this._configuration.terrain,rockets);
+    document.body.appendChild(displayer.element);
   }
   selectTutorial(t){
     this._configuration = Configuration.fromStructure(t.config);

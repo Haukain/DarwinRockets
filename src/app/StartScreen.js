@@ -14,7 +14,7 @@ export class StartScreen extends Screen{
 		super(app,"navyblue");
 		let that = this;
 		//background parallax
-		this._background = new parallaxSVG("./assets/svg/background.svg",100);
+		this._background = new ParallaxSVG("./assets/svg/background.svg",100);
 		this._container.addChild(this._background);
 		//centered row
 		this._centerer = new CenteredRow();

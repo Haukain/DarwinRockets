@@ -1,8 +1,12 @@
 import { RoundTerrainObject } from "./RoundTerrainObject.js"
+import { PhysicsEnd } from "./physics/PhysicsEnd.js"
 
 export class End extends RoundTerrainObject {
 	constructor(position) {
 		super(position,10);
+	}
+	createPhysicsObject() {
+		return new PhysicsEnd(this._position);
 	}
 	draw(context) {
 		context.beginPath();

@@ -12,7 +12,7 @@ export class GridScreen extends Screen{
         for (let i of this._gen.rockets){
             let rocketViewer = new RocketViewer(i);
             rocketViewer.on("click",()=>{
-                this._app.displayRocket(i);
+                this._app.displayRockets([i]);
             });
             let col = new Col(3,2,1,1);
             col.addChild(rocketViewer);
