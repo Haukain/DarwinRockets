@@ -1,6 +1,6 @@
 import { Widget } from "./Widget.js";
 
-export class parallaxSVG extends Widget{
+export class ParallaxSVG extends Widget{
   constructor(src,dist) {
     super();
     this._element.className = "parallaxContainer";

@@ -6,7 +6,7 @@ import { Row } from "../displayer/Row.js";
 import { CenteredRow } from "../displayer/CenteredRow.js";
 import { Col } from "../displayer/Col.js";
 import { ImageWidget } from "../displayer/ImageWidget.js";
-import { parallaxSVG } from "../displayer/parallaxSVG.js";
+import { ParallaxSVG } from "../displayer/ParallaxSVG.js";
 
 
 export class StartScreen extends Screen{
