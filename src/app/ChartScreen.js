@@ -18,19 +18,30 @@ export class ChartScreen extends Screen{
 		this._container.addChild(c2);
 		this._container.addChild(c3);
 
-		//average score per generation chart (code pas fini)
+
+		//average score per generation chart
 		let scoreChart1 = new LineChartWidget('white', 'grey');
 		let dataset1 = scoreChart1.addDataset("Average score per generation","#0011FC","#C2C6FA");
-		let n = 0;
+		let numberCurrentGen = 0;
+		for(let gen of this._app.generations){numberCurrentGen++;if(gen == this._app.currentGeneration){break;}}
+		let nGen = 0;
+		let nPointsOnXAxis = 30;
 
-		for(let gen of this._app.generations){
-			if(gen == this._app.currentGeneration){break;}
-			if(n>150){if(n%10==0){scoreChart1.addDataPoint(dataset1,[{x : 100, y : gen.getAverage()}]);}}
-			else{scoreChart1.addDataPoint(dataset1,gen.getAverage());}
-			n++;
-		}
+		if(numberCurrentGen<nPointsOnXAxis){
+			for(let gen of this._app.generations){
+				if(gen == this._app.currentGeneration){scoreChart1.addDataPoint(dataset1,nGen+1,gen.getAverage());break;}
+				nGen++;
+				scoreChart1.addDataPoint(dataset1,nGen,gen.getAverage());}}
+
+		if(numberCurrentGen>=nPointsOnXAxis){
+			for(let gen of this._app.generations){
+				if(gen == this._app.currentGeneration){scoreChart1.addDataPoint(dataset1,nGen+1,gen.getAverage());break;}
+				nGen++;
+				if(nGen%parseInt(numberCurrentGen/nPointsOnXAxis)==0){scoreChart1.addDataPoint(dataset1,nGen,gen.getAverage());}}}
+
 		c1.addChild(scoreChart1);
 
+		
 		//reste a coder le radarchart : parametres distance, speed et complexity
 		let radarChart = new RadarChartWidget('white', 'grey',["Distance","Speed","Complexity"]);
 		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
