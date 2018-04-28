@@ -44,8 +44,8 @@ export class ChartScreen extends Screen{
 
 		
 		//reste a coder le radarchart : parametres distance, speed et complexity
-		let radarChart = new RadarChartWidget('white', 'grey',["Distance","Speed","Complexity"]);
-		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
+		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (1=target)","Speed","Complexity (number of reactors)"]);
+		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[1,0,Math.random()]);
 		radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
 		c2.addChild(radarChart);
 
@@ -53,17 +53,19 @@ export class ChartScreen extends Screen{
 		//score of the actual generation bar chart
 		let barChart = new BarChartWidget('white', 'grey');
 		let dataset2 = barChart.addDataset("Number of rockets of the actual generation per score","#0011FC","#C2C6FA");
-		let max=parseInt(this._app.currentGeneration.getMax());
-		let min=parseInt(this._app.currentGeneration.getMin());
+		let max=precisionRound(this._app.currentGeneration.getMax(),1);
+		let min=precisionRound(this._app.currentGeneration.getMin(),1);
 		let interval = (max-min)/10;
 
-		for(let i=min+(interval/2); i<max; i+=interval){
+		for(let i=min-(interval/2); i<max+(interval/2); i+=interval){
 			if(i<0 && i+interval>0){
 				barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+"0"+"]",this._app.currentGeneration.getInterval(i,0));
 				barChart.addDataPoint(dataset2,"["+"0"+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(0,i+interval));
 				i=i+interval;}
 			barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(i,i+interval));}
-
+		console.log(min);
+		console.log(max);
+		console.log(this._app.currentGeneration);
 		c3.addChild(barChart);
     }
 

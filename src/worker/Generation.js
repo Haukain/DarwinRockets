@@ -27,7 +27,7 @@ export class Generation {
 
 	getInterval(score0,score1) {
 		let number = 0;
-		for(let r of this._rockets){if (r.score>=score0 && r.score<score1){number+=1};}
+		for(let r of this._rockets){if (r.score>=score0 && r.score<score1){number+=1}}
 		return number;
 	}
 
