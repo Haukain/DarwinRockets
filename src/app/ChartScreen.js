@@ -30,23 +30,23 @@ export class ChartScreen extends Screen{
 
 		if(numberCurrentGen<nPointsOnXAxis){
 			for(let gen of this._app.generations){
-				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverage());break;}
+				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverageScore());break;}
 				nGen++;
-				scoreChart.addDataPoint(dataset1,nGen,gen.getAverage());}}
+				scoreChart.addDataPoint(dataset1,nGen,gen.getAverageScore());}}
 
 		if(numberCurrentGen>=nPointsOnXAxis){
 			for(let gen of this._app.generations){
-				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverage());break;}
+				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverageScore());break;}
 				nGen++;
-				if(nGen%parseInt(numberCurrentGen/nPointsOnXAxis)==0){scoreChart.addDataPoint(dataset1,nGen,gen.getAverage());}}}
+				if(nGen%parseInt(numberCurrentGen/nPointsOnXAxis)==0){scoreChart.addDataPoint(dataset1,nGen,gen.getAverageScore());}}}
 
 		c1.addChild(scoreChart);
 
 		
-		//reste a coder le radarchart : parametres distance, speed et complexity
+		//reste a coder les parametres proximity et speed
 		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (1=target)","Speed","Complexity (number of reactors)"]);
-		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[1,0,Math.random()]);
-		radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
+		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[1,0,this._app.generations[numberCurrentGen].getAverageReactors()]);
+		radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),this._app.generations[numberCurrentGen-1].getAverageReactors()]);
 		c2.addChild(radarChart);
 
 

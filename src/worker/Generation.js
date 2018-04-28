@@ -18,9 +18,16 @@ export class Generation {
 		this._rockets = [];
 	}
 
-	getAverage() {
+	getAverageScore() {
 		let sum = 0;
 		for(let r of this._rockets){sum += r.score;}
+		let average = sum/this._rockets.length;
+		return average;
+	}
+
+	getAverageReactors() {
+		let sum = 0;
+		for(let r of this._rockets){sum += r.reactors.length;}
 		let average = sum/this._rockets.length;
 		return average;
 	}
