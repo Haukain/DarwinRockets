@@ -3,6 +3,7 @@ import { Col } from "../displayer/Col.js";
 import { ChartWidget } from "../displayer/ChartWidget.js";
 import { Row } from "../displayer/Row.js";
 import { LineChartWidget } from "../displayer/LineChartWidget.js";
+import { BarChartWidget } from "../displayer/BarChartWidget.js";
 import { RadarChartWidget } from "../displayer/RadarChartWidget.js";
 import { Generation } from "../worker/Generation.js";
 
@@ -20,8 +21,8 @@ export class ChartScreen extends Screen{
 
 
 		//average score per generation chart
-		let scoreChart1 = new LineChartWidget('white', 'grey');
-		let dataset1 = scoreChart1.addDataset("Average score per generation","#0011FC","#C2C6FA");
+		let scoreChart = new LineChartWidget('white', 'grey');
+		let dataset1 = scoreChart.addDataset("Average score per generation","#0011FC","#C2C6FA");
 		let numberCurrentGen = 0;
 		for(let gen of this._app.generations){numberCurrentGen++;if(gen == this._app.currentGeneration){break;}}
 		let nGen = 0;
@@ -29,17 +30,17 @@ export class ChartScreen extends Screen{
 
 		if(numberCurrentGen<nPointsOnXAxis){
 			for(let gen of this._app.generations){
-				if(gen == this._app.currentGeneration){scoreChart1.addDataPoint(dataset1,nGen+1,gen.getAverage());break;}
+				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverage());break;}
 				nGen++;
-				scoreChart1.addDataPoint(dataset1,nGen,gen.getAverage());}}
+				scoreChart.addDataPoint(dataset1,nGen,gen.getAverage());}}
 
 		if(numberCurrentGen>=nPointsOnXAxis){
 			for(let gen of this._app.generations){
-				if(gen == this._app.currentGeneration){scoreChart1.addDataPoint(dataset1,nGen+1,gen.getAverage());break;}
+				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverage());break;}
 				nGen++;
-				if(nGen%parseInt(numberCurrentGen/nPointsOnXAxis)==0){scoreChart1.addDataPoint(dataset1,nGen,gen.getAverage());}}}
+				if(nGen%parseInt(numberCurrentGen/nPointsOnXAxis)==0){scoreChart.addDataPoint(dataset1,nGen,gen.getAverage());}}}
 
-		c1.addChild(scoreChart1);
+		c1.addChild(scoreChart);
 
 		
 		//reste a coder le radarchart : parametres distance, speed et complexity
@@ -48,19 +49,22 @@ export class ChartScreen extends Screen{
 		radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),Math.random()]);
 		c2.addChild(radarChart);
 
-		//score of the actual generation chart (code pas fini)
-		let scoreChart2 = new LineChartWidget('white', 'grey');
-		let dataset2 = scoreChart2.addDataset("Number of rockets the actual generation per score","#0011FC","#C2C6FA");
-		let max=this._app.currentGeneration.getMax();
-		let min=this._app.currentGeneration.getMin();
-		console.log(min);
-		console.log(max);
-		min=-10;
-		max=10;
+
+		//score of the actual generation bar chart
+		let barChart = new BarChartWidget('white', 'grey');
+		let dataset2 = barChart.addDataset("Number of rockets of the actual generation per score","#0011FC","#C2C6FA");
+		let max=parseInt(this._app.currentGeneration.getMax());
+		let min=parseInt(this._app.currentGeneration.getMin());
 		let interval = (max-min)/10;
-		for(let i=min; i<max; i+=interval){
-			scoreChart2.addDataPoint(dataset2,this._app.currentGeneration.getInterval(i,i+interval));console.log(this._app.currentGeneration.getInterval(i,i+interval));}
-		c3.addChild(scoreChart2);
+
+		for(let i=min+(interval/2); i<max; i+=interval){
+			if(i<0 && i+interval>0){
+				barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+"0"+"]",this._app.currentGeneration.getInterval(i,0));
+				barChart.addDataPoint(dataset2,"["+"0"+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(0,i+interval));
+				i=i+interval;}
+			barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(i,i+interval));}
+
+		c3.addChild(barChart);
     }
 
 }
@@ -69,4 +73,8 @@ function randomChar(){
 }
 function randomColor(a){
   return `rgba(${randomChar()},${randomChar()},${randomChar()},${a})`
+}
+function precisionRound(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
 }
