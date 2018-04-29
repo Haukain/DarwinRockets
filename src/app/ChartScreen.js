@@ -43,16 +43,16 @@ export class ChartScreen extends Screen{
 		c1.addChild(scoreChart);
 
 		
-		//reste a coder les parametres proximity et speed
+		//radar chart : reste a coder les parametres proximity et speed
 		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (1=target)","Speed","Complexity (number of reactors)"]);
-		radarChart.addDataset("Actual generation",randomColor(1),randomColor(.2),[1,0,this._app.generations[numberCurrentGen].getAverageReactors()]);
-		radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),this._app.generations[numberCurrentGen-1].getAverageReactors()]);
+		radarChart.addDataset("Current generation",randomColor(1),randomColor(.2),[1,0,this._app.generations[numberCurrentGen-1].getAverageReactors()]);
+		if(numberCurrentGen!=1){radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),this._app.generations[numberCurrentGen-2].getAverageReactors()]);}
 		c2.addChild(radarChart);
 
 
-		//score of the actual generation bar chart
+		//score of the current generation bar chart
 		let barChart = new BarChartWidget('white', 'grey');
-		let dataset2 = barChart.addDataset("Number of rockets of the actual generation per score","#0011FC","#C2C6FA");
+		let dataset2 = barChart.addDataset("Number of rockets of the current generation per score","#0011FC","#C2C6FA");
 		let max=precisionRound(this._app.currentGeneration.getMax(),1);
 		let min=precisionRound(this._app.currentGeneration.getMin(),1);
 		let interval = (max-min)/10;
@@ -63,9 +63,7 @@ export class ChartScreen extends Screen{
 				barChart.addDataPoint(dataset2,"["+"0"+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(0,i+interval));
 				i=i+interval;}
 			barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(i,i+interval));}
-		console.log(min);
-		console.log(max);
-		console.log(this._app.currentGeneration);
+
 		c3.addChild(barChart);
     }
 

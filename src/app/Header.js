@@ -1,6 +1,7 @@
 import { Navbar } from "../displayer/navbar/Navbar.js";
 import { NavbarItem } from "../displayer/navbar/NavbarItem.js";
 import { IconButton } from "../displayer/IconButton.js";
+import { Text } from "../displayer/Text.js";
 import { RangeInput } from "../displayer/RangeInput.js";
 import { NumericPrompt } from "../dialogs/NumericPrompt.js";
 import { Alert } from "../dialogs/Alert.js";
@@ -30,19 +31,26 @@ export class Header{
     });
     //help Button
     this._addButton("help_outline","help",e=>{new Alert("Not yet written :/","sorry.")});
-    //generation range
+    
+    //generation range and text which indicates the current generation
     let genItem = new NavbarItem();
-    this._genRange = new RangeInput("generation");
+    let genItem2 = new NavbarItem();
+    let numberCurrentGenText = new Text("1");
+    this._genRange = new RangeInput("Generations");
     this._genRange.min=1;
     this._genRange.step=1;
     this._genRange.value=1;
     this._genRange.on("change",()=>{
       that._app.selectGeneration(that._app.generations[this._genRange.value-1]);
+      numberCurrentGenText = new Text("Current generation : "+String(this._genRange.value));
+      genItem2.destroy();
+      genItem2.addChild(numberCurrentGenText);
     });
     this.updateGen();
 
     genItem.addChild(this._genRange);
     this.container.addChild(genItem);
+    this.container.addChild(genItem2);
   }
   _addButton(icon,label,action){
     let item = new NavbarItem();
