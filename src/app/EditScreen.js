@@ -80,6 +80,15 @@ export class EditScreen extends Screen{
 			this._app.goSimulation();
 		});
 		card.addChild(LaunchButton);
+		let exportButton = new Button("Export Structure","pink");
+		exportButton.on("click",()=>{
+			if(!this._terrainConf.terrain.isValid()){
+				new Alert("Your terrain is invalid","Please make sure you have one start and one end.");
+				return;
+			}
+			console.log(JSON.stringify(this._app.configuration.toStructure()));
+		});
+		if(this._app.DEBUG)card.addChild(exportButton);
 		//terrain
 		let rightColRow = new Row();
 		rightCol.addChild(rightColRow);

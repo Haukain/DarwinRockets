@@ -1,4 +1,23 @@
 {
+  "DEBUG1":{
+    "name":"test 1",
+    "config":{
+      "commentary":"",
+      "populationSize":100,
+      "terrain":{
+        "size":{"width":1920,"height":1080},
+        "objects":[
+          {"type":"Start","position":{"x":993.813169984686,"y":950.5177111716621}},
+          {"type":"End","position":{"x":364.59418070444104,"y":323.7057220708447}},
+          {"type":"Planet","position":{"x":329.31087289433384,"y":344.3051771117166},"radius":30},
+          {"type":"Planet","position":{"x":338.13169984686067,"y":273.6784741144414},"radius":30},
+          {"type":"Planet","position":{"x":396.93721286370595,"y":285.449591280654},"radius":30}
+        ]
+      },
+      "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0,"randomMutationRate":0},
+      "fitnessFunction":{"remainingDistanceFactor":-1,"completionTimeFactor":0,"traveledDistanceFactor":0,"complexityFactor":0}
+    }
+  },
   "surv":{
     "name":"1. Survival of the fittest",
     "config":{
