@@ -24,25 +24,23 @@ export class ChartScreen extends Screen{
 		let scoreChart = new LineChartWidget('white', 'grey');
 		let dataset1 = scoreChart.addDataset("Average score per generation","#0011FC","#C2C6FA");
 		let numberCurrentGen = 0;
-		for(let gen of this._app.generations){numberCurrentGen++;if(gen == this._app.currentGeneration){break;}}
+		for(let gen of this._app.generations){numberCurrentGen++;if(gen == this._app.currentGeneration)break;}
 		let nGen = 0;
 		let nPointsOnXAxis = 30;
-
-		if(numberCurrentGen<nPointsOnXAxis){
-			for(let gen of this._app.generations){
-				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverageScore());break;}
-				nGen++;
-				scoreChart.addDataPoint(dataset1,nGen,gen.getAverageScore());}}
-
-		if(numberCurrentGen>=nPointsOnXAxis){
-			for(let gen of this._app.generations){
-				if(gen == this._app.currentGeneration){scoreChart.addDataPoint(dataset1,nGen+1,this._app.currentGeneration.getAverageScore());break;}
-				nGen++;
-				if(nGen%parseInt(numberCurrentGen/nPointsOnXAxis)==0){scoreChart.addDataPoint(dataset1,nGen,gen.getAverageScore());}}}
+		let pitch = Math.floor(numberCurrentGen/nPointsOnXAxis);
+		for(let gen of this._app.generations)console.log(gen.getAverageScore());
+		for(let gen of this._app.generations){
+			nGen++;
+			//if(fiew generations, gen in pitch, gen is the current gen)
+			if(numberCurrentGen<nPointsOnXAxis||nGen%pitch==0||gen == this._app.currentGeneration){
+				scoreChart.addDataPoint(dataset1,nGen,gen.getAverageScore());
+			}
+			if(gen == this._app.currentGeneration)break;
+		}
 
 		c1.addChild(scoreChart);
 
-		
+
 		//radar chart : reste a coder les parametres proximity et speed
 		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (1=target)","Speed","Complexity (number of reactors)"]);
 		radarChart.addDataset("Current generation",randomColor(1),randomColor(.2),[1,0,this._app.generations[numberCurrentGen-1].getAverageReactors()]);
