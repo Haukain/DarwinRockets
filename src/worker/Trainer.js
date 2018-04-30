@@ -3,6 +3,8 @@ import { Generation } from "./Generation.js";
 import { Configuration } from "./Configuration.js";
 import { Rocket } from "./Rocket.js";
 import { Reactor } from "./Reactor.js";
+import { End } from "./End.js";
+import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 export class Trainer {
 	constructor(worker){
 		let that = this;
@@ -39,15 +41,40 @@ export class Trainer {
 			newGen.addRocket(this.reproduce(p1,p2));
 		}
 		//evaluate the generation
-		await this.evaluateGen(newGen);
+		this.evaluateGen(newGen);
 		this.addGeneration(newGen);
 		this._com.send("newGen",newGen.toStructure());
 	}
 
-	async evaluateGen(g) {
+	evaluateGen(g) {
+		// console.log(this._config);
+		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
 		for(let r of g.rockets){
-			r.score = Math.random()*10 - 5; // a enlever
+			let minDist = 9999999999;
+			let topSpeed = 0; // TODO: code topSpeed
+			let complexity = r.reactors.length;
+			let completionTime = 0;
+			let traveledDistance = 0;
+			let engine = new PhysicsComputer(this._config.terrain,[r]);
+			let prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
+			// console.log(targetPos);
+			// console.log(prevPos);
+			while(minDist>30 && !engine.isEnded()){
+				engine.update();
+				let distTarget=Math.sqrt(Math.pow(engine.rockets[0].position.x-targetPos.x,2),Math.pow(engine.rockets[0].position.y-targetPos.y,2));
+				if(!isNaN(distTarget))minDist = Math.min(distTarget,minDist);
+				let delta=Math.sqrt(Math.pow(engine.rockets[0].position.x-prevPos.x,2),Math.pow(engine.rockets[0].position.y-prevPos.y,2));
+				if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
+				prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
+			}
+			// console.log(minDist, completionTime, traveledDistance, complexity);
+			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
+			r.score = this._config.fitnessFunction.compute(minDist, completionTime, traveledDistance, complexity);
+			// console.log(r.score);
+			//await new Promise((res,rej)=>setTimeout(()=>res(),1));
 		}
+		// console.log(g.getAverageScore());
+		return true;
 	}
 
 	applyNauralSelection(g) {
@@ -55,8 +82,6 @@ export class Trainer {
 		let selectedRockets = g.rockets.sort(function(a,b){
 			return b.score - a.score;
 		}).slice(0,Math.ceil(g.rockets.length/2));
-		console.log(g.rockets);
-		console.log(selectedRockets);
 		return selectedRockets;
 	}
 
