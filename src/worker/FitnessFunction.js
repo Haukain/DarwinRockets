@@ -2,7 +2,7 @@ export class FitnessFunction {
 	static fromStructure(s){
 		return new FitnessFunction(s.remainingDistanceFactor,s.completionTimeFactor,s.traveledDistanceFactor,s.complexityFactor);
 	}
-	constructor(rdf, ctf, tdf, cf){
+	constructor(rdf=0, ctf=0, tdf=0, cf=0){
 		this._remainingDistanceFactor = rdf;
 		this._completionTimeFactor = ctf;
 		this._traveledDistanceFactor = tdf;
@@ -10,8 +10,10 @@ export class FitnessFunction {
 	}
 
 	compute(rd, ct, td, cx) {
-		score = remainingDistanceFactor*rd + completionTimeFactor*ct + traveledDistanceFactor*td + complexityFactor*cx;
-		return score;
+		return this._remainingDistanceFactor*rd
+						+ this._completionTimeFactor*ct
+						+ this._traveledDistanceFactor*td
+						+ this._complexityFactor*cx;
 	}
 	get remainingDistanceFactor() {return this._remainingDistanceFactor;}
 	set remainingDistanceFactor(rd) {this._remainingDistanceFactor = rd;}
