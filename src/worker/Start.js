@@ -2,6 +2,9 @@ import { RoundTerrainObject } from "./RoundTerrainObject.js"
 import { PhysicsStart } from "./physics/PhysicsStart.js"
 
 export class Start extends RoundTerrainObject {
+	static fromStructure(s){
+		return new Start(s.position);
+	}
 	constructor(position) {
 		super(position,10);
 	}

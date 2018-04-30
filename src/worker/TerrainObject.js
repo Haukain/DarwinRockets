@@ -2,8 +2,8 @@ export class TerrainObject {
 	static fromStructure(s){
 		return new TerrainObject(s.position);
 	}
-	constructor(position){
-		this._position = position||{x:0,y:0};
+	constructor(position={x:0,y:0}){
+		this._position = position;
 	}
 
 	testCollision(r) {}
@@ -22,7 +22,7 @@ export class TerrainObject {
 	toStructure(){
 		return {
 			type: this.constructor.name,
-			position: this._position
+			position: {x:this._position.x,y:this._position.y}
 		}
 	}
 }

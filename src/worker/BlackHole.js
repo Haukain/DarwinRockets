@@ -2,6 +2,9 @@ import { PhysicsBlackHole } from "./physics/PhysicsBlackHole.js"
 import { Planet } from "./Planet.js"
 
 export class BlackHole extends Planet {
+	static fromStructure(s){
+		return new BlackHole(s.position,s.radius);
+	}
 	constructor(position, radius) {
 		super(position,radius);
 		this._fillStyle = '#000000';

@@ -14,7 +14,7 @@ export class Terrain {
 	static fromStructure(s){
 		let t=new Terrain(s.size);
 		for(let object of s.objects){
-			t.addObject(constructors[object.type].fromStructure(s));
+			t.addObject(constructors[object.type].fromStructure(object));
 		}
 		return t;
 	}
