@@ -1,7 +1,7 @@
 import { PhysicsStart } from "./PhysicsStart.js";
 
 export class PhysicsComputer {
-	constructor(terrain,rockets, simDuration=300){
+	constructor(terrain,rockets, simDuration=600){
 		this._simDuration = simDuration;
 		this._rockets = rockets.map(r=>r.createPhysicsObject());
 		this._objects = terrain.objects.map(r=>r.createPhysicsObject()).concat(this._rockets);
@@ -50,11 +50,12 @@ export class PhysicsComputer {
 		Matter.Engine.update(this._engine);
 	}
 
-	isEnded() { // TODO: finish
-		return false;
+	isEnded() {
+		return this._time>=this._simDuration;
 	}
 
 	get simDuration() {return this._simDuration;}// read only
+	get time() {return this._time;}// read only
 
 	get rockets() {return this._rockets;}
 }
