@@ -5,6 +5,7 @@ import { EditScreen } from "./EditScreen.js";
 import { GridScreen } from "./GridScreen.js";
 import { ChartScreen } from "./ChartScreen.js";
 import { PhysicsDisplayer } from "../displayer/PhysicsDisplayer.js";
+import { Modal } from "../displayer/Modal.js";
 import { Generation } from "../worker/Generation.js";
 import { Configuration } from "../worker/Configuration.js";
 import { WorkerCommander } from "../worker/WorkerCommander.js";
@@ -105,13 +106,17 @@ export class App{
   }
 
   displayRockets(rockets){
+    let modal=new Modal();
     let displayer = new PhysicsDisplayer(this._configuration.terrain,rockets);
-    document.body.appendChild(displayer.element);
+    modal.addChild(displayer);
+    this._container.addChild(modal);
+    modal.show();
   }
   selectTutorial(t){
     this._configuration = Configuration.fromStructure(t.config);
-    this.initTrainer();
-    this.goSimulation();
+    /*this.initTrainer();
+    this.goSimulation();*/
+    this.goEdit();
   }
   selectGeneration(gen){
     this._currentGeneration = gen;

@@ -22,6 +22,7 @@ export class TerrainConfigurator extends CanvasWidget{
       if(that._tool) this._terrain.objects = that._tool.upCallback(this._eventRelativeCoords(e),this._terrain.objects);
       this.draw();
     },false);
+    this.draw();
   }
   draw(){
     this._ctx.clearRect(0,0,this._canvas.width,this._canvas.height);

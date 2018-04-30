@@ -28,8 +28,12 @@ export class PhysicsDisplayer extends CanvasWidget{
     //render Loop
     if(autoRefresh){
       (function render(){
-        if(!that._engine.isEnded()) window.requestAnimationFrame(render);
-        that.tick();
+        if(!that._engine.isEnded()){
+          window.requestAnimationFrame(render);
+          that.tick();
+        }else{
+          console.log("ended");
+        }
       })();
     }
   }
