@@ -21,7 +21,7 @@ export class StartScreen extends Screen{
 		this._container.addChild(this._centerer);
 		//logo
 		this._logoCol = new Col(12,12,12,12);
-		this._logo = new ImageWidget("./assets/images/logo.png");
+		this._logo = new ImageWidget("./assets/svg/Logo DarwinRockets.svg");
 		this._logoCol.addChild(this._logo);
 		this._centerer.addChild(this._logoCol);
 		//modal button

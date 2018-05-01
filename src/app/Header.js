@@ -10,7 +10,7 @@ export class Header{
   constructor(app){
     let that = this;
     this._app = app;
-    this.container = new Navbar("./assets/icons/favicon-32x32.png","Darwin Rockets");
+    this.container = new Navbar("./assets/svg/Logo DarwinRockets without text.svg","Darwin Rockets");
     //back button
     this._addButton("arrow_back","go back",e=>{that._app.goBack()});
     //start/stop gen Button
@@ -31,7 +31,7 @@ export class Header{
     });
     //help Button
     this._addButton("help_outline","help",e=>{new Alert("Not yet written :/","sorry.")});
-    
+
     //generation range and text which indicates the current generation
     let genItem = new NavbarItem();
     let genItem2 = new NavbarItem();

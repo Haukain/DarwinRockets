@@ -252,7 +252,7 @@ body>.row{
 	left: 0;
 	pointer-events: none;
   opacity: 0.2;
-  filter: blur(7px);
+  filter: blur(3px);
 }
 /*=== floatingButton ===*/
 .floatingButton{
@@ -275,6 +275,6 @@ body>.row{
 
 /*=== PhysicsDisplayer ===*/
 .physicsDisplayer{
-  height: 50vh;
+  padding:0;
   width: 50vw;
 }
