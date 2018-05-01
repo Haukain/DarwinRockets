@@ -39,7 +39,7 @@ export class PhysicsComputer {
 		});
 		//update objects
 		Matter.Events.on(this._engine, "beforeUpdate",e=>{
-		      that._time += 1;
+		      that._time += 1/60;
 		      for(let o of that._objects){
 		        o.update(that._time,that._objects);
 		      }

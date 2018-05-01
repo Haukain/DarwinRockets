@@ -24,7 +24,7 @@ export class PhysicsReactor{
   get body(){return this._body;}
   get activationTime(){return this._activationTime;}
   get extinctionTime(){return this._extinctionTime;}
-  extinctionTimeReduction(){ this._extinctionTime -= 1;}
+  extinctionTimeReduction(){ this._extinctionTime -= 1/60;}
 
   applyThrust(rocket){
     if(!this.active){

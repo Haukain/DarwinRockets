@@ -67,7 +67,7 @@
 }
 /* === canvasfix === */
 .card canvas{
-  width: 100%;
+    width: 100%;
 }
 /* === screen classes === */
 body>.row{
@@ -271,4 +271,10 @@ body>.row{
 .toolbar .iconbutton{
   display: block;
   margin: auto;
+}
+
+/*=== PhysicsDisplayer ===*/
+.physicsDisplayer{
+  height: 50vh;
+  width: 50vw;
 }

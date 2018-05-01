@@ -4,6 +4,7 @@ import { PhysicsComputer } from "../worker/physics/PhysicsComputer.js";
 export class PhysicsDisplayer extends CanvasWidget{
   constructor(terrain,rockets,autoRefresh=true) {
     super("white","white");
+    this._element.className += " physicsDisplayer";
     let that = this;
     //save data
     this._terrain = terrain;
