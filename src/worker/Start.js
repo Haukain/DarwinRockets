@@ -13,6 +13,7 @@ export class Start extends RoundTerrainObject {
 	}
 	draw(context) {
 			context.beginPath();
+			context.fillStyle = 'red';
 			context.arc(0,0,this._radius,0,2*Math.PI);
 			context.fill();
 	}
