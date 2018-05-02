@@ -3,6 +3,7 @@ import { Generation } from "./Generation.js";
 import { Configuration } from "./Configuration.js";
 import { Rocket } from "./Rocket.js";
 import { Reactor } from "./Reactor.js";
+import { Start } from "./Start.js";
 import { End } from "./End.js";
 import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 export class Trainer {
@@ -47,8 +48,10 @@ export class Trainer {
 	}
 
 	evaluateGen(g) {
-		// console.log(this._config);
+		console.log(this._config);
+		let startPos = this._config.terrain.objects.filter(o=>o instanceof Start)[0].position;
 		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
+		console.log("start",startPos,"end:",targetPos);
 		for(let r of g.rockets){
 			let minDist = 9999999999;
 			let topSpeed = 0; // TODO: code topSpeed
@@ -57,8 +60,6 @@ export class Trainer {
 			let traveledDistance = 0;
 			let engine = new PhysicsComputer(this._config.terrain,[r]);
 			let prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
-			// console.log(targetPos);
-			// console.log(prevPos);
 			while(minDist>30 && !engine.isEnded()){
 				engine.update();
 				let distTarget=Math.sqrt(Math.pow(engine.rockets[0].position.x-targetPos.x,2),Math.pow(engine.rockets[0].position.y-targetPos.y,2));
@@ -67,13 +68,13 @@ export class Trainer {
 				if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
 				prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
 			}
-			// console.log(minDist, completionTime, traveledDistance, complexity);
+			console.log("mD :",minDist,"cT :", completionTime, "tD :",traveledDistance,"cplx :",complexity);
 			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
 			r.score = this._config.fitnessFunction.compute(minDist, completionTime, traveledDistance, complexity);
-			// console.log(r.score);
+			console.log(r.score);
 			//await new Promise((res,rej)=>setTimeout(()=>res(),1));
 		}
-		// console.log(g.getAverageScore());
+		console.log(g.getAverageScore());
 		return true;
 	}
 

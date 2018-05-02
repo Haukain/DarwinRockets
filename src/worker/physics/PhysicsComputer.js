@@ -1,7 +1,7 @@
 import { PhysicsStart } from "./PhysicsStart.js";
 
 export class PhysicsComputer {
-	constructor(terrain,rockets, simDuration=600){
+	constructor(terrain,rockets, simDuration=100){
 		this._simDuration = simDuration;
 		this._rockets = rockets.map(r=>r.createPhysicsObject());
 		this._objects = terrain.objects.map(r=>r.createPhysicsObject()).concat(this._rockets);
@@ -12,6 +12,7 @@ export class PhysicsComputer {
 		this._engine = Matter.Engine.create();
 		this._engine.world.gravity.y = 0;
 		this._time = 0;
+		this._ended = false;
 		//add object to engine
 		for(let o of this._objects){
 		  Matter.World.add(this._engine.world, o.object);
@@ -21,7 +22,6 @@ export class PhysicsComputer {
 		Matter.Events.on(this._engine, 'collisionActive', function(event) {
 		  let i, currentPair, currentPart;
 		  let n = event.pairs.length;
-
 		  for(let i =0; i<n; i++){
 		    currentPair = event.pairs[i];
 		    for(let r of that._rockets){
@@ -29,17 +29,19 @@ export class PhysicsComputer {
 		      for(let j=0;j<m;j++){
 		        currentPart = r.object.parts[j];
 		        if( (currentPair.bodyA.label === currentPart.label) || (currentPair.bodyB.label === currentPart.label)){
-		          //console.log("collision");
+							this._ended = true;
 		        }
 		      }
 		    }
-
 		  }
-
 		});
 		//update objects
 		Matter.Events.on(this._engine, "beforeUpdate",e=>{
 		      that._time += 1/60;
+					console.log(this._ended);
+					if(this._time>=this._simDuration){
+						this._ended = true;
+					}
 		      for(let o of that._objects){
 		        o.update(that._time,that._objects);
 		      }
@@ -51,7 +53,7 @@ export class PhysicsComputer {
 	}
 
 	isEnded() {
-		return this._time>=this._simDuration;
+		return this._ended;
 	}
 
 	get simDuration() {return this._simDuration;}// read only
