@@ -16,6 +16,7 @@ import { PlaceTerrainTool } from "../displayer/TerrainConfigurator/PlaceTerrainT
 import { Start } from "../worker/Start.js";
 import { End } from "../worker/End.js";
 import { Planet } from "../worker/Planet.js";
+import { BlackHole } from "../worker/BlackHole.js";
 
 export class EditScreen extends Screen{
 
@@ -106,6 +107,7 @@ export class EditScreen extends Screen{
 			new PlaceTerrainTool(this._terrainConf,"play_arrow","start",Start),
 			new PlaceTerrainTool(this._terrainConf,"stop","stop",End),
 			new PlaceTerrainTool(this._terrainConf,"public","planet",Planet),
+			new PlaceTerrainTool(this._terrainConf,"grade","blackHole",BlackHole),
 		];
 		for(let tool of tools){
 			this._toolbar.addChild(tool.button);
