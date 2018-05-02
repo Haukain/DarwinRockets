@@ -105,9 +105,9 @@ export class EditScreen extends Screen{
 			new MoveTerrainTool(this._terrainConf),
 			new EraseTerrainTool(this._terrainConf),
 			new PlaceTerrainTool(this._terrainConf,"play_arrow","start",Start),
-			new PlaceTerrainTool(this._terrainConf,"stop","stop",End),
+			new PlaceTerrainTool(this._terrainConf,"flag","stop",End),
 			new PlaceTerrainTool(this._terrainConf,"public","planet",Planet),
-			new PlaceTerrainTool(this._terrainConf,"grade","blackHole",BlackHole),
+			new PlaceTerrainTool(this._terrainConf,"star","blackHole",BlackHole)
 		];
 		for(let tool of tools){
 			this._toolbar.addChild(tool.button);
