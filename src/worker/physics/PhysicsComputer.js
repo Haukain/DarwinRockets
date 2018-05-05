@@ -1,7 +1,7 @@
 import { PhysicsStart } from "./PhysicsStart.js";
 
 export class PhysicsComputer {
-	constructor(terrain,rockets, simDuration=50){
+	constructor(terrain,rockets, simDuration=20){
 		this._simDuration = simDuration;
 		this._rockets = rockets.map(r=>r.createPhysicsObject());
 		this._objects = terrain.objects.map(r=>r.createPhysicsObject()).concat(this._rockets);

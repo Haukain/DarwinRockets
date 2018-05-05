@@ -8,8 +8,7 @@
         "size":{"width":1920,"height":1080},
         "objects":[
           {"type":"Start","position":{"x":50,"y":50}},
-          {"type":"End","position":{"x":1000,"y":1000}},
-          {"type":"Planet","position":{"x":100,"y":100},"radius":30}
+          {"type":"End","position":{"x":1837,"y":843}}
         ]
       },
       "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0,"randomMutationRate":0},

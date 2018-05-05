@@ -48,7 +48,6 @@ export class Trainer {
 	}
 
 	evaluateGen(g) {
-		console.log(this._config);
 		let startPos = this._config.terrain.objects.filter(o=>o instanceof Start)[0].position;
 		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
 		console.log("start",startPos,"end:",targetPos);
@@ -62,17 +61,17 @@ export class Trainer {
 			let prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
 			while(minDist>30 && !engine.isEnded()){
 				engine.update();
-				let distTarget=Math.sqrt(Math.pow(engine.rockets[0].position.x-targetPos.x,2),Math.pow(engine.rockets[0].position.y-targetPos.y,2));
+				let distTarget=Math.sqrt( Math.pow(engine.rockets[0].position.x-targetPos.x,2) + Math.pow(engine.rockets[0].position.y-targetPos.y,2) );
 				if(!isNaN(distTarget))minDist = Math.min(distTarget,minDist);
-				let delta=Math.sqrt(Math.pow(engine.rockets[0].position.x-prevPos.x,2),Math.pow(engine.rockets[0].position.y-prevPos.y,2));
+				let delta=Math.sqrt( Math.pow(engine.rockets[0].position.x-prevPos.x,2) + Math.pow(engine.rockets[0].position.y-prevPos.y,2) );
 				if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
 				prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
 			}
 			console.log("mD :",minDist,"cT :", completionTime, "tD :",traveledDistance,"cplx :",complexity);
 			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
 			r.score = this._config.fitnessFunction.compute(minDist, completionTime, traveledDistance, complexity);
+			console.log("rx :",engine.rockets[0].position.x,"ry :",engine.rockets[0].position.y);
 			console.log(r.score);
-			//await new Promise((res,rej)=>setTimeout(()=>res(),1));
 		}
 		console.log(g.getAverageScore());
 		return true;
