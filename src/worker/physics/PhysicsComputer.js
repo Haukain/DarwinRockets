@@ -1,7 +1,7 @@
 import { PhysicsStart } from "./PhysicsStart.js";
 
 export class PhysicsComputer {
-	constructor(terrain,rockets, simDuration=100){
+	constructor(terrain,rockets, simDuration=50){
 		this._simDuration = simDuration;
 		this._rockets = rockets.map(r=>r.createPhysicsObject());
 		this._objects = terrain.objects.map(r=>r.createPhysicsObject()).concat(this._rockets);
@@ -29,7 +29,7 @@ export class PhysicsComputer {
 		      for(let j=0;j<m;j++){
 		        currentPart = r.object.parts[j];
 		        if( (currentPair.bodyA.label === currentPart.label) || (currentPair.bodyB.label === currentPart.label)){
-							this._ended = true;
+							that._ended = true;
 		        }
 		      }
 		    }
@@ -38,9 +38,8 @@ export class PhysicsComputer {
 		//update objects
 		Matter.Events.on(this._engine, "beforeUpdate",e=>{
 		      that._time += 1/60;
-					console.log(this._ended);
-					if(this._time>=this._simDuration){
-						this._ended = true;
+					if(that._time>=that._simDuration){
+						that._ended = true;
 					}
 		      for(let o of that._objects){
 		        o.update(that._time,that._objects);
