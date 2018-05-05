@@ -12,7 +12,7 @@
         ]
       },
       "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":-1,"completionTimeFactor":0,"traveledDistanceFactor":0,"complexityFactor":0}
+      "fitnessFunction":{"remainingDistanceFactor":-1,"completionTimeFactor":0,"traveledDistanceFactor":0,"complexityFactor":0.5}
     }
   },
   "surv":{

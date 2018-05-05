@@ -88,7 +88,11 @@ export class Trainer {
 	reproduce(p1,p2) {
 		// TODO: Make the real reproduction
 		let baby = new Rocket();
+		console.log(p1,p2);
+		let parentWMostReactors = p1.reactors.length>p2.reactors.length?p1:p2;
+		let reactorMean = Math.ceil( (p1.reactors.length+p2.reactors.length)/2 ) ;
 		let reactorNumber = p1.reactors.length<p2.reactors.length?p1.reactors.length:p2.reactors.length;
+		console.log("parentWMostReactors :",parentWMostReactors,'reactorMean :',reactorMean,"reactorNumber:",reactorNumber);
 		for(let i=0;i<reactorNumber;i++){
 			let position = {x:p1.reactors[i].position.x/2+p2.reactors[i].position.x/2,y:p1.reactors[i].position.y/2+p2.reactors[i].position.y/2};
 			let thrust = p1.reactors[i].thrust/2 + p2.reactors[i].thrust/2;
@@ -97,8 +101,18 @@ export class Trainer {
 			let angle = p1.reactors[i].angle/2 + p2.reactors[i].angle/2;
 			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
 		}
+		if(reactorNumber < reactorMean){
+			let position = {x:parentWMostReactors.reactors[reactorNumber].position.x,y:parentWMostReactors.reactors[reactorNumber].position.y};
+			let thrust = parentWMostReactors.reactors[reactorNumber].thrust;
+			let activationTime = parentWMostReactors.reactors[reactorNumber].activationTime;
+			let extinctionTime = parentWMostReactors.reactors[reactorNumber].extinctionTime;
+			let angle = parentWMostReactors.reactors[reactorNumber].angle;
+			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
+			reactorNumber += 1;
+		}
 		baby.parents.push(p1);
 		baby.parents.push(p2);
+		console.log(baby);
 		return baby;
 	}
 

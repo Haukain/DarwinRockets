@@ -13,7 +13,7 @@ export class FitnessFunction {
 		return this._remainingDistanceFactor*rd
 						+ this._completionTimeFactor*ct
 						+ this._traveledDistanceFactor*td
-						+ this._complexityFactor*cx;
+						+ this._complexityFactor*(cx*10);
 	}
 	get remainingDistanceFactor() {return this._remainingDistanceFactor;}
 	set remainingDistanceFactor(rd) {this._remainingDistanceFactor = rd;}
