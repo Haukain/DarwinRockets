@@ -47,9 +47,9 @@ export class EditScreen extends Screen{
 			{
 				title:"Reproduction",
 				params:[
-					{key:".fitnessFunction.newGeneAppearanceRate",name:"gene appearance rate",min:"0",max:"1",step:".01"},
-					{key:".fitnessFunction.geneDistributionDeviationFactor",name:"distribution random",min:"0",max:"1",step:".01"},
-					{key:".fitnessFunction.randomMutationRate",name:"mutation rate",min:"0",max:"1",step:".01"}
+					{key:".reproductionParameters.newGeneAppearanceRate",name:"gene appearance rate",min:"0",max:"1",step:".01"},
+					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"distribution random",min:"0",max:"1",step:".01"},
+					{key:".reproductionParameters.randomMutationRate",name:"mutation rate",min:"0",max:"1",step:".01"}
 				]
 			}
 		];
