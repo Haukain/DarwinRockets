@@ -50,7 +50,7 @@ export class Trainer {
 	evaluateGen(g) {
 		let startPos = this._config.terrain.objects.filter(o=>o instanceof Start)[0].position;
 		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
-		console.log("start",startPos,"end:",targetPos);
+		// console.log("start",startPos,"end:",targetPos);
 		for(let r of g.rockets){
 			let minDist = 9999999999;
 			let topSpeed = 0; // TODO: code topSpeed
@@ -67,13 +67,13 @@ export class Trainer {
 				if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
 				prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
 			}
-			console.log("mD :",minDist,"cT :", completionTime, "tD :",traveledDistance,"cplx :",complexity);
+			// console.log("mD :",minDist,"cT :", completionTime, "tD :",traveledDistance,"cplx :",complexity);
 			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
 			r.score = this._config.fitnessFunction.compute(minDist, completionTime, traveledDistance, complexity);
-			console.log("rx :",engine.rockets[0].position.x,"ry :",engine.rockets[0].position.y);
-			console.log(r.score);
+			// console.log("rx :",engine.rockets[0].position.x,"ry :",engine.rockets[0].position.y);
+			// console.log(r.score);
 		}
-		console.log(g.getAverageScore());
+		console.log("av score :",g.getAverageScore());
 		return true;
 	}
 
@@ -88,11 +88,11 @@ export class Trainer {
 	reproduce(p1,p2) {
 		// TODO: Make the real reproduction
 		let baby = new Rocket();
-		console.log(p1,p2);
+		// console.log(p1,p2);
 		let parentWMostReactors = p1.reactors.length>p2.reactors.length?p1:p2;
 		let reactorMean = Math.ceil( (p1.reactors.length+p2.reactors.length)/2 ) ;
 		let reactorNumber = p1.reactors.length<p2.reactors.length?p1.reactors.length:p2.reactors.length;
-		console.log("parentWMostReactors :",parentWMostReactors,'reactorMean :',reactorMean,"reactorNumber:",reactorNumber);
+		// console.log("parentWMostReactors :",parentWMostReactors,'reactorMean :',reactorMean,"reactorNumber:",reactorNumber);
 		for(let i=0;i<reactorNumber;i++){
 			let position = {x:p1.reactors[i].position.x/2+p2.reactors[i].position.x/2,y:p1.reactors[i].position.y/2+p2.reactors[i].position.y/2};
 			let thrust = p1.reactors[i].thrust/2 + p2.reactors[i].thrust/2;
@@ -101,7 +101,7 @@ export class Trainer {
 			let angle = p1.reactors[i].angle/2 + p2.reactors[i].angle/2;
 			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
 		}
-		if(reactorNumber < reactorMean){
+		while(reactorNumber < reactorMean){
 			let position = {x:parentWMostReactors.reactors[reactorNumber].position.x,y:parentWMostReactors.reactors[reactorNumber].position.y};
 			let thrust = parentWMostReactors.reactors[reactorNumber].thrust;
 			let activationTime = parentWMostReactors.reactors[reactorNumber].activationTime;
@@ -110,9 +110,17 @@ export class Trainer {
 			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
 			reactorNumber += 1;
 		}
+		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate/5 ){
+			console.log(" - GENE");
+			baby.parents.splice(Math.floor(Math.random()*baby.parents.length));
+		}
+		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate/5 ){
+			console.log(" +  GENE");
+			baby.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
+		}
 		baby.parents.push(p1);
 		baby.parents.push(p2);
-		console.log(baby);
+		// console.log(baby);
 		return baby;
 	}
 
