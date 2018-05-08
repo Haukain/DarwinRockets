@@ -57,6 +57,7 @@ export class Trainer {
 			let minDist = 9999999999;
 			let topSpeed = 0; // TODO: code topSpeed
 			let complexity = r.reactors.length;
+			let usefulReactors = 0;
 			let completionTime = 0;
 			let traveledDistance = 0;
 			let engine = new PhysicsComputer(this._config.terrain,[r]);
@@ -69,11 +70,17 @@ export class Trainer {
 				if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
 				prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
 			}
-			// console.log("mD :",minDist,"cT :", completionTime, "tD :",traveledDistance,"cplx :",complexity);
 			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
-			let completionTimeRatio = completionTime/engine.simDuration;
+			for (let reac of r.reactors){
+				if(reac.activationTime<completionTime){
+					usefulReactors+=1;
+				}
+			}
 			let distToTargetRatio = minDist/totalDist;
-			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistance, complexity);
+			let completionTimeRatio = completionTime/engine.simDuration;
+			let complexityRatio = usefulReactors/complexity;
+			console.log("disToT",distToTargetRatio,"compTime",completionTimeRatio,"complex",complexityRatio);
+			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistance, complexityRatio);
 			// console.log("rx :",engine.rockets[0].position.x,"ry :",engine.rockets[0].position.y);
 			// console.log(r.score);
 		}
