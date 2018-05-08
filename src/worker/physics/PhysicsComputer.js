@@ -12,7 +12,6 @@ export class PhysicsComputer {
 		this._engine = Matter.Engine.create();
 		this._engine.world.gravity.y = 0;
 		this._time = 0;
-		this._ended = false;
 		//add object to engine
 		for(let o of this._objects){
 		  Matter.World.add(this._engine.world, o.object);
@@ -29,7 +28,7 @@ export class PhysicsComputer {
 		      for(let j=0;j<m;j++){
 		        currentPart = r.object.parts[j];
 		        if( (currentPair.bodyA.label === currentPart.label) || (currentPair.bodyB.label === currentPart.label)){
-							that._ended = true;
+							that._time = that._simDuration;
 							console.log("COLLISION");
 		        }
 		      }
@@ -39,9 +38,6 @@ export class PhysicsComputer {
 		//update objects
 		Matter.Events.on(this._engine, "beforeUpdate",e=>{
 		      that._time += 1/60;
-					if(that._time>=that._simDuration){
-						that._ended = true;
-					}
 		      for(let o of that._objects){
 		        o.update(that._time,that._objects);
 		      }
@@ -53,7 +49,7 @@ export class PhysicsComputer {
 	}
 
 	isEnded() {
-		return this._ended;
+		return this._time>=this._simDuration;
 	}
 
 	get simDuration() {return this._simDuration;}// read only

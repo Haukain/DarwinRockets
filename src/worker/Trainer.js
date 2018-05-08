@@ -6,6 +6,7 @@ import { Reactor } from "./Reactor.js";
 import { Start } from "./Start.js";
 import { End } from "./End.js";
 import { PhysicsComputer } from "./physics/PhysicsComputer.js";
+
 export class Trainer {
 	constructor(worker){
 		let that = this;
@@ -50,7 +51,8 @@ export class Trainer {
 	evaluateGen(g) {
 		let startPos = this._config.terrain.objects.filter(o=>o instanceof Start)[0].position;
 		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
-		// console.log("start",startPos,"end:",targetPos);
+		let totalDist = Math.sqrt( Math.pow(targetPos.x -startPos.x,2) + Math.pow(targetPos.y -startPos.y,2) );
+		console.log(this._config);
 		for(let r of g.rockets){
 			let minDist = 9999999999;
 			let topSpeed = 0; // TODO: code topSpeed
@@ -69,7 +71,9 @@ export class Trainer {
 			}
 			// console.log("mD :",minDist,"cT :", completionTime, "tD :",traveledDistance,"cplx :",complexity);
 			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
-			r.score = this._config.fitnessFunction.compute(minDist, completionTime, traveledDistance, complexity);
+			let completionTimeRatio = completionTime/engine.simDuration;
+			let distToTargetRatio = minDist/totalDist;
+			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistance, complexity);
 			// console.log("rx :",engine.rockets[0].position.x,"ry :",engine.rockets[0].position.y);
 			// console.log(r.score);
 		}
@@ -94,27 +98,32 @@ export class Trainer {
 		let reactorNumber = p1.reactors.length<p2.reactors.length?p1.reactors.length:p2.reactors.length;
 		// console.log("parentWMostReactors :",parentWMostReactors,'reactorMean :',reactorMean,"reactorNumber:",reactorNumber);
 		for(let i=0;i<reactorNumber;i++){
-			let position = {x:p1.reactors[i].position.x/2+p2.reactors[i].position.x/2,y:p1.reactors[i].position.y/2+p2.reactors[i].position.y/2};
-			let thrust = p1.reactors[i].thrust/2 + p2.reactors[i].thrust/2;
-			let activationTime = p1.reactors[i].activationTime/2 + p2.reactors[i].activationTime/2;
-			let extinctionTime = p1.reactors[i].extinctionTime/2 + p2.reactors[i].extinctionTime/2;
-			let angle = p1.reactors[i].angle/2 + p2.reactors[i].angle/2;
+			let position = {x:(p1.reactors[i].position.x/2+p2.reactors[i].position.x/2)
+												*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor), //RandomDeviation
+											y:(p1.reactors[i].position.y/2+p2.reactors[i].position.y/2)
+												*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor)
+			};
+			let thrust = (p1.reactors[i].thrust/2 + p2.reactors[i].thrust/2)*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
+			let activationTime = (p1.reactors[i].activationTime/2 + p2.reactors[i].activationTime/2)*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
+			let extinctionTime = (p1.reactors[i].extinctionTime/2 + p2.reactors[i].extinctionTime/2)*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
+			let angle = (p1.reactors[i].angle/2 + p2.reactors[i].angle/2)*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
 			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
 		}
 		while(reactorNumber < reactorMean){
-			let position = {x:parentWMostReactors.reactors[reactorNumber].position.x,y:parentWMostReactors.reactors[reactorNumber].position.y};
-			let thrust = parentWMostReactors.reactors[reactorNumber].thrust;
-			let activationTime = parentWMostReactors.reactors[reactorNumber].activationTime;
-			let extinctionTime = parentWMostReactors.reactors[reactorNumber].extinctionTime;
-			let angle = parentWMostReactors.reactors[reactorNumber].angle;
+			let position = {x:parentWMostReactors.reactors[reactorNumber].position.x*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor),
+											y:parentWMostReactors.reactors[reactorNumber].position.y*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor)};
+			let thrust = parentWMostReactors.reactors[reactorNumber].thrust*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
+			let activationTime = parentWMostReactors.reactors[reactorNumber].activationTime*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
+			let extinctionTime = parentWMostReactors.reactors[reactorNumber].extinctionTime*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
+			let angle = parentWMostReactors.reactors[reactorNumber].angle*(1+(Math.random()*2*this._config.reproductionParameters.geneDistributionDeviationFactor)-this._config.reproductionParameters.geneDistributionDeviationFactor);
 			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
 			reactorNumber += 1;
 		}
-		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate/5 ){
+		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate){
 			console.log(" - GENE");
 			baby.parents.splice(Math.floor(Math.random()*baby.parents.length));
 		}
-		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate/5 ){
+		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate){
 			console.log(" +  GENE");
 			baby.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
 		}
