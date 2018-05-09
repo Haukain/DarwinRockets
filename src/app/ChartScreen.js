@@ -6,6 +6,7 @@ import { LineChartWidget } from "../displayer/LineChartWidget.js";
 import { BarChartWidget } from "../displayer/BarChartWidget.js";
 import { RadarChartWidget } from "../displayer/RadarChartWidget.js";
 import { Generation } from "../worker/Generation.js";
+import { FloatingButton } from "../displayer/FloatingButton.js";
 
 export class ChartScreen extends Screen{
 		constructor(app, gen) {
@@ -63,6 +64,15 @@ export class ChartScreen extends Screen{
 			barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(i,i+interval));}
 
 		c3.addChild(barChart);
+
+		//bouton retour gridScreen
+		let floatingButton = new FloatingButton("home","Rockets");
+        floatingButton.on("click",()=>{
+        this._app.goSimulation();
+        });
+        let col = new Col(3,2,1,1);
+        col.addChild(floatingButton);
+        this._container.addChild(col);
     }
 
 }

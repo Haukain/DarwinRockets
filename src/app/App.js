@@ -131,6 +131,9 @@ export class App{
   get configuration(){
     return this._configuration;
   }
+  get state(){
+    return this._state;
+  }
   get _currentScreen(){
     return this.__currentScreen;
   }

@@ -12,7 +12,7 @@ export class Header{
     this._app = app;
     this.container = new Navbar("./assets/svg/Logo DarwinRockets without text.svg","Darwin Rockets");
     //back button
-    this._addButton("arrow_back","go back",e=>{that._app.goBack()});
+    this._addButton("arrow_back","Edition",e=>{that._app.goEdit();if(genItem2){console.log("if");genItem2.destroy();genItem2.addChild(new Text("Current generation : 1"))}});
     //start/stop gen Button
     this._addButton("play_arrow","toggle continuous generation",e=>{
       if(e.icon=="play_arrow"){
@@ -35,7 +35,7 @@ export class Header{
     //generation range and text which indicates the current generation
     let genItem = new NavbarItem();
     let genItem2 = new NavbarItem();
-    let numberCurrentGenText = new Text("1");
+    let numberCurrentGenText = new Text("Current generation : 1");
     this._genRange = new RangeInput("Generations");
     this._genRange.min=1;
     this._genRange.step=1;
@@ -50,6 +50,7 @@ export class Header{
 
     genItem.addChild(this._genRange);
     this.container.addChild(genItem);
+    if(this._app.state == "edit"){console.log("if");genItem2.destroy();genItem2.addChild("1");}
     this.container.addChild(genItem2);
   }
   _addButton(icon,label,action){
