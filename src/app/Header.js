@@ -12,7 +12,13 @@ export class Header{
     this._app = app;
     this.container = new Navbar("./assets/svg/Logo DarwinRockets without text.svg","Darwin Rockets");
     //back button
-    this._addButton("arrow_back","Edition",e=>{that._app.goEdit();if(genItem2){console.log("if");genItem2.destroy();genItem2.addChild(new Text("Current generation : 1"))}});
+    this._addButton("arrow_back","Edition",e=>{
+      that._app.goEdit();
+      if(genItem2){
+        genItem2.destroy();
+        genItem2.addChild(new Text("Current generation : 1"))
+      }
+    });
     //start/stop gen Button
     this._addButton("play_arrow","toggle continuous generation",e=>{
       if(e.icon=="play_arrow"){
