@@ -5,7 +5,6 @@ import { Card } from "../displayer/Card.js";
 import { Title } from "../displayer/Title.js";
 import { RangeInput } from "../displayer/RangeInput.js";
 import { Button } from "../displayer/Button.js";
-import { IconButton } from "../displayer/IconButton.js";
 import { Toolbar } from "../displayer/Toolbar.js";
 import { Alert } from "../dialogs/Alert.js";
 //terrain configurator
@@ -57,12 +56,8 @@ export class EditScreen extends Screen{
 		let card = new Card("navyblue","white");
 		leftCol.addChild(card);
 		for(let section of map){
-			let row1 = new Row();
 			let title = new Title(section.title);
-			let helpbutton = new IconButton("help_outline","help");
-			row1.addChild(title);
-			row1.addChild(helpbutton);
-			card.addChild(row1);
+			card.addChild(title);
 			for(let param of section.params){
 				let range = new RangeInput();
 				range.min=param.min;
@@ -75,7 +70,6 @@ export class EditScreen extends Screen{
 				});
 				card.addChild(range);
 			}
-
 		}
 		let LaunchButton = new Button("Launch Simulation","white");
 		LaunchButton.on("click",()=>{
