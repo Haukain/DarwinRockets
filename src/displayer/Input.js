@@ -23,4 +23,12 @@ export class Input extends Text{
   get text(){
     return this._innerElement.placeholder;
   }
+  get locked(){
+    return this._innerElement.disabled;
+
+  }
+  set locked(i){
+    this._innerElement.disabled = i;
+  }
 }
+
