@@ -66,7 +66,7 @@ export class ChartScreen extends Screen{
 		c3.addChild(barChart);
 
 		//bouton retour gridScreen
-		let floatingButton = new FloatingButton("home","Rockets");
+		let floatingButton = new FloatingButton("home","Rockets",0);
         floatingButton.on("click",()=>{
         this._app.goSimulation();
         });

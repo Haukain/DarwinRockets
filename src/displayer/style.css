@@ -255,7 +255,7 @@ body>.row{
   filter: blur(3px);
 }
 /*=== floatingButton ===*/
-.floatingButton{
+.floatingButton0{
   position:fixed;
   bottom: 20px;
   right:20px;
@@ -264,6 +264,16 @@ body>.row{
   background:#1a233a;
   color: white;
 }
+.floatingButton1{
+  position:fixed;
+  bottom: 80px;
+  right:20px;
+  display: block;
+  font-size:40px;
+  background:#1a233a;
+  color: white;
+}
+
 /*=== toolbar ===*/
 .toolbar{
   position: relative;

@@ -19,12 +19,17 @@ export class GridScreen extends Screen{
             this._container.addChild(col);
         }
 
-        let floatingButton = new FloatingButton("equalizer","Statistics");
+        let floatingButton = new FloatingButton("equalizer","Statistics",0);
         floatingButton.on("click",()=>{
             this._app.goChart();
         });
-        let col = new Col(3,2,1,1);
+        let floatingButton1 = new FloatingButton("sort","Sort by score",1);
+        floatingButton.on("click",()=>{
+            this._app.goChart();
+        });
+        let col = new Col(4,3,2,2);
         col.addChild(floatingButton);
+        col.addChild(floatingButton1);
         this._container.addChild(col);
 
 
