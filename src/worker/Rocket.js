@@ -4,7 +4,7 @@ import { PhysicsRocket } from "./physics/PhysicsRocket.js";
 export class Rocket {
 	static random(maxR){
 		let r = new Rocket();
-		let reac = Math.round(Math.random()*maxR);
+		let reac = Math.ceil(Math.random()*maxR);
 		for(let i=0;i<reac;i++){
 			r.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
 		}

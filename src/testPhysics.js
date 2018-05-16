@@ -117,16 +117,12 @@ let computer = new PhysicsComputer(terrain,rockets);
       context.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-
     //Render Rocket
     for(let rocket of computer.rockets){
       context.save();
       context.translate(rocket.position.x,rocket.position.y);
       context.rotate(rocket.angle + Math.PI);
       rocket.draw(context);
-      //let imgRocket = new Image();
-      //context.drawImage(imgRocket,rocket.position.x,rocket.position.y);
-      //imgRocket.src = './assets/images/rocket.png';
       context.restore();
     }
 
@@ -138,9 +134,5 @@ let computer = new PhysicsComputer(terrain,rockets);
       o.draw(context);
       context.restore();
     }
-
-    //let imgRocket = new Image();
-    //imgRocket.src = './assets/images/rocket.png';
-    //context.drawImage(imgRocket,10,10);
 
 })();

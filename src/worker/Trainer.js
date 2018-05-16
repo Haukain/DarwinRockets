@@ -76,13 +76,13 @@ export class Trainer {
 					usefulReactors+=1;
 				}
 			}
-			let distToTargetRatio = minDist/totalDist;
-			let completionTimeRatio = completionTime/engine.simDuration;
-			let complexityRatio = usefulReactors/complexity;
-			console.log("disToT",distToTargetRatio,"compTime",completionTimeRatio,"complex",complexityRatio);
-			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistance, complexityRatio);
-			// console.log("rx :",engine.rockets[0].position.x,"ry :",engine.rockets[0].position.y);
-			// console.log(r.score);
+			let distToTargetRatio = (1 - (minDist/totalDist)).toFixed(2); // 1 is close 0 is start
+			let completionTimeRatio = (1 - (completionTime/engine.simDuration)).toFixed(2); // 1 is fast 0 is notCompleted
+			let traveledDistRatio = (traveledDistance/totalDist).toFixed(2); // >1 is greater than objective dist <1 is lower than objective dist
+			let complexityRatio = (usefulReactors/complexity).toFixed(2); // 1 when all the reactors are useful 0 when none
+			//console.log("disToT :",distToTargetRatio,"compTime :",completionTimeRatio,"travelDist :",traveledDistRatio,"complex :",complexityRatio);
+			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
+			console.log("score :",r.score);
 		}
 		console.log("av score :",g.getAverageScore());
 		return true;
