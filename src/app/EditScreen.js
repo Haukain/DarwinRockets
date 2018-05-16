@@ -32,14 +32,14 @@ export class EditScreen extends Screen{
 		let map =[
 			{
 				title:"Population size",
-				help:"Choose the number of rockets you want.",
+				help:"Select the number of rocket by generation",
 				params:[
 					{key:".populationSize",name:"",min:"10",max:"100",step:"1"}
 				]
 			},
 			{
 				title:"Score calculation",
-				help:"a remplir",
+				help:"Choose the impact of each parameter on the score calculation",
 				params:[
 					{key:".fitnessFunction.remainingDistanceFactor",name:"distance to objective",min:"-1",max:"1",step:".01"},
 					{key:".fitnessFunction.completionTimeFactor",name:"time of flight",min:"-1",max:"1",step:".01"},
@@ -49,7 +49,7 @@ export class EditScreen extends Screen{
 			},
 			{
 				title:"Reproduction",
-				help:"a remplir",
+				help:"Choose the appearance rate of these parameters",
 				params:[
 					{key:".reproductionParameters.newGeneAppearanceRate",name:"gene appearance rate",min:"0",max:"1",step:".01"},
 					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"distribution random",min:"0",max:"1",step:".01"},
