@@ -83,6 +83,7 @@ export class PhysicsRocket{
 		}
 		ctx.lineTo(this._vertices[0].x,this._vertices[0].y);
 		ctx.fill();
+		
 		let imgRocket = new Image();
 		imgRocket.src = './assets/images/rocket.png';
 		ctx.save();
