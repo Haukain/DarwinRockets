@@ -83,6 +83,12 @@ export class PhysicsRocket{
 		}
 		ctx.lineTo(this._vertices[0].x,this._vertices[0].y);
 		ctx.fill();
+		let imgRocket = new Image();
+		imgRocket.src = './assets/images/rocket.png';
+		ctx.save();
+		ctx.rotate(3*Math.PI/4);
+		ctx.drawImage(imgRocket,-20,-45,60,60);
+		ctx.restore();
 
 		for(let r of this._reactors){
 			ctx.save();
@@ -90,6 +96,12 @@ export class PhysicsRocket{
 			ctx.translate(r.position.x,r.position.y);
 			ctx.rotate(r.angle + Math.PI);
 			r.draw(ctx);
+			let imgReactor = new Image();
+			imgReactor.src = './assets/images/reactor.png';
+			ctx.save();
+			ctx.rotate(Math.PI);
+			ctx.drawImage(imgReactor,-20,-45,40,40);
+			ctx.restore();
 			ctx.restore();
 		}
 
