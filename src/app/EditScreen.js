@@ -5,6 +5,7 @@ import { Card } from "../displayer/Card.js";
 import { Title } from "../displayer/Title.js";
 import { RangeInput } from "../displayer/RangeInput.js";
 import { Button } from "../displayer/Button.js";
+import { IconButton } from "../displayer/IconButton.js";
 import { Toolbar } from "../displayer/Toolbar.js";
 import { Alert } from "../dialogs/Alert.js";
 //terrain configurator
@@ -31,12 +32,14 @@ export class EditScreen extends Screen{
 		let map =[
 			{
 				title:"Population size",
+				help:"Choose the number of rockets you want.",
 				params:[
 					{key:".populationSize",name:"",min:"10",max:"100",step:"1"}
 				]
 			},
 			{
 				title:"Score calculation",
+				help:"a remplir",
 				params:[
 					{key:".fitnessFunction.remainingDistanceFactor",name:"distance to objective",min:"-1",max:"1",step:".01"},
 					{key:".fitnessFunction.completionTimeFactor",name:"time of flight",min:"-1",max:"1",step:".01"},
@@ -46,6 +49,7 @@ export class EditScreen extends Screen{
 			},
 			{
 				title:"Reproduction",
+				help:"a remplir",
 				params:[
 					{key:".reproductionParameters.newGeneAppearanceRate",name:"gene appearance rate",min:"0",max:"1",step:".01"},
 					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"distribution random",min:"0",max:"1",step:".01"},
@@ -56,8 +60,13 @@ export class EditScreen extends Screen{
 		let card = new Card("navyblue","white");
 		leftCol.addChild(card);
 		for(let section of map){
+			let row1 = new Row();
 			let title = new Title(section.title);
-			card.addChild(title);
+			let helpbutton = new IconButton("help_outline","Help");
+			helpbutton.on("click",()=>{new Alert(section.title,section.help)});
+			row1.addChild(title);
+			row1.addChild(helpbutton);
+			card.addChild(row1);
 			for(let param of section.params){
 				let range = new RangeInput();
 				range.min=param.min;
@@ -70,6 +79,7 @@ export class EditScreen extends Screen{
 				});
 				card.addChild(range);
 			}
+
 		}
 		let LaunchButton = new Button("Launch Simulation","white");
 		LaunchButton.on("click",()=>{
