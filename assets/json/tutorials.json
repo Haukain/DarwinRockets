@@ -7,8 +7,8 @@
       "terrain":{"size":{"width":1920,"height":1080},
       "objects":[{"type":"Start","position":{"x":500,"y":300}},
                  {"type":"End","position":{"x":1400,"y":700}}]},
-      "reproductionParameters":{"newGeneAppearanceRate":0.03,"geneDistributionDeviationFactor":0.03,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.4,"traveledDistanceFactor":0,"complexityFactor":0.00}
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.4,"traveledDistanceFactor":0,"complexityFactor":0.4}
     }
   },
   "surv":{

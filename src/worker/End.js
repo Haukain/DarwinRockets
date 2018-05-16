@@ -6,7 +6,7 @@ export class End extends RoundTerrainObject {
 		return new End(s.position);
 	}
 	constructor(position) {
-		super(position,10);
+		super(position,15);
 	}
 	createPhysicsObject() {
 		return new PhysicsEnd(this._position);

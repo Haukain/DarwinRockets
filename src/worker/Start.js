@@ -6,14 +6,14 @@ export class Start extends RoundTerrainObject {
 		return new Start(s.position);
 	}
 	constructor(position) {
-		super(position,10);
+		super(position,15);
 	}
 	createPhysicsObject() {
 		return new PhysicsStart(this._position);
 	}
 	draw(context) {
 			context.beginPath();
-			context.fillStyle = 'red';
+			context.fillStyle = 'purple';
 			context.arc(0,0,this._radius,0,2*Math.PI);
 			context.fill();
 	}
