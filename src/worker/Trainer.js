@@ -52,7 +52,7 @@ export class Trainer {
 		let startPos = this._config.terrain.objects.filter(o=>o instanceof Start)[0].position;
 		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
 		let totalDist = Math.sqrt( Math.pow(targetPos.x -startPos.x,2) + Math.pow(targetPos.y -startPos.y,2) );
-		console.log(this._config);
+		//console.log(this._config);
 		for(let r of g.rockets){
 			let minDist = 9999999999;
 			let topSpeed = 0; // TODO: code topSpeed
@@ -82,9 +82,9 @@ export class Trainer {
 			let complexityRatio = (usefulReactors/complexity).toFixed(2); // 1 when all the reactors are useful 0 when none
 			//console.log("disToT :",distToTargetRatio,"compTime :",completionTimeRatio,"travelDist :",traveledDistRatio,"complex :",complexityRatio);
 			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
-			console.log("score :",r.score);
+			//console.log("score :",r.score);
 		}
-		console.log("av score :",g.getAverageScore());
+		//console.log("av score :",g.getAverageScore());
 		return true;
 	}
 
@@ -127,11 +127,11 @@ export class Trainer {
 			reactorNumber += 1;
 		}
 		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate){
-			console.log(" - GENE");
+			//console.log(" - GENE");
 			baby.parents.splice(Math.floor(Math.random()*baby.parents.length));
 		}
 		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate){
-			console.log(" +  GENE");
+			//console.log(" +  GENE");
 			baby.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
 		}
 		/*baby.parents.push(p1);
