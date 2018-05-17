@@ -12,12 +12,12 @@ export class Trainer {
 		let that = this;
 		this._continuousGeneration = false;
 		this._config = null;
-		this._generations = [];
+		this._generation = null;
 		this._com = new WorkerCommander(self);
 		this._com.addCommandListener("initTrainer",d=>{
-			that._generations = [Generation.fromStructure(d.gen)];
+			that._generation = Generation.fromStructure(d.gen);
 			this._config = Configuration.fromStructure(d.conf);
-			this.evaluateGen(that._generations[0])
+			this.evaluateGen(that._generation);
 		});
 		this._com.addCommandListener("startGen",d=>{
 			that.startContinuousGeneration();
@@ -32,7 +32,7 @@ export class Trainer {
 	}
 
 	async makeNewGen() {
-		let oldGen = this.generations[this.generations.length-1];
+		let oldGen = this.generation;
 		//killing the old
 		let survivors = this.applyNauralSelection(oldGen);
 		//making the new
@@ -44,7 +44,7 @@ export class Trainer {
 		}
 		//evaluate the generation
 		this.evaluateGen(newGen);
-		this.addGeneration(newGen);
+		this._generation=newGen;
 		this._com.send("newGen",newGen.toStructure());
 	}
 
@@ -134,8 +134,8 @@ export class Trainer {
 			console.log(" +  GENE");
 			baby.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
 		}
-		baby.parents.push(p1);
-		baby.parents.push(p2);
+		/*baby.parents.push(p1);
+		baby.parents.push(p2);*/
 		// console.log(baby);
 		return baby;
 	}
@@ -159,13 +159,9 @@ export class Trainer {
 		}
 	}
 
-	addGeneration(generation) {
-		this._generations.push(generation);
-	}
-
 	get config() {return this._config;}
 	set config(config) {this._config = config;}
 
-	get generations() {return this._generations;}
+	get generation() {return this._generation;}
 
 }
