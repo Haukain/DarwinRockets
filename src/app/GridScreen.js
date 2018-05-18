@@ -54,6 +54,7 @@ export class GridScreen extends Screen{
         //sort the list of rockets with the ordered indexes and re-load the grid
         for (let i=0;i<orderedIndexArray.length;i++){orderedRocketsArray[i]=rockets[orderedIndexArray[i]];}
         this._app.currentGeneration._rockets = orderedRocketsArray;
+        console.log(this._app.currentGeneration._rockets); // pour timothy
         this._app.goSimulation();
     }
 
