@@ -35,22 +35,26 @@ export class GridScreen extends Screen{
 
         let max = this._app.currentGeneration.getMax();
         let next = -10;
-        let orderedRocketsArray=[];
+        let orderedIndexArray=[];
         let rockets=this._app.currentGeneration._rockets;
+        let orderedRocketsArray = [];
 
         //find the index(es) of the max
-        for(let i=0;i<rockets.length;i++){if(rockets[i].score==max){orderedRocketsArray.push(i)};}
+        for(let i=0;i<rockets.length;i++){if(rockets[i].score==max){orderedIndexArray.push(i)};}
  
-        //orderedRocketsArray = array of indexes of rockets by score (higher to lower)
+        //orderedIndexArray = array of indexes of rockets by score (higher to lower)
         for (let i=0;i<rockets.length;i++){
             for(let r of rockets){if (r.score<max && r.score>=next){next=r.score};}
         
-            for(let i=0;i<rockets.length;i++){if (rockets[i].score==next){orderedRocketsArray.push(i)};}
+            for(let i=0;i<rockets.length;i++){if (rockets[i].score==next){orderedIndexArray.push(i)};}
             max=next;
             next=-10;
         }
-
-        //for (let i=0;i<orderedRocketsArray.length;i++){this._constructRocket(orderedRocketsArray[i]);} ne fonctionne pas pour l'instant
+        
+        //sort the list of rockets with the ordered indexes and re-load the grid
+        for (let i=0;i<orderedIndexArray.length;i++){orderedRocketsArray[i]=rockets[orderedIndexArray[i]];}
+        this._app.currentGeneration._rockets = orderedRocketsArray;
+        this._app.goSimulation();
     }
 
     _constructRocket(i){
