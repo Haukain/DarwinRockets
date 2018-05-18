@@ -1,5 +1,5 @@
 import { WorkerCommander } from "./worker/WorkerCommander.js"
-import Worker from 'worker-loader!./worker/Worker.js';
+import Worker from 'worker-loader!./worker/mainWorker.js';
 let worker = new Worker();
 let com = new WorkerCommander(worker);
 setTimeout(()=>{

@@ -3,20 +3,19 @@ import { Generation } from "./Generation.js";
 import { Configuration } from "./Configuration.js";
 import { Rocket } from "./Rocket.js";
 import { Reactor } from "./Reactor.js";
-import { Start } from "./Start.js";
-import { End } from "./End.js";
 import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 
-export class Trainer {
+ export class Trainer {
 	constructor(worker){
 		let that = this;
 		this._continuousGeneration = false;
 		this._config = null;
 		this._generation = null;
-		this._com = new WorkerCommander(self);
+		this._com = new WorkerCommander(worker);
 		this._com.addCommandListener("initTrainer",d=>{
 			that._generation = Generation.fromStructure(d.gen);
 			this._config = Configuration.fromStructure(d.conf);
+			for(let s of that._subWorkers) s.send("setConfig",d.conf)
 			this.evaluateGen(that._generation);
 		});
 		this._com.addCommandListener("startGen",d=>{
@@ -29,6 +28,12 @@ export class Trainer {
 			that.makeNGenerations(n);
 		});
 		this._com.addCommandListener("isRunning",d=>Promise.resolve(that.continuousGeneration()));
+		this._subWorkers = [];
+		this._com.addCommandListener("addSubWorker",s=>{
+			s.start();
+			that._subWorkers.push(new WorkerCommander(s));
+		});
+
 	}
 
 	async makeNewGen() {
@@ -43,47 +48,19 @@ export class Trainer {
 			newGen.addRocket(this.reproduce(p1,p2));
 		}
 		//evaluate the generation
-		this.evaluateGen(newGen);
+		await this.evaluateGen(newGen);
 		this._generation=newGen;
 		this._com.send("newGen",newGen.toStructure());
 	}
 
-	evaluateGen(g) {
-		let startPos = this._config.terrain.objects.filter(o=>o instanceof Start)[0].position;
-		let targetPos = this._config.terrain.objects.filter(o=>o instanceof End)[0].position;
-		let totalDist = Math.sqrt( Math.pow(targetPos.x -startPos.x,2) + Math.pow(targetPos.y -startPos.y,2) );
-		//console.log(this._config);
-		for(let r of g.rockets){
-			let minDist = 9999999999;
-			let topSpeed = 0; // TODO: code topSpeed
-			let complexity = r.reactors.length;
-			let usefulReactors = 0;
-			let completionTime = 0;
-			let traveledDistance = 0;
-			let engine = new PhysicsComputer(this._config.terrain,[r]);
-			let prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
-			while(minDist>30 && !engine.isEnded()){
-				engine.update();
-				let distTarget=Math.sqrt( Math.pow(engine.rockets[0].position.x-targetPos.x,2) + Math.pow(engine.rockets[0].position.y-targetPos.y,2) );
-				if(!isNaN(distTarget))minDist = Math.min(distTarget,minDist);
-				let delta=Math.sqrt( Math.pow(engine.rockets[0].position.x-prevPos.x,2) + Math.pow(engine.rockets[0].position.y-prevPos.y,2) );
-				if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
-				prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
-			}
-			completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
-			for (let reac of r.reactors){
-				if(reac.activationTime<completionTime){
-					usefulReactors+=1;
-				}
-			}
-			let distToTargetRatio = (1 - (minDist/totalDist)).toFixed(2); // 1 is close 0 is start
-			let completionTimeRatio = (1 - (completionTime/engine.simDuration)).toFixed(2); // 1 is fast 0 is notCompleted
-			let traveledDistRatio = (traveledDistance/totalDist).toFixed(2); // >1 is greater than objective dist <1 is lower than objective dist
-			let complexityRatio = (usefulReactors/complexity).toFixed(2); // 1 when all the reactors are useful 0 when none
-			//console.log("disToT :",distToTargetRatio,"compTime :",completionTimeRatio,"travelDist :",traveledDistRatio,"complex :",complexityRatio);
-			r.score = this._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
-			//console.log("score :",r.score);
+	async evaluateGen(g) {
+		let trays = this._subWorkers.map(s=>[]);
+		for(let i=0;i<g.rockets.length;i++){
+			trays[i%trays.length].push(g.rockets[i]);
 		}
+		let promises = this._subWorkers.map(s=>s.send("evaluateGen",trays.pop().map(r=>r.toStructure()),true));
+		let results = await Promise.all(promises);
+		g.rockets = results.reduce((acc, val) => acc.concat(val), []).map(r=>Rocket.fromStructure(r));
 		//console.log("av score :",g.getAverageScore());
 		return true;
 	}

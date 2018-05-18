@@ -55,6 +55,7 @@ export class Generation {
 	}
 
 	get rockets() {return this._rockets;}
+	set rockets(r) {this._rockets=r}
 
 	toStructure(){
 		return {rockets:this._rockets.map(r=>r.toStructure())};

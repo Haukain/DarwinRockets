@@ -24,12 +24,13 @@ export class WorkerCommander{
       }
     }
   }
-  _sendCom(t,c,i,d){
-    this._context.postMessage({type:t,command:c,id:i,data:d});
+  _sendCom(t,c,i,d,tr){
+    if(tr) this._context.postMessage({type:t,command:c,id:i,data:d},[d]);
+    else this._context.postMessage({type:t,command:c,id:i,data:d});
   }
-  send(command,data,isReturn){//(string,object,bool)
+  send(command,data,isReturn,transferable){//(string,object,bool)
     let id = ""+Math.round(Math.random()*1000000);
-    this._sendCom(0,command,id,data);
+    this._sendCom(0,command,id,data,transferable);
     if(isReturn){
       return new Promise((res,rej)=>{this._returnPromises[id]={res:res,rej:rej};});
     }

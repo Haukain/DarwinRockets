@@ -9,7 +9,8 @@ import { Modal } from "../displayer/Modal.js";
 import { Generation } from "../worker/Generation.js";
 import { Configuration } from "../worker/Configuration.js";
 import { WorkerCommander } from "../worker/WorkerCommander.js";
-import Worker from 'worker-loader!../worker/Worker.js';
+import Worker from 'worker-loader!../worker/mainWorker.js';
+import SubWorker from 'worker-loader!../worker/subWorker.js';
 export class App{
   constructor(el) {
     this._DEBUG = true;
@@ -25,6 +26,15 @@ export class App{
     this._com.addCommandListener("newGen",g=>{
 			that.addGeneration(Generation.fromStructure(g));
 		});
+    this._subWorkers = [];
+    for(let i=0;i<4;i++){
+			let w = new SubWorker();
+      let channel = new MessageChannel();
+      let wc = new WorkerCommander(w);
+      this._com.send("addSubWorker",channel.port1,false,true);
+      wc.send("setWorker",channel.port2,false,true);
+			this._subWorkers.push(w);
+		}
     //generations
     this._currentGeneration = null;
     this._generations=[];
