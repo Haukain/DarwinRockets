@@ -23,7 +23,9 @@ export class ChartScreen extends Screen{
 
 		//average score per generation chart
 		let scoreChart = new LineChartWidget('white', 'grey');
-		let dataset1 = scoreChart.addDataset("Average score per generation","#0011FC","#C2C6FA");
+		let maxDataset = scoreChart.addDataset("max score per generation","#97ddff","rgba(0,0,0,0)");
+		let avgDataset = scoreChart.addDataset("Average score per generation","#0011FC","#C2C6FA55");
+		let minDataset = scoreChart.addDataset("min score per generation","#ffa3c5","rgba(0,0,0,0)");
 		let numberCurrentGen = 0;
 		for(let gen of this._app.generations){numberCurrentGen++;if(gen == this._app.currentGeneration)break;}
 		let nGen = 0;
@@ -34,7 +36,9 @@ export class ChartScreen extends Screen{
 			nGen++;
 			//if(fiew generations, gen in pitch, gen is the current gen)
 			if(numberCurrentGen<nPointsOnXAxis||nGen%pitch==0||gen == this._app.currentGeneration){
-				scoreChart.addDataPoint(dataset1,nGen,gen.getAverageScore());
+				scoreChart.addDataPoint(maxDataset,nGen,gen.getMax());
+				scoreChart.addDataPoint(avgDataset,nGen,gen.getAverageScore());
+				scoreChart.addDataPoint(minDataset,nGen,gen.getMin());
 			}
 			if(gen == this._app.currentGeneration)break;
 		}
