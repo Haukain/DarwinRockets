@@ -8,6 +8,10 @@ module.exports = {
     testDisplayerChart:'./src/testDisplayerChart.js',
     testPhysics:'./src/testPhysics.js',
     testWorker:'./src/testWorker.js',
+    start:'./src/redirect.js',
+    edit:'./src/redirect.js',
+    gen:'./src/redirect.js',
+    chart:'./src/redirect.js',
   },
   output: {
     filename: '[name].bundle.js',

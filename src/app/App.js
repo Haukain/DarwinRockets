@@ -64,19 +64,19 @@ export class App{
     this._currentScreen = new StartScreen(this);
     this._state = "start";
     this._header.hideButtons();
-    if(!this._DEBUG)history.pushState({fake: true},"Darwin Rockets","start.html");
+    history.pushState({fake: true},"Darwin Rockets","start.html");
   }
   goEdit(locked=false) {
     this._currentScreen = new EditScreen(this,locked);
     this._state = "edit";
     this._header.hideButtons();
-    if(!this._DEBUG)history.pushState({fake: true},"Edit config","edit.html");
+    history.pushState({fake: true},"Edit config","edit.html");
   }
   goSimulation() {
     this._currentScreen = new GridScreen(this,this._currentGeneration);
     this._state = "gen";
     this._header.showButtons();
-    if(!this._DEBUG)history.pushState({fake: true},"Simulation screen","gen.html");
+    history.pushState({fake: true},"Simulation screen","gen.html");
   }
   goChart() {
     console.log("going edit");
@@ -84,7 +84,7 @@ export class App{
     this._currentScreen = new ChartScreen(this,this._currentGeneration);
     this._state = "chart";
     this._header.showButtons();
-    if(!this._DEBUG)history.pushState({fake: true},"chart screen","chart.html");
+    history.pushState({fake: true},"chart screen","chart.html");
   }
   //trainer interface
   initTrainer(){
