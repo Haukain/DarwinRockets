@@ -13,7 +13,7 @@ export class Text extends Widget{
   removeChild() {}
 
   set text(t){
-    this._innerElement.textContent = t;
+    this._innerElement.innerHTML = t.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");
   }
   get text(){
     return this._innerElement.textContent;
