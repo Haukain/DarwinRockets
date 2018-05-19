@@ -10,10 +10,12 @@ export class GridScreen extends Screen{
         this._gen = gen;
 
         //build the grid
+				const max = this._gen.getMax();
+				const min = this._gen.getMin();
         for (let i of this._gen.rockets){
 					let rank=null;
-					if(i.score==this._gen.getMax())rank="first";
-					if(i.score==this._gen.getMin())rank="last";
+					if(i.score==max)rank="first";
+					if(i.score==min)rank="last";
 					if(i.score==-1)rank=null;
 					this._constructRocket(i,rank);
 				}
