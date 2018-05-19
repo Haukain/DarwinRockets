@@ -27,7 +27,7 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 		this._com.addCommandListener("nGen",n=>{
 			that.makeNGenerations(n);
 		});
-		this._com.addCommandListener("isRunning",d=>Promise.resolve(that.continuousGeneration()));
+		this._com.addCommandListener("isRunning",d=>Promise.resolve(that._continuousGeneration));
 		this._subWorkers = [];
 		this._com.addCommandListener("addSubWorker",s=>{
 			s.start();

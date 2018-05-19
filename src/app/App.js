@@ -70,6 +70,7 @@ export class App{
     this._currentScreen = new EditScreen(this,locked);
     this._state = "edit";
     this._header.hideButtons();
+    this.stopGen();
     history.pushState({fake: true},"Edit config","edit.html");
   }
   goSimulation() {
@@ -101,6 +102,9 @@ export class App{
   stopGen() {
     console.log("stopping generation");
     this._com.send("stopGen");
+  }
+  isGenerating(){//Promise<boolean>
+    return this._com.send("isRunning",null,true);
   }
   makeNGen(n) {
     console.log(`making ${n}  generation`);

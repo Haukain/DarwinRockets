@@ -20,7 +20,7 @@ export class Header{
       }
     });
     //start/stop gen Button
-    this._addButton("play_arrow","toggle continuous generation",e=>{
+    this._continuousGenButton=this._addButton("play_arrow","toggle continuous generation",e=>{
       if(e.icon=="play_arrow"){
         e.icon = "pause";
         that._app.startGen();
@@ -65,11 +65,15 @@ export class Header{
     button.on("click",()=>action(button));
     item.addChild(button);
     this.container.addChild(item);
+    return button;
   }
   hideButtons(){
     for(let child of this.container.children) child.disabled = true;
   }
   showButtons(){
+    this._app.isGenerating().then(a=>{
+      this._continuousGenButton.icon = a?"pause":"play_arrow";
+    });
     for(let child of this.container.children) child.disabled = false;
   }
   updateGen(){
