@@ -301,9 +301,9 @@ body>.row{
   position: relative;
 }
 /*=== RocketViewer ===*/
-.rv-first{
-  border:solid 1px green;
+.rv-first>div{
+  box-shadow: 0 0 10px #97ddff;
 }
-.rv-last{
-  border:solid 1px red;
+.rv-last>div{
+  box-shadow: 0 0 10px #ffa3c5;
 }
