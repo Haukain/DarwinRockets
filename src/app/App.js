@@ -66,8 +66,8 @@ export class App{
     this._header.hideButtons();
     if(!this._DEBUG)history.pushState({fake: true},"Darwin Rockets","start.html");
   }
-  goEdit() {
-    this._currentScreen = new EditScreen(this);
+  goEdit(locked=false) {
+    this._currentScreen = new EditScreen(this,locked);
     this._state = "edit";
     this._header.hideButtons();
     if(!this._DEBUG)history.pushState({fake: true},"Edit config","edit.html");
@@ -126,7 +126,7 @@ export class App{
     this._configuration = Configuration.fromStructure(t.config);
     /*this.initTrainer();
     this.goSimulation();*/
-    this.goEdit();
+    this.goEdit(true);
   }
   selectGeneration(gen){
     this._currentGeneration = gen;

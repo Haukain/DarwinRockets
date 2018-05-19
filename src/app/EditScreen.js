@@ -21,7 +21,7 @@ import { BlackHole } from "../worker/BlackHole.js";
 
 export class EditScreen extends Screen{
 
-	constructor(app) {
+	constructor(app,locked) {
 		super(app,"navyblue");
 		//structure
 		let leftCol=new Col(12,12,5,5);
@@ -73,6 +73,7 @@ export class EditScreen extends Screen{
 				range.max=param.max;
 				range.step=param.step;
 				range.text=param.name;
+				range.locked=locked;
 				range.value=eval("this._app.configuration"+param.key); // TODO: trouver une solution pour éviter cette vulnérabilité
 				range.on("change",e=>{
 					eval(`this._app.configuration${param.key}=${range.value}`); // TODO: trouver une solution pour éviter cette vulnérabilité
@@ -119,8 +120,10 @@ export class EditScreen extends Screen{
 			new PlaceTerrainTool(this._terrainConf,"public","planet",Planet),
 			new PlaceTerrainTool(this._terrainConf,"star","blackHole",BlackHole)
 		];
-		for(let tool of tools){
-			this._toolbar.addChild(tool.button);
+		if(!locked){
+			for(let tool of tools){
+				this._toolbar.addChild(tool.button);
+			}
 		}
 	}
 }
