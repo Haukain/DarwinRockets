@@ -9,10 +9,13 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 	constructor(worker){
 		let that = this;
 		this._continuousGeneration = false;
+    this._remainingGenerations = 0;
 		this._config = null;
 		this._generation = null;
 		this._com = new WorkerCommander(worker);
 		this._com.addCommandListener("initTrainer",d=>{
+      that._continuousGeneration = false;
+      this._remainingGenerations = 0;
 			that._generation = Generation.fromStructure(d.gen);
 			this._config = Configuration.fromStructure(d.conf);
 			for(let s of that._subWorkers) s.send("setConfig",d.conf)
@@ -27,7 +30,7 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 		this._com.addCommandListener("nGen",n=>{
 			that.makeNGenerations(n);
 		});
-		this._com.addCommandListener("isRunning",d=>Promise.resolve(that._continuousGeneration));
+		this._com.addCommandListener("isRunning",d=>Promise.resolve(that._continuousGeneration||this._remainingGenerations>0));
 		this._subWorkers = [];
 		this._com.addCommandListener("addSubWorker",s=>{
 			s.start();
@@ -119,6 +122,7 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 
 	async startContinuousGeneration() {
 		this._continuousGeneration = true;
+    this._remainingGenerations = 0;
 		while(this._continuousGeneration){
 			await this.makeNewGen();
 			await new Promise((res,rej)=>setTimeout(()=>res(),1));
@@ -127,11 +131,14 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 
 	stopContinuousGeneration() {
 		this._continuousGeneration = false;
+    this._remainingGenerations = 0;
 	}
 
 	async makeNGenerations(n) {
-		for(let i=0;i<n;i++){
+    this._remainingGenerations = n;
+		while(this._remainingGenerations>0){
 			await this.makeNewGen();
+      this._remainingGenerations--;
 			await new Promise((res,rej)=>setTimeout(()=>res(),1));
 		}
 	}

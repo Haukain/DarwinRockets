@@ -22,19 +22,23 @@ export class Header{
     //start/stop gen Button
     this._continuousGenButton=this._addButton("play_arrow","toggle continuous generation",e=>{
       if(e.icon=="play_arrow"){
-        e.icon = "pause";
         that._app.startGen();
       }else{
-        e.icon = "play_arrow";
         that._app.stopGen();
       }
     });
+    setInterval(()=>{
+      that._app.isGenerating().then(a=>{
+        that._continuousGenButton.icon = a?"pause":"play_arrow";
+      });
+    },300);
     //make N gen button
     this._addButton("chevron_right","make N generations",e=>{
       new NumericPrompt("number of generations","",d=>{
         that._app.makeNGen(d);
       });
     });
+
     //help Button
     this._addButton("help_outline","help",e=>{new Alert("Not yet written :/","sorry.")});
 
@@ -71,9 +75,6 @@ export class Header{
     for(let child of this.container.children) child.disabled = true;
   }
   showButtons(){
-    this._app.isGenerating().then(a=>{
-      this._continuousGenButton.icon = a?"pause":"play_arrow";
-    });
     for(let child of this.container.children) child.disabled = false;
   }
   updateGen(){
