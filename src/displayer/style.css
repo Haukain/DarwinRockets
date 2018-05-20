@@ -57,6 +57,7 @@
   border-radius: 100px;
   background: rgba(125,125,125,.2);
   padding: 6px;
+  color : white;
 }
 /* === rowfix === */
 .row{
