@@ -20,6 +20,11 @@ export class Widget{
   on(evt,callback) {
     this._element.addEventListener(evt,callback,false);
   }
+  trigger(evt){
+    let event = document.createEvent("HTMLEvents");
+    event.initEvent(evt, true, true );
+    this._element.dispatchEvent(event);
+  }
   destroy() {
     while(this._children.length){
       this._children[0].destroy();
