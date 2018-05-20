@@ -63,7 +63,7 @@ export class EditScreen extends Screen{
 		for(let section of map){
 			let row1 = new Row();
 			let title = new Title(section.title);
-			let helpbutton = new IconButton("help_outline","Help");
+			let helpbutton = new IconButton("help_outline","Help","white");
 			helpbutton.on("click",()=>{new Alert(section.title,section.help)});
 			row1.addChild(title);
 			row1.addChild(helpbutton);

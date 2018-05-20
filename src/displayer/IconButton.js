@@ -1,8 +1,8 @@
 import { Button } from "./Button.js";
 
 export class IconButton extends Button{
-  constructor(icon,text) {
-    super(text);
+  constructor(icon,text,color) {
+    super(text,color);
     this._element.className = `btn material-icons iconbutton`;
     this.icon = icon;
 
