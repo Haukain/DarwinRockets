@@ -1,84 +1,123 @@
 {
-  "DEBUG1":{
+  "First run":{
     "name":"Basic Test",
     "config":{
-      "commentary":"Basic run for discovery or debug purpose",
+      "commentary":"Simple path between a start and an end",
+      "populationSize":80,
+      "terrain":{"size":{"width":1920,"height":1080},
+      "objects":[{"type":"Start","position":{"x":400,"y":300}},
+                 {"type":"End","position":{"x":1000,"y":800}}]},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+    }
+  },
+  "Harder Training":{
+    "name":"Longer path",
+    "config":{
+      "commentary":"Longer path to travel",
+      "populationSize":80,
+      "terrain":{"size":{"width":1920,"height":1080},
+      "objects":[{"type":"Start","position":{"x":200,"y":200}},
+                 {"type":"End","position":{"x":1700,"y":800}}]},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+    }
+  },
+  "Planetary contact":{
+    "name":"Planetary contact",
+    "config":{
+      "commentary":"The rocket will try to find a path between the planets",
       "populationSize":100,
       "terrain":{"size":{"width":1920,"height":1080},
-      "objects":[{"type":"Start","position":{"x":500,"y":300}},
-                 {"type":"End","position":{"x":1400,"y":700}}]},
+      "objects":[{"type":"Start","position":{"x":300,"y":300}},
+                 {"type":"End","position":{"x":1500,"y":800}},
+                 {"type":"Planet","position":{"x":649.3528183716076,"y":124.23005565862708},"radius":30},
+                 {"type":"Planet","position":{"x":729.5198329853862,"y":599.1094619666048},"radius":30},
+                 {"type":"Planet","position":{"x":1230.5636743215032,"y":933.7291280148423},"radius":30},
+                 {"type":"Planet","position":{"x":843.7578288100209,"y":318.58998144712433},"radius":30},
+                 {"type":"Planet","position":{"x":1058.2045929018789,"y":713.3209647495362},"radius":30},
+                 {"type":"Planet","position":{"x":483.0062630480167,"y":460.8534322820037},"radius":30},
+                 {"type":"Planet","position":{"x":729.5198329853862,"y":885.6400742115028},"radius":30},
+                 {"type":"Planet","position":{"x":1276.659707724426,"y":438.8126159554731},"radius":30},
+                 {"type":"Planet","position":{"x":1733.6116910229646,"y":933.7291280148423},"radius":30},
+                 {"type":"Planet","position":{"x":196.40918580375782,"y":106.19666048237477},"radius":30},
+                 {"type":"Planet","position":{"x":164.34237995824634,"y":631.1688311688312},"radius":30},
+                 {"type":"Planet","position":{"x":1601.3361169102297,"y":288.5343228200371},"radius":30},
+                 {"type":"Planet","position":{"x":420.8768267223382,"y":895.6586270871985},"radius":30}]},
       "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.4,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
     }
   },
-  "surv":{
-    "name":"1. Survival of the fittest",
+  "Abort":{
+    "name":"Abort !!",
     "config":{
-      "commentary":" The survival of the highest: 1 when the distance will be made, 0 if no. Reproduction has no purposes",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
+      "commentary":"An unexpected black hole situation",
+      "populationSize":100,
+      "terrain":{"size":{"width":1920,"height":1080},
+      "objects":[{"type":"Start","position":{"x":300,"y":300}},
+                 {"type":"End","position":{"x":1500,"y":800}},
+                 {"type":"BlackHole","position":{"x":635.3235908141962,"y":332.6159554730983},"radius":30},
+                 {"type":"Planet","position":{"x":649.3528183716076,"y":398.7384044526902},"radius":30},
+                 {"type":"Planet","position":{"x":549.1440501043842,"y":603.1168831168832},"radius":30},
+                 {"type":"Planet","position":{"x":547.1398747390397,"y":306.56771799628945},"radius":30},
+                 {"type":"Planet","position":{"x":282.58872651356995,"y":601.113172541744},"radius":30},
+                 {"type":"Planet","position":{"x":649.3528183716076,"y":260.4823747680891},"radius":30},
+                 {"type":"Planet","position":{"x":701.4613778705636,"y":50.09276437847866},"radius":30},
+                 {"type":"Planet","position":{"x":996.0751565762005,"y":280.5194805194805},"radius":30},
+                 {"type":"Planet","position":{"x":707.473903966597,"y":352.6530612244898},"radius":30},
+                 {"type":"Planet","position":{"x":372.77661795407096,"y":34.063079777365495},"radius":30},
+                 {"type":"Planet","position":{"x":112.23382045929019,"y":350.64935064935065},"radius":30},
+                 {"type":"Planet","position":{"x":573.1941544885177,"y":76.14100185528757},"radius":30},
+                 {"type":"Planet","position":{"x":793.6534446764092,"y":266.4935064935065},"radius":30}]},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      }
+    },
+    "No Mutation":{
+      "name":"No mutation !",
+      "config":{
+        "commentary":"A small sample of rocket on a simple path, but without any reproduction mutation (only mean of former best rockets genes)",
+        "populationSize":10,
+        "terrain":{"size":{"width":1920,"height":1080},
+        "objects":[{"type":"Start","position":{"x":400,"y":300}},
+                   {"type":"End","position":{"x":1200,"y":800}}]},
+        "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0,"randomMutationRate":0},
+        "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      }
+    },
+    "Road curve":{
+      "name":"A harder path for the rockets",
+      "config":{
+        "commentary":"A small sample of rocket on a simple path, but without any reproduction mutation (only mean of former best rockets genes)",
+        "populationSize":10,
+        "terrain":{"size":{"width":1920,"height":1080},
+        "objects":[{"type":"Start","position":{"x":390.8141962421712,"y":813.5064935064935}},
+                   {"type":"End","position":{"x":1362.8392484342378,"y":815.5102040816327}},
+                   {"type":"Planet","position":{"x":330.6889352818372,"y":943.747680890538},"radius":30},
+                   {"type":"Planet","position":{"x":422.88100208768265,"y":927.7179962894248},"radius":30},
+                   {"type":"Planet","position":{"x":485.01043841336116,"y":899.6660482374768},"radius":30},
+                   {"type":"Planet","position":{"x":545.1356993736952,"y":843.5621521335808},"radius":30},
+                   {"type":"Planet","position":{"x":609.2693110647182,"y":755.3988868274582},"radius":30},
+                   {"type":"Planet","position":{"x":657.3695198329854,"y":677.2541743970315},"radius":30},
+                   {"type":"Planet","position":{"x":709.4780793319416,"y":593.0983302411873},"radius":30},
+                   {"type":"Planet","position":{"x":775.615866388309,"y":494.9165120593692},"radius":30},
+                   {"type":"Planet","position":{"x":849.7703549060543,"y":410.760667903525},"radius":30},
+                   {"type":"Planet","position":{"x":933.945720250522,"y":372.69016697588125},"radius":30},
+                   {"type":"Planet","position":{"x":1012.1085594989562,"y":414.76808905380335},"radius":30},
+                   {"type":"Planet","position":{"x":1046.179540709812,"y":472.8756957328386},"radius":30},
+                   {"type":"Planet","position":{"x":1090.2713987473903,"y":571.0575139146567},"radius":30},
+                   {"type":"Planet","position":{"x":1134.3632567849686,"y":667.2356215213358},"radius":30},
+                   {"type":"Planet","position":{"x":1168.4342379958246,"y":743.3766233766233},"radius":30},
+                   {"type":"Planet","position":{"x":1208.517745302714,"y":815.5102040816327},"radius":30},
+                   {"type":"Planet","position":{"x":1260.6263048016701,"y":877.6252319109462},"radius":30},
+                   {"type":"Planet","position":{"x":1346.8058455114822,"y":923.7105751391466},"radius":30},
+                   {"type":"Planet","position":{"x":1428.9770354906054,"y":915.69573283859},"radius":30},
+                   {"type":"Planet","position":{"x":258.5386221294363,"y":893.6549165120593},"radius":30},
+                   {"type":"Planet","position":{"x":258.5386221294363,"y":795.4730983302412},"radius":30},
+                   {"type":"Planet","position":{"x":282.58872651356995,"y":717.3283858998145},"radius":30},
+                   {"type":"Planet","position":{"x":1505.1356993736952,"y":857.5881261595547},"radius":30}]},
+        "reproductionParameters":{"newGeneAppearanceRate":0.15,"geneDistributionDeviationFactor":0.05,"randomMutationRate":0},
+        "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      }
     }
-  },
-  "repro":{
-    "name":"2. New with Old",
-    "config":{
-      "commentary":" Adds more interest ",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-    }
-  },
-  "mut":{
-    "name":"3. Random Mutation",
-    "config":{
-      "commentary":" Mutations are random for all generations ",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-    }
-  },
-  "varia":{
-    "name":"4. Replication Errors",
-    "config":{
-      "commentary":" Reactor cloning ",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-    }
-  },
-  "harder":{
-    "name":"5. Harder",
-    "config":{
-      "commentary":" The field is harder, more complex ",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-    }
-  },
-  "simpler":{
-    "name":"6. Simpler",
-    "config":{
-      "commentary":" Prioritize the rockets not complex, malus for complexity ",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-    }
-  },
-  "faster":{
-    "name":"7. Faster",
-    "config":{
-      "commentary":" The fastest possible ",
-      "populationSize" : 30,
-      "terrain":{"size":{"width":1000,"height":700}, "objects":[]},
-      "reproductionParameters":{"newGeneAppearanceRate":1 ,"geneDistributionDeviationFactor": 0,"randomMutationRate": 1 },
-      "fitnessFunction":{"remainingDistanceFactor":1 ,"completionTimeFactor":1 ,"traveledDistanceFactor": 1,"complexityFactor": 1}
-    }
-  }
 }

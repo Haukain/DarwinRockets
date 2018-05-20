@@ -29,7 +29,6 @@ export class PhysicsComputer {
 		        currentPart = r.object.parts[j];
 		        if( (currentPair.bodyA.label === currentPart.label) || (currentPair.bodyB.label === currentPart.label)){
 							that._time = that._simDuration;
-							console.log("COLLISION");
 		        }
 		      }
 		    }
