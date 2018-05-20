@@ -27,7 +27,7 @@ export class App{
 			that.addGeneration(Generation.fromStructure(g));
 		});
     this._subWorkers = [];
-    for(let i=0;i<4;i++){
+    for(let i=0;i<navigator.hardwareConcurrency;i++){
 			let w = new SubWorker();
       let channel = new MessageChannel();
       let wc = new WorkerCommander(w);
