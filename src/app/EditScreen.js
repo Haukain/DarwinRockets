@@ -28,6 +28,7 @@ export class EditScreen extends Screen{
 		let rightCol=new Col(12,12,7,7);
 		this._container.addChild(leftCol);
 		this._container.addChild(rightCol);
+
 		//config
 		let map =[
 			{
@@ -82,6 +83,17 @@ export class EditScreen extends Screen{
 			}
 
 		}
+		//unlock screen
+		let unlockRow = new Row();
+		unlockRow.disabled = !locked;
+		card.addChild(unlockRow);
+		let unlockTitle = new Title("These parameters are locked in tutorial mode");
+		unlockRow.addChild(unlockTitle);
+		let unlockButton = new IconButton("lock_open");
+		unlockButton.on("click",()=>{
+			this._app.goEdit();
+		});
+		unlockRow.addChild(unlockButton);
 		let LaunchButton = new Button("Launch Simulation","white");
 		LaunchButton.on("click",()=>{
 			if(!this._terrainConf.terrain.isValid()){
