@@ -36,10 +36,17 @@ export class Header{
     });
 
     //help Button
-    let helpButton = this._addButton("help_outline","help",e=>{new Alert("Controls",
-      "You can create new generations with the arrows.\n"+
-      "You can navigate between the generations by using the slider.\n"+
-      "You can see the evolution charts bu clicking the chart button.\n"+
+    let helpButton = this._addButton("help_outline","help",e=>{new Alert("HELP !",
+      "The rockets will try to find the best path between the start and the end you set\n"+
+      "The planets will stop and the black hole attract the rockets to their doom\n"+
+      "The best rockets (blue aura) will reproduce between each generation, the worst (red aura) will disappear\n"+
+      "Experiment differents routes and configuration to see if and how they will survive\n\n"+
+
+      "Controls :\n"+
+      "You can create continuous generations with the play button, or a defined number the angle bracket button.\n"+
+      "You can navigate between the generations by using the slider and/or the keyboard arrows.\n"+
+      "You can sort the rockets of the generation by clicking on the sort button.\n"+
+      "You can switch between the chart/simulation screen by clicking on the chart/home button.\n"+
       "You can see a rocket flight by clicking on it."
     )});
     //generation range and text which indicates the current generation

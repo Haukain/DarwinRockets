@@ -40,21 +40,21 @@ export class EditScreen extends Screen{
 			},
 			{
 				title:"Score calculation",
-				help:"Choose the impact of each parameter on the score calculation",
+				help:"Choose the impact of each parameter on the score calculation\n\n" + "Distance to objective : Less remaining distance gives a better score \n" + "Time of flight : Shorter time of completion gives a better score\n" + "Complexity : A higher percentage of useful reactors gives a better score",
 				params:[
-					{key:".fitnessFunction.remainingDistanceFactor",name:"distance to objective",min:"-1",max:"1",step:".01"},
-					{key:".fitnessFunction.completionTimeFactor",name:"time of flight",min:"-1",max:"1",step:".01"},
-					{key:".fitnessFunction.traveledDistanceFactor",name:"distance traveled",min:"-1",max:"1",step:".01"},
-					{key:".fitnessFunction.complexityFactor",name:"rocket complexity",min:"-1",max:"1",step:".01"}
+					{key:".fitnessFunction.remainingDistanceFactor",name:"Distance to objective",min:"-1",max:"1",step:".01"},
+					{key:".fitnessFunction.completionTimeFactor",name:"Time of flight",min:"-1",max:"1",step:".01"},
+					{key:".fitnessFunction.traveledDistanceFactor",name:"Distance traveled",min:"-1",max:"1",step:".01"},
+					{key:".fitnessFunction.complexityFactor",name:"Rocket complexity",min:"-1",max:"1",step:".01"}
 				]
 			},
 			{
 				title:"Reproduction",
-				help:"Choose the appearance rate of these parameters",
+				help:"Choose the appearance rate of these parameters\n\n" + "Gene appearance rate : How often will a reactor appear or disappear while generating\n" + "Gene distribution : How much will the parameter will change between the parents and the child",
 				params:[
-					{key:".reproductionParameters.newGeneAppearanceRate",name:"gene appearance rate",min:"0",max:"1",step:".01"},
-					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"distribution random",min:"0",max:"1",step:".01"},
-					{key:".reproductionParameters.randomMutationRate",name:"mutation rate",min:"0",max:"1",step:".01"}
+					{key:".reproductionParameters.newGeneAppearanceRate",name:"Gene appearance rate",min:"0",max:"1",step:".01"},
+					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"Random distrubtion interval",min:"0",max:"1",step:".01"},
+					{key:".reproductionParameters.randomMutationRate",name:"Mutation rate",min:"0",max:"1",step:".01"}
 				]
 			}
 		];
