@@ -283,6 +283,12 @@ body>.row{
   margin: auto;
 }
 
+/*=== canvas margin fix ===*/
+.canvasWidget canvas{
+  display: block;
+  position: relative;
+}
+
 /*=== PhysicsDisplayer ===*/
 .modal-dialog{
   position: absolute !important;
@@ -295,10 +301,6 @@ body>.row{
   padding:0;
   margin:0;
   width: 50vw;
-}
-.physicsDisplayer canvas{
-  display: block;
-  position: relative;
 }
 /*=== RocketViewer ===*/
 .rv-first>div{
