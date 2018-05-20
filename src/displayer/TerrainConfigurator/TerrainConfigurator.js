@@ -22,10 +22,23 @@ export class TerrainConfigurator extends CanvasWidget{
       if(that._tool) this._terrain.objects = that._tool.upCallback(this._eventRelativeCoords(e),this._terrain.objects);
       this.draw();
     },false);
-    this.draw();
+    this._background = new Image();
+    this._background.src = './assets/images/starBackground.png';
+    this._background.loaded = false;
+    this._background.onload = ()=>that._background.loaded = true;
+    (function draw(){
+      that.draw();
+      requestAnimationFrame(draw);
+    })();
   }
   draw(){
-    this._ctx.clearRect(0,0,this._canvas.width,this._canvas.height);
+    if (this._background.loaded){
+      this._ctx.drawImage(this._background,0,0,this._canvas.width,this._background.height/this._background.width*this._canvas.width);
+    }
+    else {
+      this._ctx.fillStyle = '#1a233a';
+      this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
+    }
     for(let object of this._terrain.objects){
       this._ctx.save();
       this._ctx.translate(object.position.x,object.position.y);
