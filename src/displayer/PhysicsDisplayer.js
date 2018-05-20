@@ -25,6 +25,11 @@ export class PhysicsDisplayer extends CanvasWidget{
     this._background.src = './assets/images/starBackground.png';
     this._background.loaded = false;
     this._background.onload = ()=>{that._background.loaded = true;that.renderStatics();}
+    //end graphics
+    this._end = new Image();
+    this._end.src = './assets/images/signal_lost.png';
+    this._end.loaded = false;
+    this._end.onload = ()=>{that._end.loaded = true;}
     this.renderStatics();
     //render Loop
     if(autoRefresh){
@@ -33,6 +38,7 @@ export class PhysicsDisplayer extends CanvasWidget{
           window.requestAnimationFrame(render);
           that.tick();
         }else{
+          that.drawEnding();
           console.log("ended");
         }
       })();
@@ -67,6 +73,9 @@ export class PhysicsDisplayer extends CanvasWidget{
       rocket.draw(this._ctx);
       this._ctx.restore();
     }
+  }
+  drawEnding(){
+    this._ctx.drawImage(this._end,0,0,this._canvas.width,this._end.height/this._end.width*this._canvas.width);
   }
   draw(){
     this.drawStatics();
