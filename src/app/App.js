@@ -63,12 +63,15 @@ export class App{
   goStart(){
     this._currentScreen = new StartScreen(this);
     this._state = "start";
+    this._configuration = new Configuration();
     this._header.hideButtons();
     history.pushState({fake: true},"Darwin Rockets","start.html");
   }
   goEdit(locked=false) {
     this._currentScreen = new EditScreen(this,locked);
     this._state = "edit";
+    this._currentGeneration = null;
+    this._generations=[];
     this._header.hideButtons();
     this.stopGen();
     history.pushState({fake: true},"Edit config","edit.html");
