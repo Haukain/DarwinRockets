@@ -36,7 +36,12 @@ export class Header{
     });
 
     //help Button
-    let helpButton = this._addButton("help_outline","help",e=>{new Alert("Not yet written :/","sorry.")});
+    let helpButton = this._addButton("help_outline","help",e=>{new Alert("Controls",
+      "You can create new generations with the arrows.\n"+
+      "You can navigate between the generations by using the slider.\n"+
+      "You can see the evolution charts bu clicking the chart button.\n"+
+      "You can see a rocket flight by clicking on it."
+    )});
     //generation range and text which indicates the current generation
     let genItem = new NavbarItem();
     let genItem2 = new NavbarItem();
