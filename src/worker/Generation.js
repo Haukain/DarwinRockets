@@ -27,7 +27,22 @@ export class Generation {
 
 	getAverageReactors() {
 		let sum = 0;
-		for(let r of this._rockets){sum += r.reactors.length;}
+		let max = 0;
+		for(let r of this._rockets){sum += r.reactors.length;if(max<r.reactors.length){max=r.reactors.length;}}
+		let average = sum/this._rockets.length;
+		return average/max;
+	}
+
+	getAverageRemainingDistance() {
+		let sum = 0;
+		for(let r of this._rockets){sum += Number(r.remainingDistance);}
+		let average = sum/this._rockets.length;
+		return average;
+	}
+
+	getAverageCompletionTime() {
+		let sum = 0;
+		for(let r of this._rockets){sum += Number(r.completionTime);}
 		let average = sum/this._rockets.length;
 		return average;
 	}

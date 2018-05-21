@@ -22,17 +22,17 @@ export class ChartScreen extends Screen{
 
 
 		//average score per generation chart
+		let gens = this._app.generations;
 		let scoreChart = new LineChartWidget('white', 'grey');
 		let maxDataset = scoreChart.addDataset("max score per generation","#97ddff","rgba(0,0,0,0)");
 		let avgDataset = scoreChart.addDataset("Average score per generation","#0011FC","#C2C6FA55");
 		let minDataset = scoreChart.addDataset("min score per generation","#ffa3c5","rgba(0,0,0,0)");
 		let numberCurrentGen = 0;
-		for(let gen of this._app.generations){numberCurrentGen++;if(gen == this._app.currentGeneration)break;}
+		for(let gen of gens){numberCurrentGen++;if(gen == this._app.currentGeneration)break;}
 		let nGen = 0;
 		let nPointsOnXAxis = 30;
 		let pitch = Math.floor(numberCurrentGen/nPointsOnXAxis);
-		for(let gen of this._app.generations)console.log(gen.getAverageScore());
-		for(let gen of this._app.generations){
+		for(let gen of gens){
 			nGen++;
 			//if(fiew generations, gen in pitch, gen is the current gen)
 			if(numberCurrentGen<nPointsOnXAxis||nGen%pitch==0||gen == this._app.currentGeneration){
@@ -46,11 +46,12 @@ export class ChartScreen extends Screen{
 		c1.addChild(scoreChart);
 
 
-		//radar chart : reste a coder les parametres proximity et speed
-		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (1=target)","Speed","Complexity (number of reactors)"]);
-		radarChart.addDataset("Current generation",randomColor(1),randomColor(.2),[1,0,this._app.generations[numberCurrentGen-1].getAverageReactors()]);
-		if(numberCurrentGen!=1){radarChart.addDataset("Parent generation",randomColor(1),randomColor(.2),[Math.random(),Math.random(),this._app.generations[numberCurrentGen-2].getAverageReactors()]);}
+		//radar chart
+		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (%)","Time of flight (%)","Complexity (%)"]);
+		radarChart.addDataset("Current generation","#07bd26","#70FE87",[gens[numberCurrentGen-1].getAverageRemainingDistance(),gens[numberCurrentGen-1].getAverageCompletionTime(),gens[numberCurrentGen-1].getAverageReactors()]);
+		if(numberCurrentGen!=1){radarChart.addDataset("Parent generation","#F6FE00","#FAFE70",[gens[numberCurrentGen-2].getAverageRemainingDistance(),gens[numberCurrentGen-2].getAverageCompletionTime(),gens[numberCurrentGen-2].getAverageReactors()]);}
 		c2.addChild(radarChart);
+		console.log("ici");
 
 
 		//score of the current generation bar chart
