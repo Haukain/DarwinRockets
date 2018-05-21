@@ -23,9 +23,9 @@ export class Rocket {
 	}
 	constructor(){
 		this._score = 0;
-		this._remainingDistance;
-		this._completionTime;
-		this._complexity;
+		this._remainingDistance = 0;
+		this._completionTime = 0;
+		this._complexity = 0;
 		this._parents = [];
 		this._reactors = [];
 

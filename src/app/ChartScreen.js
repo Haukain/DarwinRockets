@@ -16,9 +16,11 @@ export class ChartScreen extends Screen{
 		let c1 = new Col(6,6,6,6);
 		let c2 = new Col(6,6,6,6);
 		let c3 = new Col(6,6,6,6);
+		let c4 = new Col(6,6,6,6);
 		this._container.addChild(c1);
 		this._container.addChild(c2);
 		this._container.addChild(c3);
+		this._container.addChild(c4);
 
 
 		//average score per generation chart
@@ -42,16 +44,14 @@ export class ChartScreen extends Screen{
 			}
 			if(gen == this._app.currentGeneration)break;
 		}
-
 		c1.addChild(scoreChart);
 
 
-		//radar chart
+		//radar chart with Complexity, Proximity to the target and Time of flight
 		let radarChart = new RadarChartWidget('white', 'grey',["Proximity to the target (%)","Time of flight (%)","Complexity (%)"]);
 		radarChart.addDataset("Current generation","#07bd26","#70FE87",[gens[numberCurrentGen-1].getAverageRemainingDistance(),gens[numberCurrentGen-1].getAverageCompletionTime(),gens[numberCurrentGen-1].getAverageReactors()]);
 		if(numberCurrentGen!=1){radarChart.addDataset("Parent generation","#F6FE00","#FAFE70",[gens[numberCurrentGen-2].getAverageRemainingDistance(),gens[numberCurrentGen-2].getAverageCompletionTime(),gens[numberCurrentGen-2].getAverageReactors()]);}
 		c2.addChild(radarChart);
-		console.log("ici");
 
 
 		//score of the current generation bar chart
@@ -66,10 +66,28 @@ export class ChartScreen extends Screen{
 				barChart.addDataPoint(dataset2,"0",this._app.currentGeneration.getInterval(i,i+interval));
 				i=i+interval;}
 			barChart.addDataPoint(dataset2,precisionRound(i+(interval/2),2),this._app.currentGeneration.getInterval(i,i+interval));}
-
 		c3.addChild(barChart);
 
-		//bouton retour gridScreen
+
+		//last chart with Complexity, Proximity to the target and Time of flight
+		let lastChart = new LineChartWidget('white', 'grey');
+		let Dataset0 = lastChart.addDataset("Complexity (%)","#97ddff","rgba(0,0,0,0)");
+		let Dataset1 = lastChart.addDataset("Proximity to the target (%)","#00FE5D","rgba(0,0,0,0)");
+		let Dataset2 = lastChart.addDataset("Time of flight (%)","#FE3939","rgba(0,0,0,0)");
+		nGen =0;
+		for(let gen of gens){
+			nGen++;
+			if(numberCurrentGen<nPointsOnXAxis||nGen%pitch==0||gen == this._app.currentGeneration){
+				lastChart.addDataPoint(Dataset0,nGen,gen.getAverageReactors());
+				lastChart.addDataPoint(Dataset1,nGen,gen.getAverageRemainingDistance());
+				lastChart.addDataPoint(Dataset2,nGen,gen.getAverageCompletionTime());
+			}
+			if(gen == this._app.currentGeneration)break;
+		}
+		c4.addChild(lastChart);
+		
+
+		//gridScreen button
 		let floatingButton = new FloatingButton("home","Rockets",0);
         floatingButton.on("click",()=>{
         this._app.goSimulation();
