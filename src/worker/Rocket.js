@@ -21,7 +21,7 @@ export class Rocket {
 		return r;
 	}
 	constructor(){
-		this._score = -1;
+		this._score = 0;
 		this._remainingDistance;
 		this._completionTime;
 		this._parents = [];

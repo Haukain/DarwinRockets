@@ -63,7 +63,7 @@ export class GridScreen extends Screen{
         for (let i=0;i<orderedIndexArray.length;i++){orderedRocketsArray[i]=rockets[orderedIndexArray[i]];}
         this._app.currentGeneration._rockets = orderedRocketsArray;*/
 				this._gen.rockets=this._gen.rockets.sort((a,b)=>b.score-a.score);
-        console.log(this._app.currentGeneration._rockets); // pour timothy
+        console.log(this._app.currentGeneration._rockets);
         this._app.goSimulation();
     }
 

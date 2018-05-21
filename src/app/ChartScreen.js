@@ -62,10 +62,9 @@ export class ChartScreen extends Screen{
 
 		for(let i=min-(interval/2); i<max+(interval/2); i+=interval){
 			if(i<0 && i+interval>0){
-				barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+"0"+"]",this._app.currentGeneration.getInterval(i,0));
-				barChart.addDataPoint(dataset2,"["+"0"+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(0,i+interval));
+				barChart.addDataPoint(dataset2,"0",this._app.currentGeneration.getInterval(i,i+interval));
 				i=i+interval;}
-			barChart.addDataPoint(dataset2,"["+precisionRound(i,1)+";"+precisionRound(i+interval,1)+"]",this._app.currentGeneration.getInterval(i,i+interval));}
+			barChart.addDataPoint(dataset2,precisionRound(i+(interval/2),2),this._app.currentGeneration.getInterval(i,i+interval));}
 
 		c3.addChild(barChart);
 
