@@ -15,6 +15,7 @@ export class Rocket {
 		r.score = s.score;
 		r.remainingDistance = s.remainingDistance;
 		r.completionTime = s.completionTime;
+		r.complexity = s.complexity;
 		for(let re of s.reactors){
 			r.addReactor(re.position,re.thrust,re.activationTime,re.extinctionTime,re.angle);
 		}
@@ -24,6 +25,7 @@ export class Rocket {
 		this._score = 0;
 		this._remainingDistance;
 		this._completionTime;
+		this._complexity;
 		this._parents = [];
 		this._reactors = [];
 
@@ -64,11 +66,14 @@ export class Rocket {
 	get completionTime() {return this._completionTime}
 	set completionTime(c) {this._completionTime=c;}
 
+	get complexity() {return this._complexity}
+	set complexity(c) {this._complexity=c;}
+
 	get score() {return this._score;}
 	set score(s) {this._score=s;}
 
 	toStructure(){
 		let reactors = this._reactors.map(r=>r.toStructure());
-		return {score:this._score,remainingDistance:this._remainingDistance,completionTime:this._completionTime,reactors:reactors};
+		return {score:this._score,remainingDistance:this._remainingDistance,completionTime:this._completionTime,complexity:this._complexity,reactors:reactors};
 	}
 }

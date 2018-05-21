@@ -45,10 +45,11 @@ export class Evaluator{
           }
           let distToTargetRatio = (1 - (minDist/that._totalDist)).toFixed(2); // 1 is close 0 is start
           let completionTimeRatio = (1 - (completionTime/engine.simDuration)).toFixed(2); // 1 is fast 0 is notCompleted
-          r.completionTime= completionTimeRatio;
-          r.remainingDistance = distToTargetRatio;
           let traveledDistRatio = (traveledDistance/that._totalDist).toFixed(2); // >1 is greater than objective dist <1 is lower than objective dist
           let complexityRatio = (usefulReactors/complexity).toFixed(2); // 1 when all the reactors are useful 0 when none
+          r.completionTime= completionTimeRatio;
+          r.remainingDistance = distToTargetRatio;
+          r.complexity = complexityRatio;
           //console.log("disToT :",distToTargetRatio,"compTime :",completionTimeRatio,"travelDist :",traveledDistRatio,"complex :",complexityRatio);
           r.score = that._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
           //console.log("score :",r.score);
