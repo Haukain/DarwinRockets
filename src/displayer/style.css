@@ -305,10 +305,10 @@ body>.row{
 }
 /*=== RocketViewer ===*/
 .rv-first>div{
-  box-shadow: 0 0 10px #97ddff;
+  box-shadow: 0px 0px 5px 8px rgba(133, 188, 230,0.50);
 }
 .rv-last>div{
-  box-shadow: 0 0 10px #ffa3c5;
+  box-shadow: 0px 0px 5px 8px rgba(255,163,197,0.50);
 }
 /*=== modal color fix ===*/
 .modal{

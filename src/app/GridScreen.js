@@ -16,7 +16,7 @@ export class GridScreen extends Screen{
 					let rank=null;
 					if(i.score==max)rank="first";
 					if(i.score==min)rank="last";
-					if(i.score==-1)rank=null;
+					if(i.score==0)rank=null;
 					this._constructRocket(i,rank);
 				}
 
