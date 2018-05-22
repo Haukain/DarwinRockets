@@ -13,9 +13,9 @@ export class ChartScreen extends Screen{
         super(app,"grey");
         this._gen = gen;
 
-		let c1 = new Col(7,7,7,7);
-		let c2 = new Col(6,6,6,6);
-		let c3 = new Col(6,6,6,6);
+		let c1 = new Col(12,12,12,12);
+		let c2 = new Col(12,12,6,6);
+		let c3 = new Col(12,12,6,6);
 		this._container.addChild(c1);
 		this._container.addChild(c2);
 		this._container.addChild(c3);
@@ -23,7 +23,7 @@ export class ChartScreen extends Screen{
 
 		//average score per generation chart
 		let gens = this._app.generations;
-		let scoreChart = new LineChartWidget('white', 'grey');
+		let scoreChart = new LineChartWidget('white', 'grey',2.2*16/9);
 		let maxDataset = scoreChart.addDataset("max score per generation","#97ddff","rgba(0,0,0,0)");
 		let avgDataset = scoreChart.addDataset("Average score per generation","#0011FC","#C2C6FA55");
 		let minDataset = scoreChart.addDataset("min score per generation","#ffa3c5","rgba(0,0,0,0)");

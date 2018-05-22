@@ -1,8 +1,8 @@
 import { ChartWidget } from "./ChartWidget.js";
 
 export class RadarChartWidget extends ChartWidget{
-  constructor(bg,fg,labels) {
-    super(bg,fg,"radar");
+  constructor(bg,fg,labels,ratio) {
+    super(bg,fg,"radar",ratio);
     this._chart.data.labels=labels;
   }
 }
