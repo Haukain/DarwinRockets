@@ -91,12 +91,12 @@ export class App{
     history.pushState({fake: true},"chart screen","chart.html");
   }
   //trainer interface
-  initTrainer(){
-    let that = this;
-    this._currentGeneration = Generation.random(this._configuration.populationSize,5);
+  async initTrainer(){
+    let gen = Generation.random(this._configuration.populationSize,5);
+    this._currentGeneration = Generation.fromStructure(await this._com.send("initTrainer",{gen:gen.toStructure(),conf:this._configuration.toStructure()},true));
     this._generations=[];
     this.addGeneration(this._currentGeneration);
-    this._com.send("initTrainer",{gen:that._generations[0].toStructure(),conf:this._configuration.toStructure()});
+    return true;
   }
   startGen() {
     console.log("starting generation");

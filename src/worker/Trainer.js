@@ -19,7 +19,7 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 			that._generation = Generation.fromStructure(d.gen);
 			this._config = Configuration.fromStructure(d.conf);
 			for(let s of that._subWorkers) s.send("setConfig",d.conf)
-			this.evaluateGen(that._generation);
+			return this.evaluateGen(that._generation).then(s=>that._generation.toStructure()); 
 		});
 		this._com.addCommandListener("startGen",d=>{
 			that.startContinuousGeneration();

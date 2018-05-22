@@ -100,8 +100,7 @@ export class EditScreen extends Screen{
 				new Alert("Your terrain is invalid","Please make sure you have one start and one end.");
 				return;
 			}
-			this._app.initTrainer();
-			this._app.goSimulation();
+			this._app.initTrainer().then(s=>this._app.goSimulation());
 		});
 		card.addChild(LaunchButton);
 		let exportButton = new Button("Export Structure","pink");
