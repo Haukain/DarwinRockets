@@ -5,6 +5,7 @@ import { Text } from "../displayer/Text.js";
 import { RangeInput } from "../displayer/RangeInput.js";
 import { NumericPrompt } from "../dialogs/NumericPrompt.js";
 import { Alert } from "../dialogs/Alert.js";
+import { ExternalPopup } from "../dialogs/ExternalPopup.js";
 
 export class Header{
   constructor(app){
@@ -36,7 +37,7 @@ export class Header{
     });
 
     //help Button
-    let helpButton = this._addButton("help_outline","help",e=>{new Alert("HELP !",
+    let helpButton = this._addButton("help_outline","help",e=>{/*new Alert("HELP !",
       "The rockets will try to find the best path between the start and the end you set\n"+
       "The planets will stop and the black hole attract the rockets to their doom\n"+
       "The best rockets (blue aura) will reproduce between each generation, the worst (red aura) will disappear\n"+
@@ -48,7 +49,9 @@ export class Header{
       "You can sort the rockets of the generation by clicking on the sort button.\n"+
       "You can switch between the chart/simulation screen by clicking on the chart/home button.\n"+
       "You can see a rocket flight by clicking on it."
-    )});
+    )*/
+    new ExternalPopup("./assets/html/help.html");
+    });
     //generation range and text which indicates the current generation
     let genItem = new NavbarItem();
     let genItem2 = new NavbarItem();

@@ -314,3 +314,15 @@ body>.row{
 .modal{
   color:black;
 }
+/*=== ExternalContent ===*/
+.fluidframe{
+  border: none;
+  width: 100%;
+  display: block;
+
+}
+.modal .fluidframe{
+  width:80vw;
+  max-width:1000px;
+  height:80vh;
+}
