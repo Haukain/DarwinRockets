@@ -63,10 +63,10 @@ export class EditScreen extends Screen{
 		for(let section of map){
 			let row1 = new Row();
 			let title = new Title(section.title);
-			let helpbutton = new IconButton("help_outline","Help","white");
-			helpbutton.on("click",()=>{new Alert(section.title,section.help)});
+			let helpButton = new IconButton("help_outline","Help","white");
+			helpButton.on("click",()=>{new Alert(section.title,section.help)});
 			row1.addChild(title);
-			row1.addChild(helpbutton);
+			row1.addChild(helpButton);
 			card.addChild(row1);
 			for(let param of section.params){
 				let range = new RangeInput();
@@ -136,6 +136,9 @@ export class EditScreen extends Screen{
 			for(let tool of tools){
 				this._toolbar.addChild(tool.button);
 			}
+			let toolbarHelpButton = new IconButton("help_outline","Toolbar help","white");
+			toolbarHelpButton.on("click",()=>{new Alert("Toolbar help","a remplir")});
+			this._toolbar.addChild(toolbarHelpButton);
 		}
 	}
 }

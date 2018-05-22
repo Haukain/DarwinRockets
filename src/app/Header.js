@@ -30,7 +30,7 @@ export class Header{
     },300);
     //make N gen button
     let nGenButton=this._addButton("chevron_right","make N generations",e=>{
-      new NumericPrompt("number of generations","",d=>{
+      new NumericPrompt("Number of generations","",d=>{
         that._app.makeNGen(d);
       });
     });
