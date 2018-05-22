@@ -12,6 +12,7 @@ export class GridScreen extends Screen{
         //build the grid
 				const max = this._gen.getMax();
 				const min = this._gen.getMin();
+				this._sortByScore();
         for (let i of this._gen.rockets){
 					let rank=null;
 					if(i.score==max)rank="first";
@@ -26,45 +27,15 @@ export class GridScreen extends Screen{
             this._app.goChart();
         });
 
-        //button to order the grid by the score of rockets
-        let orderButton = new FloatingButton("sort","Sort by score",1);
-        orderButton.on("click",()=>{
-            this._sortByScore();
-        });
-
         //build the buttons
         let col = new Col(4,3,2,2);
         col.addChild(chartButton);
-        col.addChild(orderButton);
         this._container.addChild(col);
-
     }
     _sortByScore(){
-
-        /*let max = this._app.currentGeneration.getMax();
-        let next = -10;
-        let orderedIndexArray=[];
-        let rockets=this._app.currentGeneration._rockets;
-        let orderedRocketsArray = [];
-
-        //find the index(es) of the max
-        for(let i=0;i<rockets.length;i++){if(rockets[i].score==max){orderedIndexArray.push(i)};}
-
-        //orderedIndexArray = array of indexes of rockets by score (higher to lower)
-        for (let i=0;i<rockets.length;i++){
-            for(let r of rockets){if (r.score<max && r.score>=next){next=r.score};}
-
-            for(let i=0;i<rockets.length;i++){if (rockets[i].score==next){orderedIndexArray.push(i)};}
-            max=next;
-            next=-10;
-        }
-
-        //sort the list of rockets with the ordered indexes and re-load the grid
-        for (let i=0;i<orderedIndexArray.length;i++){orderedRocketsArray[i]=rockets[orderedIndexArray[i]];}
-        this._app.currentGeneration._rockets = orderedRocketsArray;*/
 				this._gen.rockets=this._gen.rockets.sort((a,b)=>b.score-a.score);
-        console.log(this._app.currentGeneration._rockets);
-        this._app.goSimulation();
+        //console.log(this._app.currentGeneration._rockets);
+        //this._app.goSimulation();
     }
 
     _constructRocket(i,rank){
