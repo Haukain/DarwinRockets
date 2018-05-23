@@ -15,6 +15,11 @@ export class RocketViewer extends CanvasWidget{
     this._ctx.rotate(Math.PI*1.25);
     this._rocket.draw(this._ctx);
     this._ctx.restore();
+    this._ctx.font="12px Arial";
+    this._ctx.fillStyle="#d65b73";
+    this._ctx.fillRect(0,100-22,40,22);
+    this._ctx.fillStyle="white";
+    this._ctx.fillText(this._rocket.score.toFixed(3),5,95);
   }
   get rank(){
     return this._rank;
