@@ -4,7 +4,8 @@ import { Rocket } from "./Rocket.js";
 import { Start } from "./Start.js";
 import { End } from "./End.js";
 import { PhysicsComputer } from "./physics/PhysicsComputer.js";
-export class Evaluator{
+
+export class Evaluator{ // Evaluaating the rockets on the field, calculate parameters to send to the FitnessFunction
   constructor(){
     let that = this;
     this._config = null;
@@ -22,7 +23,6 @@ export class Evaluator{
         ar = ar.map(r=>Rocket.fromStructure(r));
         for(let r of ar){
           let minDist = 9999999999;
-          let topSpeed = 0; // TODO: code topSpeed
           let complexity = r.reactors.length;
           let usefulReactors = 0;
           let completionTime = 0;
@@ -50,9 +50,7 @@ export class Evaluator{
           r.completionTime= completionTimeRatio;
           r.remainingDistance = distToTargetRatio;
           r.complexity = complexityRatio;
-          //console.log("disToT :",distToTargetRatio,"compTime :",completionTimeRatio,"travelDist :",traveledDistRatio,"complex :",complexityRatio);
           r.score = that._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
-          //console.log("score :",r.score);
         }
         return Promise.resolve(ar.map(r=>r.toStructure()));
       });

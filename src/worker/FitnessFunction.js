@@ -9,11 +9,11 @@ export class FitnessFunction {
 		this._complexityFactor = cf;
 	}
 
-	compute(rd, ct, td, cx) {
+	compute(rd, ct, td, cx) { // Compute the score of a rocket (rd : remaingDistance, ct : CompletinTime, td : traveledDistance, cx : complexityFactor)
 		return (this._remainingDistanceFactor*rd
 						+ this._completionTimeFactor*ct
 						+ this._traveledDistanceFactor*td
-						+ this._complexityFactor*(cx) )/4;
+						+ this._complexityFactor*cx )/4; //Weighted average : Each rocket gets a score between 0 and 1, 0 being the worst and 1 the best
 	}
 	get remainingDistanceFactor() {return this._remainingDistanceFactor;}
 	set remainingDistanceFactor(rd) {this._remainingDistanceFactor = rd;}
