@@ -19,7 +19,7 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 			that._generation = Generation.fromStructure(d.gen);
 			this._config = Configuration.fromStructure(d.conf);
 			for(let s of that._subWorkers) s.send("setConfig",d.conf)
-			return this.evaluateGen(that._generation).then(s=>that._generation.toStructure()); 
+			return this.evaluateGen(that._generation).then(s=>that._generation.toStructure());
 		});
 		this._com.addCommandListener("startGen",d=>{
 			that.startContinuousGeneration();
@@ -106,17 +106,17 @@ import { PhysicsComputer } from "./physics/PhysicsComputer.js";
 			baby.addReactor(position, thrust, activationTime, extinctionTime, angle);
 			reactorNumber += 1;
 		}
-		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate){
-			//console.log(" - GENE");
+		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate*(1 - 1/1/baby.reactors.length)){
+			console.log(" - GENE");
 			baby.parents.splice(Math.floor(Math.random()*baby.parents.length));
 		}
-		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate){
-			//console.log(" +  GENE");
+		if ( Math.random()<this._config.reproductionParameters.newGeneAppearanceRate*(1/baby.reactors.length)){
+			console.log(" +  GENE");
 			baby.addReactor({x:Math.random()*20-10,y:Math.random()*40-20}, Math.random()*0.0001+0.0001, Math.random()*10, Math.random()*10, Math.random()*Math.PI*2-Math.PI);
 		}
 		/*baby.parents.push(p1);
 		baby.parents.push(p2);*/
-		// console.log(baby);
+		console.log(baby.reactors.length);
 		return baby;
 	}
 
