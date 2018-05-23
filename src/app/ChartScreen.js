@@ -30,7 +30,7 @@ export class ChartScreen extends Screen{
 		let numberCurrentGen = 0;
 		for(let gen of gens){numberCurrentGen++;if(gen == this._app.currentGeneration)break;}
 		let nGen = 0;
-		let nPointsOnXAxis = 30;
+		let nPointsOnXAxis = 60;
 		let pitch = Math.floor(numberCurrentGen/nPointsOnXAxis);
 		for(let gen of gens){
 			nGen++;
@@ -61,6 +61,7 @@ export class ChartScreen extends Screen{
 
 
 		//last chart with Complexity, Proximity to the target and Time of flight
+
 		let lastChart = new LineChartWidget('white', 'grey');
 		let Dataset0 = lastChart.addDataset("Complexity (%)","#97ddff","rgba(0,0,0,0)");
 		let Dataset1 = lastChart.addDataset("Proximity to the target (%)","#00FE5D","rgba(0,0,0,0)");
