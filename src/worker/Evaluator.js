@@ -43,10 +43,10 @@ export class Evaluator{
               usefulReactors+=1;
             }
           }
-          let distToTargetRatio = (1 - (minDist/that._totalDist)).toFixed(2); // 1 is close 0 is start
-          let completionTimeRatio = (1 - (completionTime/engine.simDuration)).toFixed(2); // 1 is fast 0 is notCompleted
-          let traveledDistRatio = (traveledDistance/that._totalDist).toFixed(2); // >1 is greater than objective dist <1 is lower than objective dist
-          let complexityRatio = (usefulReactors/complexity).toFixed(2); // 1 when all the reactors are useful 0 when none
+          let distToTargetRatio = (1 - (minDist/that._totalDist)).toFixed(4); // 1 is close 0 is start
+          let completionTimeRatio = (1 - (completionTime/engine.simDuration)).toFixed(4); // 1 is fast 0 is notCompleted
+          let traveledDistRatio = (traveledDistance/that._totalDist).toFixed(4); // >1 is greater than objective dist <1 is lower than objective dist
+          let complexityRatio = (usefulReactors/complexity).toFixed(4); // 1 when all the reactors are useful 0 when none
           r.completionTime= completionTimeRatio;
           r.remainingDistance = distToTargetRatio;
           r.complexity = complexityRatio;
