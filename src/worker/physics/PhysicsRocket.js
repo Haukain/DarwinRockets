@@ -1,3 +1,4 @@
+// Physic Object of the Rocket
 export class PhysicsRocket{
 	constructor(blueprint,rocketRender){
 		this._reactors = [];
@@ -10,22 +11,6 @@ export class PhysicsRocket{
 		this._body.label = "rocketBody";
 			Matter.Body.setAngle(this._body, Math.PI);
 
-		//manual controls
-		// document.body.addEventListener("keydown",e=>{
-		//   if(e.keyCode-49>=0 && e.keyCode-49<9){
-		//   	if (this._reactors[e.keyCode-49]){
-		//   	this._reactors[e.keyCode-49].active = true;
-		//   	}
-		//   }
-		// },false);
-		// document.body.addEventListener("keyup",e=>{
-		//   if(e.keyCode-49>=0 && e.keyCode-49<9){
-		//   	if (this._reactors[e.keyCode-49]){
-		//   		this._reactors[e.keyCode-49].active = false;
-		//   	}
-		//   }
-		// },false);
-
 	}
 	get body(){return this._body;}
 	get reactors(){return this._reactors};
@@ -37,7 +22,7 @@ export class PhysicsRocket{
 		Matter.Body.setPosition(this._object,position);
 	}
 
-	addPhysicsReactors(reactors){
+	addPhysicsReactors(reactors){ // Adding reactors to the rocket from a reactor array
 		this._reactors = reactors;
 		this._object = Matter.Body.create({
 			parts:[this._body].concat(this._reactors.map(d=>d.body)),
@@ -49,7 +34,7 @@ export class PhysicsRocket{
 
 	}
 
-	selectReactor(time){
+	selectReactor(time){ // Activate reactors after their activationTime and desactivate them after the extinctionTime
 		for(let r of this._reactors){
 			if(time>=r.activationTime){
 				r.active = true;
@@ -64,7 +49,7 @@ export class PhysicsRocket{
 		}
 	}
 
-	applyThrusts(time){
+	applyThrusts(time){ // Applaying thrust for each reactor of the rocket
 		this.selectReactor(time);
 		for(let reactor of this._reactors){
 			 reactor.applyThrust(this);
@@ -74,7 +59,7 @@ export class PhysicsRocket{
 		this.applyThrusts(time);
 	}
 
-	draw(ctx){
+	draw(ctx){ // Drawing the rocket
 		ctx.beginPath();
 		ctx.fillStyle = this._object.parts[1].render.fillStyle
 		ctx.moveTo(this._vertices[0].x,this._vertices[0].y);
@@ -84,7 +69,7 @@ export class PhysicsRocket{
 		ctx.lineTo(this._vertices[0].x,this._vertices[0].y);
 		ctx.fill();
 
-		for(let r of this._reactors){
+		for(let r of this._reactors){ //Drawing each of the reactors
 			ctx.save();
 			ctx.scale(r.scale,r.scale);
 			ctx.translate(r.position.x,r.position.y);
