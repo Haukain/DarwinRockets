@@ -33,6 +33,12 @@ export class RocketScreen extends Screen{
 				descCardTitleCol.addChild(descCardTitle1);
 				let descCardTitle2 = new Title(`Reactors: ${r.reactors.length}`);
 				descCardTitleCol.addChild(descCardTitle2);
+				let descCardTitle3 = new Title(`Completion time: ${(r.completionTime*100).toFixed(2)} %`);
+				descCardTitleCol.addChild(descCardTitle3);
+				let descCardTitle4 = new Title(`Proximity to the Target: ${(r.remainingDistance*100).toFixed(2)} %`);
+				descCardTitleCol.addChild(descCardTitle4);
+				let descCardTitle5 = new Title(`Useful reactors: ${(r.complexity*100).toFixed(2)} %`);
+				descCardTitleCol.addChild(descCardTitle5);
 				this._reactorViewers = r.reactors.map(r=>new ReactorViewer(r));
 				let reactorCols = this._reactorViewers.map(r=>{let col = new Col(4,3,3,3);col.addChild(r);return col;});
 				for(let r of reactorCols)descCardRow.addChild(r);
