@@ -39,7 +39,8 @@ export class GridScreen extends Screen{
     _constructRocket(i,rank){
         let rocketViewer = new RocketViewer(i);
         rocketViewer.on("click",()=>{
-            this._app.displayRockets([i]);
+            // this._app.displayRockets([i]);
+            this._app.goRocket(i);
         });
 				if(rank)rocketViewer.rank=rank;
         let col = new Col(3,2,1,1);

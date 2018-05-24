@@ -4,6 +4,7 @@ import { StartScreen } from "./StartScreen.js";
 import { EditScreen } from "./EditScreen.js";
 import { GridScreen } from "./GridScreen.js";
 import { ChartScreen } from "./ChartScreen.js";
+import { RocketScreen } from "./RocketScreen.js";
 import { PhysicsDisplayer } from "../displayer/PhysicsDisplayer.js";
 import { Modal } from "../displayer/Modal.js";
 import { Generation } from "../worker/Generation.js";
@@ -55,7 +56,7 @@ export class App{
   goBack() {
     if     (this._state == "edit") this.goStart();
     else if(this._state == "gen") this.goEdit();
-    else if(this._state == "chart" || this._state == "display") this.goSimulation();
+    else if(this._state == "chart" || this._state == "rocket") this.goSimulation();
     else {
       let i =Array.from(history).reduce((a,b)=>a+(!!b.state.fake),0);
       history.back(-i);
@@ -88,8 +89,15 @@ export class App{
     this._header.showButtons();
     this._currentScreen = new ChartScreen(this,this._currentGeneration);
     this._state = "chart";
-    this._header.showButtons();
     history.pushState({fake: true},"chart screen","chart.html");
+  }
+  goRocket(r) {
+    if(!r)return;
+    console.log("going rocket");
+    this._header.showButtons();
+    this._currentScreen = new RocketScreen(this,r);
+    this._state = "rocket";
+    history.pushState({fake: true},"rocket screen","rocket.html");
   }
   //trainer interface
   async initTrainer(){

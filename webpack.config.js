@@ -12,6 +12,7 @@ module.exports = {
     edit:'./src/redirect.js',
     gen:'./src/redirect.js',
     chart:'./src/redirect.js',
+    rocket:'./src/redirect.js',
   },
   output: {
     filename: '[name].bundle.js',

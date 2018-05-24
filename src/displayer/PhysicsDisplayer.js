@@ -85,4 +85,7 @@ export class PhysicsDisplayer extends CanvasWidget{
     this._engine.update();
     this.draw();
   }
+  get time(){
+    return this._engine.time;
+  }
 }

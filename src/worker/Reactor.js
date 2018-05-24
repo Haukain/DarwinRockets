@@ -9,7 +9,14 @@ export class Reactor {
 		this._angle = angle;
 	}
 
-	draw() {}
+	draw(ctx) {
+		let blueprint =  Matter.Vertices.fromPath('-9 -20 -9 0 -7 15 -4 30 -3 33 -2 35 0 36 2 35 3 33 4 30 7 15 9 0 9 -20');
+		let render = {
+			fillStyle: '#913748',
+		};
+		let oneTimeObject = this.createPhysicsObject(blueprint,render);
+		oneTimeObject.draw(ctx);
+	}
 
 	createPhysicsObject(blueprint,reactorRender) {
 		return new PhysicsReactor(blueprint,reactorRender,this._position,this._thrust,this._activationTime,this._extinctionTime,this._angle)

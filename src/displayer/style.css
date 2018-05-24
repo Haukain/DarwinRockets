@@ -301,6 +301,8 @@ body>.row{
 .physicsDisplayer{
   padding:0;
   margin:0;
+}
+.modal-dialog .physicsDisplayer{
   width: 50vw;
 }
 /*=== RocketViewer ===*/
