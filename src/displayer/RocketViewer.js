@@ -1,10 +1,11 @@
 import { CanvasWidget } from "./CanvasWidget.js";
 
 export class RocketViewer extends CanvasWidget{
-  constructor(rocket) {
+  constructor(rocket,w=150,h=150) {
     super("white","white");
-    this._canvas.width = 100;
-    this._canvas.height = 100;
+    this._canvas.width = w;
+    this._canvas.height = h;
+    this._ctx.scale(w/100,h/100);
     this._rocket = rocket;
     this._rank = null;
     this.draw();

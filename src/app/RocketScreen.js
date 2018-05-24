@@ -23,11 +23,11 @@ export class RocketScreen extends Screen{
 				leftCol.addChild(descCard);
 				let descCardRow = new Row();
 				descCard.addChild(descCardRow);
-				let descCardViewerCol = new Col(3,3,3,3);
-				let descCardTitleCol = new Col(9,9,9,9);
+				let descCardViewerCol = new Col(6,6,6,6);
+				let descCardTitleCol = new Col(6,6,6,6);
 				descCardRow.addChild(descCardViewerCol);
 				descCardRow.addChild(descCardTitleCol);
-				let descCardViewer = new RocketViewer(r);
+				let descCardViewer = new RocketViewer(r,500,500);
 				descCardViewerCol.addChild(descCardViewer);
 				let descCardTitle1 = new Title(`Score: ${r.score.toFixed(6)}`);
 				descCardTitleCol.addChild(descCardTitle1);
@@ -39,9 +39,14 @@ export class RocketScreen extends Screen{
 				descCardTitleCol.addChild(descCardTitle4);
 				let descCardTitle5 = new Title(`Useful reactors: ${(r.complexity*100).toFixed(2)} %`);
 				descCardTitleCol.addChild(descCardTitle5);
+				let reactorCard = new Card("white","pink");
+				leftCol.addChild(reactorCard);
+				let reactorCardRow = new Row();
+				reactorCard.addChild(reactorCardRow);
 				this._reactorViewers = r.reactors.map(r=>new ReactorViewer(r));
 				let reactorCols = this._reactorViewers.map(r=>{let col = new Col(4,3,3,3);col.addChild(r);return col;});
-				for(let r of reactorCols)descCardRow.addChild(r);
+				for(let r of reactorCols)reactorCardRow.addChild(r);
+
 				//Simulation
 				this._displayer = new PhysicsDisplayer(this._app.configuration.terrain,[r]);
 				rightCol.addChild(this._displayer);
