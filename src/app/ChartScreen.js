@@ -61,7 +61,6 @@ export class ChartScreen extends Screen{
 
 
 		//last chart with Complexity, Proximity to the target and Time of flight
-
 		let lastChart = new LineChartWidget('white', 'grey');
 		let Dataset0 = lastChart.addDataset("Complexity (%)","#97ddff","rgba(0,0,0,0)");
 		let Dataset1 = lastChart.addDataset("Proximity to the target (%)","#00FE5D","rgba(0,0,0,0)");
