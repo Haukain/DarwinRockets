@@ -11,6 +11,7 @@ import { Configuration } from "../worker/Configuration.js";
 import { WorkerCommander } from "../worker/WorkerCommander.js";
 import Worker from 'worker-loader!../worker/mainWorker.js';
 import SubWorker from 'worker-loader!../worker/subWorker.js';
+
 export class App{
   constructor(el) {
     this._DEBUG = true;
@@ -56,7 +57,7 @@ export class App{
     else if(this._state == "gen") this.goEdit();
     else if(this._state == "chart" || this._state == "display") this.goSimulation();
     else {
-      let i =Array.from(history).reduce((a,b)=>a+(!!b.state.fake),0); // TODO: repair the history back out of site feature
+      let i =Array.from(history).reduce((a,b)=>a+(!!b.state.fake),0);
       history.back(-i);
     }
   }
@@ -131,8 +132,6 @@ export class App{
   }
   selectTutorial(t){
     this._configuration = Configuration.fromStructure(t.config);
-    /*this.initTrainer();
-    this.goSimulation();*/
     this.goEdit(true);
   }
   selectGeneration(gen){

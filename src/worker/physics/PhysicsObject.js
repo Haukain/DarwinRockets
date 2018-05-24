@@ -1,5 +1,6 @@
 import { PhysicsRocket } from './PhysicsRocket.js';
 
+// Abstract PhysicObject
 export class PhysicsObject{
 	constructor(position){
 		if (new.target === PhysicsObject) {

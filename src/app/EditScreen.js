@@ -42,10 +42,10 @@ export class EditScreen extends Screen{
 				title:"Score calculation",
 				help:"Choose the impact of each parameter on the score calculation\n\n" + "Distance to objective : Less remaining distance gives a better score \n" + "Time of flight : Shorter time of completion gives a better score\n" + "Complexity : A higher percentage of useful reactors gives a better score",
 				params:[
-					{key:".fitnessFunction.remainingDistanceFactor",name:"Distance to objective",min:"-1",max:"1",step:".01"},
-					{key:".fitnessFunction.completionTimeFactor",name:"Time of flight",min:"-1",max:"1",step:".01"},
-					{key:".fitnessFunction.traveledDistanceFactor",name:"Distance traveled",min:"-1",max:"1",step:".01"},
-					{key:".fitnessFunction.complexityFactor",name:"Rocket complexity",min:"-1",max:"1",step:".01"}
+					{key:".fitnessFunction.remainingDistanceFactor",name:"Distance to objective",min:"0",max:"1",step:".01"},
+					{key:".fitnessFunction.completionTimeFactor",name:"Time of flight",min:"0",max:"1",step:".01"},
+					{key:".fitnessFunction.traveledDistanceFactor",name:"Distance traveled",min:"0",max:"1",step:".01"},
+					{key:".fitnessFunction.complexityFactor",name:"Rocket complexity",min:"0",max:"1",step:".01"}
 				]
 			},
 			{
@@ -75,9 +75,9 @@ export class EditScreen extends Screen{
 				range.step=param.step;
 				range.text=param.name;
 				range.locked=locked;
-				range.value=eval("this._app.configuration"+param.key); // TODO: trouver une solution pour éviter cette vulnérabilité
+				range.value=eval("this._app.configuration"+param.key);
 				range.on("change",e=>{
-					eval(`this._app.configuration${param.key}=${range.value}`); // TODO: trouver une solution pour éviter cette vulnérabilité
+					eval(`this._app.configuration${param.key}=${range.value}`);
 				});
 				card.addChild(range);
 			}
