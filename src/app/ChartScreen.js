@@ -30,7 +30,7 @@ export class ChartScreen extends Screen{
 		let numberCurrentGen = 0;
 		for(let gen of gens){numberCurrentGen++;if(gen == this._app.currentGeneration)break;}
 		let nGen = 0;
-		let nPointsOnXAxis = 30;
+		let nPointsOnXAxis = 60;
 		let pitch = Math.floor(numberCurrentGen/nPointsOnXAxis);
 		for(let gen of gens){
 			nGen++;

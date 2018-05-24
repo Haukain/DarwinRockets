@@ -34,8 +34,6 @@ export class GridScreen extends Screen{
     }
     _sortByScore(){
 				this._gen.rockets=this._gen.rockets.sort((a,b)=>b.score-a.score);
-        //console.log(this._app.currentGeneration._rockets);
-        //this._app.goSimulation();
     }
 
     _constructRocket(i,rank){
