@@ -89,7 +89,7 @@
       "name":"A harder path for the rockets",
       "config":{
         "commentary":"A small sample of rocket on a simple path, but without any reproduction mutation (only mean of former best rockets genes)",
-        "populationSize":10,
+        "populationSize":100,
         "terrain":{"size":{"width":1920,"height":1080},
         "objects":[{"type":"Start","position":{"x":390.8141962421712,"y":813.5064935064935}},
                    {"type":"End","position":{"x":1362.8392484342378,"y":815.5102040816327}},
