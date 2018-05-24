@@ -1,5 +1,6 @@
 import { PhysicsObject } from "./PhysicsObject.js";
 
+// Physic object of the Start point
 export class PhysicsStart extends PhysicsObject{
 	constructor(position){
 		super(position);

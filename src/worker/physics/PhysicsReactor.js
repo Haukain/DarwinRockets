@@ -1,3 +1,4 @@
+// Physic Object of the reactor
 export class PhysicsReactor{
   constructor(blueprint,reactorRender,position,thrust,activationTime,extinctionTime,angle){
     this._position = {x:0,y:0};
