@@ -34,11 +34,18 @@ export class RocketScreen extends Screen{
 				let descCardTitle2 = new Title(`Reactors: ${r.reactors.length}`);
 				descCardTitleCol.addChild(descCardTitle2);
 				this._reactorViewers = r.reactors.map(r=>new ReactorViewer(r));
-				let reactorCols = this._reactorViewers.map(r=>{let col = new Col(3,3,3,3);col.addChild(r);return col;});
+				let reactorCols = this._reactorViewers.map(r=>{let col = new Col(4,3,3,3);col.addChild(r);return col;});
 				for(let r of reactorCols)descCardRow.addChild(r);
 				//Simulation
 				this._displayer = new PhysicsDisplayer(this._app.configuration.terrain,[r]);
 				rightCol.addChild(this._displayer);
+
+				//back button
+				let floatingButton = new FloatingButton("home","Rockets",0);
+        floatingButton.on("click",()=>{
+        	this._app.goSimulation();
+        });
+        this._container.addChild(floatingButton);
 				this._loop();
     }
 		_loop(){

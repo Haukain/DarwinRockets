@@ -7,6 +7,7 @@ import { ChartScreen } from "./ChartScreen.js";
 import { RocketScreen } from "./RocketScreen.js";
 import { PhysicsDisplayer } from "../displayer/PhysicsDisplayer.js";
 import { Modal } from "../displayer/Modal.js";
+import { Confirm } from "../dialogs/Confirm.js";
 import { Generation } from "../worker/Generation.js";
 import { Configuration } from "../worker/Configuration.js";
 import { WorkerCommander } from "../worker/WorkerCommander.js";
@@ -55,7 +56,7 @@ export class App{
   //go methods
   goBack() {
     if     (this._state == "edit") this.goStart();
-    else if(this._state == "gen") this.goEdit();
+    else if(this._state == "gen") new Confirm("Are you sure you want to go back?","all the progress you made will be lost.",()=>this.goEdit());
     else if(this._state == "chart" || this._state == "rocket") this.goSimulation();
     else {
       let i =Array.from(history).reduce((a,b)=>a+(!!b.state.fake),0);
