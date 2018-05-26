@@ -7,6 +7,7 @@ import { CenteredRow } from "../displayer/CenteredRow.js";
 import { Col } from "../displayer/Col.js";
 import { ImageWidget } from "../displayer/ImageWidget.js";
 import { ParallaxSVG } from "../displayer/ParallaxSVG.js";
+import { ExternalPopup } from "../dialogs/ExternalPopup.js";
 
 
 export class StartScreen extends Screen{
@@ -41,6 +42,16 @@ export class StartScreen extends Screen{
 		this._editButton.on("click",()=>{
 			that._app.goEdit();
 		});
+
+		//intro button
+		this._introCol = new Col(12,12,12,12);
+		this._introButton = new Button ("What is DarwinRockets?", "navyblue");
+		this._introCol.addChild(this._introButton);
+		this._centerer.addChild(this._introCol);
+		this._introButton.on("click",()=>{
+			new ExternalPopup("./assets/html/intro.html");
+		});
+
 		//modal
 		this._modal = new Modal();
 		this._container.addChild(this._modal);
