@@ -1,16 +1,69 @@
 <html>
-  <head>
-    <script src="../../libs/jquery/jquery-3.3.1.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../../libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../../libs/bootstrap/css/bootstrap-reboot.min.css">
-		<script src="../../libs/bootstrap/js/bootstrap.bundle.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../libs/material-icons/material-icons.css">
-  </head>
-  <body>
-    <h2 class="text-center">What is DarwinRockets!</h2>
-    <h4 class="text-center">A tool to toy with evolutionary concepts.</h4>
-    <p>
+<head>
+  <script src="../../libs/jquery/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../libs/bootstrap/css/bootstrap-reboot.min.css">
+  <script src="../../libs/bootstrap/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../libs/material-icons/material-icons.css">
+</head>
+<body>
+  <h2 class="text-center">What is DarwinRockets!</h2>
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
+            A tool to toy with evolutionary concepts.
+          </button>
+        </h5>
+      </div>
 
-    </p>
-  </body>
+      <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+        <div class="card-body">
+          The goal of this app is to allow you to discover how <a href="https://en.wikipedia.org/wiki/Natural_selection" target="_blank">natural selection</a> can produce the fittest organisms from unfit organisms over time.
+          This process is what we call <a href="https://en.wikipedia.org/wiki/Evolution" target="_blank">evolution</a>.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo">
+            A simple model.
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
+        <div class="card-body">
+          The app centers around vessels that we call rockets.<br>
+          Each rocket has a number of reactors to move around.<br>
+          These reactors are defined by their position on the rocket, angle, thrust, activation time and fuel quantity.<br>
+          These numbers are what describes the blueprint of a reactor like a <a href="https://en.wikipedia.org/wiki/Gene" target"_blank">gene</a> can describe a certain property of an organism.<br>
+          When it comes time to make a new generation rocket reproduce to form a baby rocket with new genes that are a mix of their parent genes but also part random.<br>
+          Not every rocket have a chance of making a baby though, only those who survive can.<br>
+          To be more likely to survive you must have a high fitness score.<br>
+          the fitness score is defined by the user and assess how the rocket perform.<br>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree">
+            A project by students.
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" data-parent="#accordionExample">
+        <div class="card-body">
+          The project was made by students as part of a group project for school.<br>
+          <a href="mailto:t5cabare@enib.fr">Timothy Cabaret</a><br>
+          <a href="https://www.linkedin.com/in/titouan-baillon/" target="_blank">Titouan Baillon</a><br>
+          <a href="https://www.linkedin.com/in/maiwenn-berthelot/" target="_blank">Maïwenn Berthelot</a><br>
+          <a href="https://www.linkedin.com/in/lukas-chaillan-b41791158/" target="_blank">Lukas Chaillant</a><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
