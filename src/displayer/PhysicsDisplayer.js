@@ -39,7 +39,7 @@ export class PhysicsDisplayer extends CanvasWidget{
           that.tick();
         }else{
           that.drawEnding();
-          console.log("ended");
+          console.log("Simulation ended");
         }
       })();
     }

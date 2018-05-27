@@ -6,7 +6,6 @@ export class ChartWidget extends CanvasWidget{
     this._canvas.width = 1600;
     this._canvas.height = Math.round(this._canvas.width / ratio);
     this._chart = new Chart(this._ctx, {type:type,data:{},options:{maintainAspectRatio:true}});
-    console.log(this._chart);
   }
   addDataset(label,borderColor,backgroundColor,data){
     data=data||[];

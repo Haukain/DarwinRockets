@@ -71,6 +71,7 @@ export class App{
     history.pushState({fake: true},"Darwin Rockets","start.html");
   }
   goEdit(locked=false) {
+    console.log("Going to the Edit Screen");
     this._currentScreen = new EditScreen(this,locked);
     this._state = "edit";
     this._currentGeneration = null;
@@ -86,7 +87,7 @@ export class App{
     history.pushState({fake: true},"Simulation screen","gen.html");
   }
   goChart() {
-    console.log("going edit");
+    console.log("Going to the Chart Screen");
     this._header.showButtons();
     this._currentScreen = new ChartScreen(this,this._currentGeneration);
     this._state = "chart";
@@ -94,7 +95,7 @@ export class App{
   }
   goRocket(r) {
     if(!r)return;
-    console.log("going rocket");
+    console.log("Going to the Rocket Screen");
     this._header.showButtons();
     this._currentScreen = new RocketScreen(this,r);
     this._state = "rocket";
@@ -109,18 +110,18 @@ export class App{
     return true;
   }
   startGen() {
-    console.log("starting generation");
+    console.log("Starting generation");
     this._com.send("startGen");
   }
   stopGen() {
-    console.log("stopping generation");
+    console.log("Stopping generation");
     this._com.send("stopGen");
   }
   isGenerating(){//Promise<boolean>
     return this._com.send("isRunning",null,true);
   }
   makeNGen(n) {
-    console.log(`making ${n}  generation`);
+    console.log(`Making ${n} generation(s)`);
     this._com.send("nGen",n);
   }
   trainerRunning(){//return Promise<boolean>
