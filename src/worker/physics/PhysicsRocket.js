@@ -68,6 +68,9 @@ export class PhysicsRocket{
 		}
 		ctx.lineTo(this._vertices[0].x,this._vertices[0].y);
 		ctx.fill();
+		ctx.strokeStyle = '#1a233a';
+		ctx.lineWidth = 0.5;
+    ctx.stroke();
 
 		for(let r of this._reactors){ //Drawing each of the reactors
 			ctx.save();
