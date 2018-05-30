@@ -25,6 +25,8 @@ export class PhysicsDisplayer extends CanvasWidget{
     this._background.src = './assets/images/starBackground.png';
     this._background.loaded = false;
     this._background.onload = ()=>{that._background.loaded = true;that.renderStatics();}
+    //path
+    this._path = [[]];
     //end graphics
     this._end = new Image();
     this._end.src = './assets/images/signal_lost.png';
@@ -74,11 +76,27 @@ export class PhysicsDisplayer extends CanvasWidget{
       this._ctx.restore();
     }
   }
+  drawPath(){
+    for (let r=0;r<this._engine.rockets.length;r++){
+      this._ctx.beginPath();
+
+      this._path[r].push(this._engine.rockets[r].position.x);
+      this._path[r].push(this._engine.rockets[r].position.y);
+      this._ctx.moveTo(this._path[r][0],this._path[r][1]);
+      for(let i=2;i<this._path[r].length;i=i+2){
+        this._ctx.lineTo(this._path[r][i],this._path[r][i+1]);
+      }
+      this._ctx.strokeStyle = 'rgba(214, 91, 115,0.5)';
+      this._ctx.lineWidth = 3;
+      this._ctx.stroke();
+    }
+  }
   drawEnding(){
     this._ctx.drawImage(this._end,0,0,this._canvas.width,this._end.height/this._end.width*this._canvas.width);
   }
   draw(){
     this.drawStatics();
+    this.drawPath();
     this.drawRockets();
   }
   tick(){
