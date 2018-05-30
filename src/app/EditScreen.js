@@ -44,7 +44,6 @@ export class EditScreen extends Screen{
 				params:[
 					{key:".fitnessFunction.remainingDistanceFactor",name:"Distance to objective",min:"0",max:"1",step:".01"},
 					{key:".fitnessFunction.completionTimeFactor",name:"Time of flight",min:"0",max:"1",step:".01"},
-					{key:".fitnessFunction.traveledDistanceFactor",name:"Distance traveled",min:"0",max:"1",step:".01"},
 					{key:".fitnessFunction.complexityFactor",name:"Rocket complexity",min:"0",max:"1",step:".01"}
 				]
 			},

@@ -26,7 +26,6 @@ export class Evaluator{ // Evaluaating the rockets on the field, calculate param
           let complexity = r.reactors.length;
           let usefulReactors = 0;
           let completionTime = 0;
-          let traveledDistance = 0;
           let engine = new PhysicsComputer(that._config.terrain,[r]);
           let prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
           while(minDist>30 && !engine.isEnded()){
@@ -34,7 +33,6 @@ export class Evaluator{ // Evaluaating the rockets on the field, calculate param
             let distTarget=Math.sqrt( Math.pow(engine.rockets[0].position.x-that._targetPos.x,2) + Math.pow(engine.rockets[0].position.y-that._targetPos.y,2) );
             if(!isNaN(distTarget))minDist = Math.min(distTarget,minDist);
             let delta=Math.sqrt( Math.pow(engine.rockets[0].position.x-prevPos.x,2) + Math.pow(engine.rockets[0].position.y-prevPos.y,2) );
-            if(!isNaN(delta) && delta != Infinity)traveledDistance+=delta;
             prevPos = {x:engine.rockets[0].position.x,y:engine.rockets[0].position.y};
           }
           completionTime = !isNaN(engine.time)?engine.time:engine.simDuration;
@@ -45,12 +43,11 @@ export class Evaluator{ // Evaluaating the rockets on the field, calculate param
           }
           let distToTargetRatio = (1 - (minDist/that._totalDist)).toFixed(6); // 1 is close 0 is start
           let completionTimeRatio = (1 - (completionTime/engine.simDuration)).toFixed(6); // 1 is fast 0 is notCompleted
-          let traveledDistRatio = (traveledDistance/that._totalDist).toFixed(6); // >1 is greater than objective dist <1 is lower than objective dist
           let complexityRatio = (usefulReactors/complexity).toFixed(6); // 1 when all the reactors are useful 0 when none
           r.completionTime= completionTimeRatio;
           r.remainingDistance = distToTargetRatio;
           r.complexity = complexityRatio;
-          r.score = that._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, traveledDistRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
+          r.score = that._config.fitnessFunction.compute(distToTargetRatio, completionTimeRatio, complexityRatio); // Score calculation by fitnessFunction (0 is bad, 1 is great)
         }
         return Promise.resolve(ar.map(r=>r.toStructure()));
       });

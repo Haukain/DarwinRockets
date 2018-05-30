@@ -8,7 +8,7 @@
       "objects":[{"type":"Start","position":{"x":400,"y":300}},
                  {"type":"End","position":{"x":1000,"y":800}}]},
       "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
     }
   },
   "Harder Training":{
@@ -20,7 +20,7 @@
       "objects":[{"type":"Start","position":{"x":200,"y":200}},
                  {"type":"End","position":{"x":1700,"y":800}}]},
       "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
     }
   },
   "Planetary contact":{
@@ -45,7 +45,7 @@
                  {"type":"Planet","position":{"x":1601.3361169102297,"y":288.5343228200371},"radius":30},
                  {"type":"Planet","position":{"x":420.8768267223382,"y":895.6586270871985},"radius":30}]},
       "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
     }
   },
   "Abort":{
@@ -70,7 +70,7 @@
                  {"type":"Planet","position":{"x":573.1941544885177,"y":76.14100185528757},"radius":30},
                  {"type":"Planet","position":{"x":793.6534446764092,"y":266.4935064935065},"radius":30}]},
       "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
-      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+      "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
     },
     "No Mutation":{
@@ -82,7 +82,7 @@
         "objects":[{"type":"Start","position":{"x":400,"y":300}},
                    {"type":"End","position":{"x":1200,"y":800}}]},
         "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0,"randomMutationRate":0},
-        "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+        "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
     },
     "Road curve":{
@@ -117,7 +117,7 @@
                    {"type":"Planet","position":{"x":282.58872651356995,"y":717.3283858998145},"radius":30},
                    {"type":"Planet","position":{"x":1505.1356993736952,"y":857.5881261595547},"radius":30}]},
         "reproductionParameters":{"newGeneAppearanceRate":0.15,"geneDistributionDeviationFactor":0.05,"randomMutationRate":0},
-        "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"traveledDistanceFactor":0,"complexityFactor":0.4}
+        "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
     }
 }
