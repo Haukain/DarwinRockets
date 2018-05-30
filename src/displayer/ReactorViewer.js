@@ -15,9 +15,9 @@ export class ReactorViewer extends CanvasWidget{
     this._ctx.clearRect(0,0,100,100);
     this._ctx.save();
     this._ctx.translate(50,50);
-    this._ctx.rotate(Math.PI*0.25+this._reactor.angle);
-    this._reactor.draw(this._ctx);
     if(this._time>this._reactor.activationTime && this._time<this._reactor.activationTime+this._reactor.extinctionTime){
+      this._ctx.rotate(Math.PI*0.25 +Math.random()/20 +this._reactor.angle);
+      this._reactor.draw(this._ctx);
       this._ctx.beginPath();
       this._ctx.fillStyle='rgba(255, 170, 0, 0.5)';
       this._ctx.moveTo(9,-20);
@@ -33,9 +33,9 @@ export class ReactorViewer extends CanvasWidget{
       this._ctx.closePath();
       this._ctx.fill();
     }
-    else if (this._time>this._reactor.activationTime+this._reactor.extinctionTime){
-      this._ctx.fillStyle='rgba(255, 10, 255, 0.5)';
-      this._ctx.fillRect(0,0,50,50);
+    else {
+      this._ctx.rotate(Math.PI*0.25+this._reactor.angle);
+      this._reactor.draw(this._ctx);
     }
     this._ctx.restore();
     this._ctx.fillStyle="#d65b73";
