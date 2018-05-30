@@ -52,8 +52,7 @@ export class EditScreen extends Screen{
 				help:"Choose the appearance rate of these parameters\n\n" + "Gene appearance rate : How often will a reactor appear or disappear while generating\n" + "Gene distribution : How much will the parameter will change between the parents and the child",
 				params:[
 					{key:".reproductionParameters.newGeneAppearanceRate",name:"Gene appearance rate",min:"0",max:"1",step:".01"},
-					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"Random distribution interval",min:"0",max:"1",step:".01"},
-					{key:".reproductionParameters.randomMutationRate",name:"Mutation rate",min:"0",max:"1",step:".01"}
+					{key:".reproductionParameters.geneDistributionDeviationFactor",name:"Random distribution interval",min:"0",max:"1",step:".01"}
 				]
 			}
 		];

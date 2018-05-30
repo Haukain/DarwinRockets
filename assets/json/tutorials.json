@@ -7,7 +7,7 @@
       "terrain":{"size":{"width":1920,"height":1080},
       "objects":[{"type":"Start","position":{"x":400,"y":300}},
                  {"type":"End","position":{"x":1000,"y":800}}]},
-      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01},
       "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
     }
   },
@@ -19,7 +19,7 @@
       "terrain":{"size":{"width":1920,"height":1080},
       "objects":[{"type":"Start","position":{"x":200,"y":200}},
                  {"type":"End","position":{"x":1700,"y":800}}]},
-      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01},
       "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
     }
   },
@@ -44,7 +44,7 @@
                  {"type":"Planet","position":{"x":164.34237995824634,"y":631.1688311688312},"radius":30},
                  {"type":"Planet","position":{"x":1601.3361169102297,"y":288.5343228200371},"radius":30},
                  {"type":"Planet","position":{"x":420.8768267223382,"y":895.6586270871985},"radius":30}]},
-      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01},
       "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
     }
   },
@@ -69,7 +69,7 @@
                  {"type":"Planet","position":{"x":112.23382045929019,"y":350.64935064935065},"radius":30},
                  {"type":"Planet","position":{"x":573.1941544885177,"y":76.14100185528757},"radius":30},
                  {"type":"Planet","position":{"x":793.6534446764092,"y":266.4935064935065},"radius":30}]},
-      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01,"randomMutationRate":0},
+      "reproductionParameters":{"newGeneAppearanceRate":0.1,"geneDistributionDeviationFactor":0.01},
       "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
     },
@@ -81,7 +81,7 @@
         "terrain":{"size":{"width":1920,"height":1080},
         "objects":[{"type":"Start","position":{"x":400,"y":300}},
                    {"type":"End","position":{"x":1200,"y":800}}]},
-        "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0,"randomMutationRate":0},
+        "reproductionParameters":{"newGeneAppearanceRate":0,"geneDistributionDeviationFactor":0},
         "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
     },
@@ -116,7 +116,7 @@
                    {"type":"Planet","position":{"x":258.5386221294363,"y":795.4730983302412},"radius":30},
                    {"type":"Planet","position":{"x":282.58872651356995,"y":717.3283858998145},"radius":30},
                    {"type":"Planet","position":{"x":1505.1356993736952,"y":857.5881261595547},"radius":30}]},
-        "reproductionParameters":{"newGeneAppearanceRate":0.15,"geneDistributionDeviationFactor":0.05,"randomMutationRate":0},
+        "reproductionParameters":{"newGeneAppearanceRate":0.15,"geneDistributionDeviationFactor":0.05},
         "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
     }
