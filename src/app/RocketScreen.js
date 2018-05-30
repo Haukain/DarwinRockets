@@ -7,6 +7,7 @@ import { Col } from "../displayer/Col.js";
 import { Card } from "../displayer/Card.js";
 import { Title } from "../displayer/Title.js";
 import { FloatingButton } from "../displayer/FloatingButton.js";
+import { IconButton } from "../displayer/IconButton.js";
 
 export class RocketScreen extends Screen{
 
@@ -23,22 +24,29 @@ export class RocketScreen extends Screen{
 				leftCol.addChild(descCard);
 				let descCardRow = new Row();
 				descCard.addChild(descCardRow);
-				let descCardViewerCol = new Col(6,6,6,6);
-				let descCardTitleCol = new Col(6,6,6,6);
+				let descCardViewerCol = new Col(5,5,5,5);
+				let descCardTitleCol = new Col(5,5,5,5);
+				let descCardReloadCol = new Col(1,1,1,1);
 				descCardRow.addChild(descCardViewerCol);
 				descCardRow.addChild(descCardTitleCol);
+				descCardRow.addChild(descCardReloadCol);
 				let descCardViewer = new RocketViewer(r,500,500);
 				descCardViewerCol.addChild(descCardViewer);
-				let descCardTitle1 = new Title(`Score: ${r.score.toFixed(6)}`);
+				let descCardTitle1 = new Title(`Score: ${r.score.toFixed(4)}`);
 				descCardTitleCol.addChild(descCardTitle1);
 				let descCardTitle2 = new Title(`Reactors: ${r.reactors.length}`);
 				descCardTitleCol.addChild(descCardTitle2);
-				let descCardTitle3 = new Title(`Completion time: ${(r.completionTime*100).toFixed(2)} %`);
+				let descCardTitle3 = new Title(`Completion time: ${(r.completionTime*100).toFixed(1)} %`);
 				descCardTitleCol.addChild(descCardTitle3);
-				let descCardTitle4 = new Title(`Proximity to the Target: ${(r.remainingDistance*100).toFixed(2)} %`);
+				let descCardTitle4 = new Title(`Proximity to the Target: ${(r.remainingDistance*100).toFixed(1)} %`);
 				descCardTitleCol.addChild(descCardTitle4);
-				let descCardTitle5 = new Title(`Useful reactors: ${(r.complexity*100).toFixed(2)} %`);
+				let descCardTitle5 = new Title(`Useful reactors: ${(r.complexity*100).toFixed(1)} %`);
 				descCardTitleCol.addChild(descCardTitle5);
+
+				let reloadButton = new IconButton("restore","Reload Simulation",1);
+				reloadButton.on("click",()=>{this._app.goRocket(this._rocket)});
+				descCardReloadCol.addChild(reloadButton);
+
 				let reactorCard = new Card("white","pink");
 				leftCol.addChild(reactorCard);
 				let reactorCardRow = new Row();
