@@ -2,11 +2,17 @@ import { PhysicsReactor } from "./physics/PhysicsReactor.js"
 
 export class Reactor {
 	constructor(position, thrust, activationTime, extinctionTime, angle){
-		this._position = position;
-		this._thrust = thrust;
-		this._activationTime = activationTime;
-		this._extinctionTime = extinctionTime;
+		this._position = {x:0,y:0};
+    if(position.x<10 && position.x>-10){ this._position.x = position.x;}
+    else if(position.x>10){ this._position.x = 10;}
+    else {this._position.x = -10; }
+    if(position.y<35 && position.y>-20){ this._position.y = position.y;}
+    else if(position.y>35){ this._position.y = 35;}
+    else {this._position.y = -20; }
 		this._angle = angle;
+    this._thrust = thrust<(1/2500)?thrust:(1/2500);
+		this._activationTime = activationTime>0?activationTime:0;
+    this._extinctionTime = extinctionTime;
 	}
 
 	draw(ctx) {
