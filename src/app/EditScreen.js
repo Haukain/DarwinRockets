@@ -133,9 +133,6 @@ export class EditScreen extends Screen{
 			for(let tool of tools){
 				this._toolbar.addChild(tool.button);
 			}
-			let toolbarHelpButton = new IconButton("help_outline","Toolbar help","white");
-			toolbarHelpButton.on("click",()=>{new Alert("Toolbar help","a remplir")});
-			this._toolbar.addChild(toolbarHelpButton);
 		}
 	}
 }
