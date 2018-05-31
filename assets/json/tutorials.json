@@ -119,5 +119,40 @@
         "reproductionParameters":{"newGeneAppearanceRate":0.15,"geneDistributionDeviationFactor":0.05},
         "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":0.7,"complexityFactor":0.4}
       }
+    },
+    "Black Hole Area":{
+      "name":"Black Hole Area",
+      "config":{
+         "commentary":"Rockets must find a straight path between the black holes",
+         "populationSize":100,
+         "terrain":{"size":{"width":1920,"height":1080},
+         "objects":[{"type":"Start","position":{"x":190.39665970772444,"y":494.9165120593692}},
+                   {"type":"End","position":{"x":1635.4070981210855,"y":541.0018552875696}},
+                   {"type":"Planet","position":{"x":284.5929018789144,"y":118.21892393320965},"radius":30},
+                   {"type":"Planet","position":{"x":386.80584551148223,"y":196.36363636363637},"radius":30},
+                   {"type":"Planet","position":{"x":434.90605427974947,"y":294.54545454545456},"radius":30},
+                   {"type":"Planet","position":{"x":501.0438413361169,"y":681.2615955473099},"radius":30},
+                   {"type":"Planet","position":{"x":430.89770354906057,"y":827.5324675324675},"radius":30},
+                   {"type":"Planet","position":{"x":346.7223382045929,"y":927.7179962894248},"radius":30},
+                   {"type":"Planet","position":{"x":198.4133611691023,"y":1027.9035250463821},"radius":30},
+                   {"type":"Planet","position":{"x":110.22964509394572,"y":60.111317254174395},"radius":30},
+                   {"type":"Planet","position":{"x":46.09603340292276,"y":1053.951762523191},"radius":30},
+                   {"type":"Planet","position":{"x":202.42171189979123,"y":72.13358070500928},"radius":30},
+                   {"type":"BlackHole","position":{"x":693.4446764091858,"y":314.582560296846},"radius":30},
+                   {"type":"BlackHole","position":{"x":964.0083507306889,"y":609.1280148423006},"radius":30},
+                   {"type":"BlackHole","position":{"x":1208.517745302714,"y":386.7161410018553},"radius":30},
+                   {"type":"BlackHole","position":{"x":1497.1189979123174,"y":667.2356215213358},"radius":30},
+                   {"type":"Planet","position":{"x":761.5866388308978,"y":845.5658627087198},"radius":30},
+                   {"type":"Planet","position":{"x":1128.3507306889353,"y":971.799628942486},"radius":30},
+                   {"type":"Planet","position":{"x":1541.2108559498956,"y":983.8218923933209},"radius":30},
+                   {"type":"Planet","position":{"x":653.3611691022965,"y":146.2708719851577},"radius":30},
+                   {"type":"Planet","position":{"x":1092.2755741127348,"y":134.2486085343228},"radius":30},
+                   {"type":"Planet","position":{"x":1529.1858037578288,"y":164.30426716141002},"radius":30},
+                   {"type":"Planet","position":{"x":1783.7160751565762,"y":258.4786641929499},"radius":30},
+                   {"type":"Planet","position":{"x":1827.8079331941544,"y":595.1020408163265},"radius":30},
+                   {"type":"Planet","position":{"x":1811.7745302713988,"y":813.5064935064935},"radius":30}]},
+          "reproductionParameters":{"newGeneAppearanceRate":0.41,"geneDistributionDeviationFactor":0.03},
+          "fitnessFunction":{"remainingDistanceFactor":1,"completionTimeFactor":1,"complexityFactor":0.41}
+      }
     }
 }
