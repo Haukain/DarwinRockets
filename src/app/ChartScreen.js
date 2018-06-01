@@ -48,17 +48,21 @@ export class ChartScreen extends Screen{
 		//score of the current generation bar chart
 		let barChart = new BarChartWidget('white', 'grey');
 		let dataset2 = barChart.addDataset("Number of rockets of the current generation per score","#0011FC","#C2C6FA");
-		let max=precisionRound(this._app.currentGeneration.getMax(),1);
-		let min=precisionRound(this._app.currentGeneration.getMin(),1);
+		let max=precisionRound(this._app.currentGeneration.getMax(),3);
+		let min=precisionRound(this._app.currentGeneration.getMin(),3);
 		let interval = (max-min)/10;
-
-		for(let i=min-(interval/2); i<max+(interval/2); i+=interval){
-			if(i<0 && i+interval>0){
-				barChart.addDataPoint(dataset2,"0",this._app.currentGeneration.getInterval(i,i+interval));
-				i=i+interval;}
-			barChart.addDataPoint(dataset2,precisionRound(i+(interval/2),2),this._app.currentGeneration.getInterval(i,i+interval));}
-		c2.addChild(barChart);
-
+		if(max==min){
+			barChart.addDataPoint(dataset2,precisionRound(max,3),this._app.currentGeneration.rockets.length);
+			c2.addChild(barChart);
+		}
+		else if(max!=min){
+			for(let i=min-2*(interval/2); i<max+(interval/2); i+=interval){
+				if(i<0 && i+interval>0){
+					barChart.addDataPoint(dataset2,"0",this._app.currentGeneration.getInterval(i,i+interval));
+					i=i+interval;}
+				barChart.addDataPoint(dataset2,precisionRound(i+(interval/2),2),this._app.currentGeneration.getInterval(i,i+interval));}
+			c2.addChild(barChart);
+		}
 
 		//last chart with Complexity, Proximity to the target and Time of flight
 		let lastChart = new LineChartWidget('white', 'grey');
