@@ -38,8 +38,16 @@ export class Header{
 
     //help Button
     let helpButton = this._addButton("help_outline","help",e=>{
-    new ExternalPopup("./assets/html/help.html");
+      new ExternalPopup("./assets/html/help.html");
     });
+    //tutorial Button
+    this._tutorialButton = this._addButton("priority_high","tutorial",e=>{
+      fetch(this._commentary).then(r=>{
+        if(r.status==200) new ExternalPopup(r.url);
+        else new Alert("",that._commentary);
+      })
+    });
+    this._tutorialButton.disabled = true;
     //generation range and text which indicates the current generation
     let genItem = new NavbarItem();
     let genItem2 = new NavbarItem();
@@ -76,6 +84,10 @@ export class Header{
   }
   showButtons(){
     for(let child of this._disablables) child.disabled = false;
+  }
+  set commentary(c){
+    this._tutorialButton.disabled = !c;
+    this._commentary = c;
   }
   updateGen(){
     this._genRange.max=this._app.generations.length;

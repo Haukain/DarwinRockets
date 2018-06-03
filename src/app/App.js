@@ -59,8 +59,10 @@ export class App{
     else if(this._state == "gen") new Confirm("Are you sure you want to go back?","all the progress you made will be lost.",()=>this.goEdit());
     else if(this._state == "chart" || this._state == "rocket") this.goSimulation();
     else {
-      let i =Array.from(history).reduce((a,b)=>a+(!!b.state.fake),0);
-      history.back(-i);
+      /*while(!!history.state.fake){
+        console.log(history)
+        history.back();
+      }*/
     }
   }
   goStart(){
@@ -72,6 +74,7 @@ export class App{
   }
   goEdit(locked=false) {
     console.log("Going to the Edit Screen");
+    this._header.commentary = this._configuration.commentary;
     this._currentScreen = new EditScreen(this,locked);
     this._state = "edit";
     this._currentGeneration = null;

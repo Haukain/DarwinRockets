@@ -2,7 +2,7 @@
   "First run":{
     "name":"Basic Test",
     "config":{
-      "commentary":"Simple path between a start and an end",
+      "commentary":"./assets/html/tut1.html",
       "populationSize":80,
       "terrain":{"size":{"width":1920,"height":1080},
       "objects":[{"type":"Start","position":{"x":400,"y":300}},
