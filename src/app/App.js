@@ -16,7 +16,7 @@ import SubWorker from 'worker-loader!../worker/subWorker.js';
 
 export class App{
   constructor(el) {
-    this._DEBUG = true;
+    this._DEBUG = false;
     let that = this;
     this._generations=[];
     this._header = new Header(this);
