@@ -14,6 +14,9 @@ import { WorkerCommander } from "../worker/WorkerCommander.js";
 import Worker from 'worker-loader!../worker/mainWorker.js';
 import SubWorker from 'worker-loader!../worker/subWorker.js';
 
+// DarwinRockets.fr
+// Made by Timothy Cabaret, Titouan Baillon, Lukas Chaillan, Maïwenn Berthelot, Adrien Constante
+
 export class App{
   constructor(el) {
     this._DEBUG = false;
