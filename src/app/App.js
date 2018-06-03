@@ -67,6 +67,7 @@ export class App{
   }
   goStart(){
     this._currentScreen = new StartScreen(this);
+    this._header.commentary = "";
     this._state = "start";
     this._configuration = new Configuration();
     this._header.hideButtons();
